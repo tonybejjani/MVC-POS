@@ -1,44 +1,50 @@
 /** @format */
-
 'use strict';
-
-const menuItems = {
-  1: {
-    catg: 1,
-    catgName: 'Yumcha',
-    name: 'Pork Soup Dumling',
-    price: 2.0,
-    qty: 1,
-    img: 'images/1x/asset11.png',
-  },
-  2: {
-    catg: 1,
-    catgName: 'Yumcha',
-    name: 'Prawn Dumpling',
-    price: 2.5,
-    qty: 1,
-    img: 'images/1x/asset12.png',
-  },
-  3: {
-    catg: 1,
-    catgName: 'Yumcha',
-    name: 'BBQ Pork Buns',
-    price: 3,
-    qty: 1,
-    img: 'images/1x/asset13.png',
-  },
-};
 
 class App {
   #currentOrderLog = {};
 
   constructor() {
-    // to do: load Menu functionality
-    const selectItemBtns = document.querySelectorAll('.menu--item__button');
+    // const menuItemBtns = document.querySelectorAll('.menu--item__button');
+    // const menuSpecialBtn = document.querySelector(
+    //   '.menu--special--item__button'
+    // );
 
-    selectItemBtns.forEach((btn) =>
-      btn.addEventListener('click', this._showItemForm.bind(this, btn))
-    );
+    // to do: load Menu functionality
+    this._loadMenuItems();
+
+    // menuSpecialBtn.addEventListener('click', this._showSpecialModal.bind(this));
+
+    // menuItemBtns.forEach((btn) =>
+    //   btn.addEventListener('click', this._showItemForm.bind(this, btn))
+    // );
+  }
+
+  _loadMenuItems() {
+    for (const [
+      key,
+      { catgId, catgName, name, price, qty, img },
+    ] of Object.entries(menuItems)) {
+      console.log(key, catgId, catgName, name, price, qty, img);
+    }
+  }
+  // })
+  // const html = `<div class="menu--item" >
+  //                 <div class="menu--item__image"><img src="images/1x/mix.png"></div>
+  //                 <div class="menu--item__details">
+  //                   <div class="menu--item__info"><img src="images/Icon/info.png"></div>
+  //                   <h2 class="menu--item__title">Mix of 7pcs</h2>
+  //                   <div class="menu--item__price">$ 14.00</div>
+  //                   <button class="menu--special--item__button" data-item-id="0">Select</button>
+  //                 </div>
+  //               </div>`;
+
+  // const menuItemsContainer = document.querySelector('.menu--items');
+
+  // menuItemsContainer.insertAdjacentHTML('afterbegin', html);
+
+  _showSpecialModal() {
+    console.log('need to develop Modal');
   }
 
   _showItemForm(btn) {
@@ -53,6 +59,7 @@ class App {
     const itemQty = document.querySelector(
       `.order--item__qty[data-item-id="${Number(itemId)}"] .itemQty`
     );
+    const specialItem = false;
 
     // On selecting an item, check if itemId already exists in current Order List
     // 1- if YES: update Qty & total price
@@ -69,8 +76,16 @@ class App {
 
       // 2- if NO: add new item to #currentOrderLog object
     } else {
-      this.#currentOrderLog[itemId] = { itemId, name, price, qty, img };
+      this.#currentOrderLog[itemId] = {
+        itemId,
+        name,
+        price,
+        qty,
+        img,
+        specialItem,
+      };
       this._renderItemForm({ itemId, name, priceD, qty, img });
+      console.log(this.#currentOrderLog);
       const deleteBtn = document.querySelector('.order--item__remove');
       deleteBtn.addEventListener('click', this._removeItem.bind(this, itemId));
     }
@@ -78,14 +93,14 @@ class App {
   // _loadMenu() {}
 
   _removeItem(itemId) {
-    //delete item from Current Order Log Object
+    //delete item from CurrentOrderLog Object
     delete this.#currentOrderLog[itemId];
 
-    //delete item from UI
     const deleteItem = document.querySelector(
       `.order--item__qty[data-item-id="${Number(itemId)}"]`
     );
 
+    //delete item from UI
     deleteItem.parentElement.remove();
   }
 
@@ -112,6 +127,7 @@ class App {
       <img src="images/Icon/Trash.png">
     </div>
     </div>`;
+
     const orderList = document.querySelector('.order__details');
 
     orderList.insertAdjacentHTML('afterbegin', html);

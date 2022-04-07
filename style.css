@@ -210,7 +210,8 @@ input {
   cursor: pointer;
 }
 
-button.menu--item__button {
+button.menu--item__button,
+button.menu--special--item__button {
   height: 5rem;
   background: none;
   border: 1px solid var(--color-light--2);
