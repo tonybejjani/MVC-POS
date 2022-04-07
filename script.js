@@ -23,44 +23,57 @@ const menuItems = {
   },
 };
 
-const currentOrder = {};
-
-const menuBtns = document.querySelectorAll('.menu--item__button');
+const currentOrderLog = {};
+const selectItemBtns = document.querySelectorAll('.menu--item__button');
 const orderList = document.querySelector('.order__details');
 
-menuBtns.forEach((btn) =>
+selectItemBtns.forEach((btn) =>
   btn.addEventListener('click', function () {
     // get data from menuItems object according to item selected on
     // "data-item-id" attribute of element
     const { name, price, qty, img } =
       menuItems[this.getAttribute('data-item-id')];
 
-    //convert price to decimal
-    const priceD = price.toFixed(2);
+    const priceD = price.toFixed(2); //convert price to decimal
     const itemId = this.getAttribute('data-item-id');
+    const currItemId = currentOrderLog[itemId];
+    const itemQty = document.querySelector(
+      `.order--item__qty[data-item-id="${Number(itemId)}"] .itemQty`
+    );
 
+    console.log(itemQty);
     // On selecting an item, check if itemId already exists in current Order List
     // 1- if YES: update Qty & total price
-    if (currentOrder[itemId]) {
-      const currItemId = currentOrder[itemId];
-
-      //update qty and total price in Object storing the current order
+    if (currItemId) {
+      //update qty and total price in currentOrderLog Object
       currItemId.qty++;
       currItemId.totalPrice = currItemId.price * currItemId.qty;
 
       //update UI: item qty & total price
-      const itemQty = document.querySelector(
-        `.order--item__qty[data-item-id="${Number(itemId)}"] .itemQty`
-      );
       itemQty.textContent = currItemId.qty;
       itemQty.parentElement.nextElementSibling.querySelector(
         '.totalPrice'
       ).textContent = currItemId.totalPrice.toFixed(2);
 
-      // 2- if NO: add new item to order list
+      // 2- if NO: add new item to currentOrderLog object
     } else {
-      currentOrder[itemId] = { itemId, name, price, qty, img };
+      currentOrderLog[itemId] = { itemId, name, price, qty, img };
       renderItemForm({ itemId, name, priceD, qty, img });
+
+      //bind "remove item" event
+      document
+        .querySelector('.order--item__remove')
+        .addEventListener('click', function () {
+          //delete item from Current Order Log Object
+          delete currentOrderLog[itemId];
+
+          //delete item from UI
+          document
+            .querySelector(
+              `.order--item__qty[data-item-id="${Number(itemId)}"]`
+            )
+            .parentElement.remove();
+        });
     }
   })
 );
@@ -91,7 +104,7 @@ const renderItemForm = function (itemData) {
                     <input type="text" placeholder="Order Note...">
                   </div>
                   <div class="order--item__remove">
-                    <a href="#"><img src="images/Icon/Trash.png"></a>
+                    <img src="images/Icon/Trash.png">
                   </div>
                   </div>`;
 
