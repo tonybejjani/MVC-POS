@@ -1,17 +1,25 @@
 /** @format */
 
 const menuCategories = {
-  1: {
+  0: {
     id: 1,
     name: 'Yumcha',
+    active: true,
   },
-  2: {
+  1: {
     id: 2,
     name: 'Peking Duck',
+    active: false,
   },
-  3: {
+  2: {
     id: 3,
     name: 'Drinks',
+    active: false,
+  },
+  3: {
+    id: 4,
+    name: 'Entrees',
+    active: false,
   },
 };
 
@@ -23,6 +31,7 @@ const menuItems = {
     price: 14.0,
     qty: 1,
     img: 'images/1x/mix.png',
+    special_deal: true,
   },
   1: {
     catgId: 1,
@@ -31,6 +40,7 @@ const menuItems = {
     price: 2.0,
     qty: 1,
     img: 'images/1x/asset11.png',
+    special_deal: false,
   },
   2: {
     catgId: 1,
@@ -39,6 +49,7 @@ const menuItems = {
     price: 2.5,
     qty: 1,
     img: 'images/1x/asset12.png',
+    special_deal: false,
   },
   3: {
     catgId: 1,
@@ -47,53 +58,88 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/asset13.png',
+    special_deal: false,
   },
   10: {
     catgId: 2,
     catgName: 'Peking Duck',
     name: 'Peking Duck 2pcs',
     price: 7,
-    qty: 2,
+    qty: 1,
     img: 'images/1x/asset13.png',
+    special_deal: false,
   },
   11: {
     catgId: 2,
     catgName: 'Peking Duck',
     name: 'Peking Duck 4pcs',
     price: 12,
-    qty: 4,
+    qty: 1,
     img: 'images/1x/asset13.png',
+    special_deal: false,
   },
   12: {
     catgId: 2,
     catgName: 'Peking Duck',
     name: 'Peking Duck 6pcs',
     price: 16,
-    qty: 6,
+    qty: 1,
     img: 'images/1x/asset13.png',
+    special_deal: false,
   },
   20: {
+    catgId: 3,
+    catgName: 'Drinks',
+    name: 'Water',
+    price: 3,
+    qty: 1,
+    img: 'images/1x/water.png',
+    special_deal: false,
+  },
+  21: {
+    catgId: 3,
+    catgName: 'Drinks',
+    name: 'Coke',
+    price: 3,
+    qty: 1,
+    img: 'images/1x/coke.png',
+    special_deal: false,
+  },
+  22: {
     catgId: 3,
     catgName: 'Drinks',
     name: 'Coke Zero',
     price: 3,
     qty: 1,
-    img: 'images/1x/asset13.png',
+    img: 'images/1x/coke-zero.png',
+    special_deal: false,
   },
-  21: {
-    catgId: 3,
-    catgName: 'Drinks',
-    name: 'Sprite',
-    price: 3,
-    qty: 1,
-    img: 'images/1x/asset13.png',
-  },
-  22: {
+  23: {
     catgId: 3,
     catgName: 'Drinks',
     name: 'Fanta',
     price: 3,
     qty: 1,
-    img: 'images/1x/asset13.png',
+    img: 'images/1x/fanta.png',
+    special_deal: false,
+  },
+
+  24: {
+    catgId: 3,
+    catgName: 'Drinks',
+    name: 'Sprite',
+    price: 3,
+    qty: 1,
+    img: 'images/1x/sprite.png',
+    special_deal: false,
+  },
+  25: {
+    catgId: 3,
+    catgName: 'Drinks',
+    name: 'Solo',
+    price: 3,
+    qty: 1,
+    img: 'images/1x/solo.png',
+    special_deal: false,
   },
 };
