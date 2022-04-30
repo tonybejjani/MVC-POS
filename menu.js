@@ -1,5 +1,11 @@
 /** @format */
 
+const info = {
+  logo: 'images/1x/LOGO.png',
+  title: 'YUMCHA EAT ST.',
+  date: 'Tuesday 9th November 2023',
+};
+
 const menuCategories = {
   0: {
     id: 1,
@@ -63,28 +69,28 @@ const menuItems = {
   10: {
     catgId: 2,
     catgName: 'Peking Duck',
-    name: 'Peking Duck 2pcs',
+    name: 'Peking Duck x2',
     price: 7,
     qty: 1,
-    img: 'images/1x/asset13.png',
+    img: 'images/1x/duck_x2.png',
     special_deal: false,
   },
   11: {
     catgId: 2,
     catgName: 'Peking Duck',
-    name: 'Peking Duck 4pcs',
+    name: 'Peking Duck x4',
     price: 12,
     qty: 1,
-    img: 'images/1x/asset13.png',
+    img: 'images/1x/duck_x4.png',
     special_deal: false,
   },
   12: {
     catgId: 2,
     catgName: 'Peking Duck',
-    name: 'Peking Duck 6pcs',
+    name: 'Peking Duck x6',
     price: 16,
     qty: 1,
-    img: 'images/1x/asset13.png',
+    img: 'images/1x/duck_x6.png',
     special_deal: false,
   },
   20: {

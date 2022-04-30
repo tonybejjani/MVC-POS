@@ -5,11 +5,17 @@ class App {
   #currentOrderLog = {};
 
   constructor() {
+    //render Logo, Restaurant Name & Date
+    this._render(this._generateInfoMarkup(), '.info', 'afterbegin');
+
+    //render UI menu categories
     this._render(
       this._generateMenuCategMarkup(),
       '.menu--navbar',
       'afterbegin'
     );
+
+    //render UI menu items
     this._render(this._generateMenuItemsMarkup(), '.menu', 'beforeend');
 
     const menuItemBtns = document.querySelectorAll('.menu--item__button');
@@ -61,7 +67,7 @@ class App {
 
   _showItemOrderForm(btn) {
     // get data from menuItems object according to item selected on
-    // "data-item-id" attribute of element
+    // "data-item-id" attribute of html element
 
     const { name, price, qty, img } =
       menuItems[btn.getAttribute('data-item-id')];
@@ -115,15 +121,27 @@ class App {
   _removeItemOrder(itemId) {
     //delete item from CurrentOrderLog Object
     delete this.#currentOrderLog[itemId];
+
+    //select item to delete from UI
     const deleteItem = document.querySelector(
       `.order--item__qty[data-item-id="${Number(itemId)}"]`
     );
-    //delete item from UI
+
+    // delete item from UI
     deleteItem.parentElement.remove();
   }
 
   _showSpecialModal() {
     console.log('need to develop Modal');
+  }
+
+  _generateInfoMarkup() {
+    const { logo, title, date } = info;
+
+    return `
+    <div class="info__logo"><img src="${logo}"></div>
+    <div class="info__title">${title}</div>
+    <div class="info__date">${date}</div>`;
   }
 
   _generateMenuCategMarkup() {
