@@ -19,9 +19,6 @@ class App {
     this._render(this._generateMenuItemsMarkup(), '.menu', 'beforeend');
 
     const menuItemBtns = document.querySelectorAll('.menu--item__button');
-    const menuSpecialBtn = document.querySelector(
-      '.menu--special--item__button'
-    );
     const menuCategLinks = document.querySelectorAll('.menu--navbar__link');
 
     menuCategLinks.forEach((categlink) =>
@@ -31,9 +28,59 @@ class App {
       )
     );
 
-    menuSpecialBtn.addEventListener('click', this._showSpecialModal.bind(this));
     menuItemBtns.forEach((btn) =>
       btn.addEventListener('click', this._showItemOrderForm.bind(this, btn))
+    );
+
+    // develop "Special Mix" menu item functionality
+    const menuSpecialBtn = document.querySelector(
+      '.menu--special--item__button'
+    );
+
+    const menuSpecialBtnItemId = Number(
+      document.querySelector('.menu--special--item__button').attributes[
+        'data-item-id'
+      ].nodeValue
+    );
+
+    const specialBtnCategId = Number(
+      document
+        .querySelector('.menu--special--item__button')
+        .closest('.menu--items').attributes['data-category-id'].nodeValue
+    );
+
+    const totalPcs = menuItems[menuSpecialBtnItemId].mix_qty;
+
+    this._render(
+      this._generateSpecialModal(
+        menuSpecialBtnItemId,
+        specialBtnCategId,
+        totalPcs
+      ),
+      '.menu',
+      'beforeend'
+    );
+
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.overlay');
+    const btnCloseModal = document.querySelector('.close-modal');
+    const btnIncrease = document.querySelectorAll('.order--item__qty-increase');
+    const btnDecrease = document.querySelectorAll('.order--item__qty-decrease');
+    const btnAdd = document.querySelector('.special-menu--footer .btnAdd');
+    const itemQty = document.querySelectorAll('.order--item__qty-num');
+    const totalQty = document.querySelector('.special-menu--footer .total-qty');
+
+    this._addModalEventListeners(
+      menuSpecialBtn,
+      modal,
+      overlay,
+      btnCloseModal,
+      btnIncrease,
+      btnDecrease,
+      btnAdd,
+      itemQty,
+      totalQty,
+      totalPcs
     );
   }
 
@@ -66,8 +113,8 @@ class App {
   }
 
   _showItemOrderForm(btn) {
-    // get data from menuItems object according to item selected on
-    // "data-item-id" attribute of html element
+    /* get data from menuItems object according to item selected on
+     "data-item-id" attribute of html element */
 
     const { name, price, qty, img } =
       menuItems[btn.getAttribute('data-item-id')];
@@ -93,6 +140,7 @@ class App {
         '.totalPrice'
       ).textContent = currItemLog.totalPrice.toFixed(2);
 
+      console.log(this.#currentOrderLog);
       // 2- if NO: add new item to #currentOrderLog object
     } else {
       this.#currentOrderLog[itemId] = {
@@ -131,8 +179,128 @@ class App {
     deleteItem.parentElement.remove();
   }
 
-  _showSpecialModal() {
-    console.log('need to develop Modal');
+  _addModalEventListeners(...args) {
+    const [
+      menuSpecialBtn,
+      modal,
+      overlay,
+      btnCloseModal,
+      btnIncrease,
+      btnDecrease,
+      btnAdd,
+      itemQty,
+      totalQty,
+      totalPcs,
+    ] = args;
+
+    const closeModal = function () {
+      modal.classList.add('hidden');
+      overlay.classList.add('hidden');
+
+      // Reset Quantities
+      itemQty.forEach(function (el) {
+        el.textContent = 0;
+      });
+      totalQty.textContent = 0;
+
+      // Disable decrease buttons
+      btnDecrease.forEach(function (el) {
+        el.classList.add('disabled');
+        el.disabled = true;
+      });
+
+      // Enable Increase Buttons
+      btnIncrease.forEach(function (el) {
+        el.classList.remove('disabled');
+        el.disabled = false;
+      });
+      // Disable Add Button
+      btnAdd.classList.add('disabled');
+      btnAdd.disabled = true;
+    };
+
+    const openModal = function () {
+      modal.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+    };
+
+    const changeQty = function (el, inc, totalQtyNum) {
+      let itemQtyNum;
+      inc
+        ? (itemQtyNum = Number(el.previousElementSibling.textContent))
+        : (itemQtyNum = Number(el.nextElementSibling.textContent));
+
+      inc ? itemQtyNum++ : itemQtyNum--;
+      inc ? totalQtyNum++ : totalQtyNum--;
+
+      inc
+        ? (el.previousElementSibling.textContent = String(itemQtyNum))
+        : (el.nextElementSibling.textContent = String(itemQtyNum));
+
+      console.log(itemQtyNum);
+      totalQty.textContent = String(totalQtyNum);
+
+      return totalQtyNum;
+    };
+
+    menuSpecialBtn.addEventListener('click', openModal);
+    btnCloseModal.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+
+    btnIncrease.forEach((el) =>
+      el.addEventListener('click', function () {
+        let totalQtyNum = Number(totalQty.textContent);
+
+        totalQtyNum = changeQty(el, true, totalQtyNum);
+
+        if (totalQtyNum > 0) {
+          btnDecrease.forEach(function (el) {
+            if (Number(el.nextElementSibling.textContent) > 0) {
+              el.classList.remove('disabled');
+              el.disabled = false;
+            }
+          });
+        }
+
+        if (totalQtyNum === Number(totalPcs)) {
+          // enable add button
+          // disable increase
+          btnAdd.classList.remove('disabled');
+          btnAdd.disabled = false;
+
+          btnIncrease.forEach(function (el) {
+            el.classList.add('disabled');
+            el.disabled = true;
+          });
+        }
+      })
+    );
+
+    btnDecrease.forEach((el) =>
+      el.addEventListener('click', function () {
+        console.log('decrease!');
+        let totalQtyNum = Number(totalQty.textContent);
+
+        totalQtyNum = changeQty(el, false, totalQtyNum);
+
+        if (Number(el.nextElementSibling.textContent) === 0) {
+          el.classList.add('disabled');
+          el.disabled = true;
+        }
+
+        if (totalQtyNum !== Number(totalPcs)) {
+          // enable add button
+          // disable increase
+          btnAdd.classList.add('disabled');
+          btnAdd.disabled = true;
+
+          btnIncrease.forEach(function (el) {
+            el.classList.remove('disabled');
+            el.disabled = false;
+          });
+        }
+      })
+    );
   }
 
   _generateInfoMarkup() {
@@ -196,7 +364,6 @@ class App {
   }
 
   _generateItemOrderMarkup(itemData) {
-    console.log('_generateItemOrderMarkup');
     return `<div class="order--item">
       <div class="item-content__thumb">
         <div class="thumb__image"><img src="${itemData.img}"></div>
@@ -204,8 +371,7 @@ class App {
         <div class="thumb__price"><span>$ ${itemData.priceD}</span></div>
       </div>
       <div class="order--item__qty" data-item-id="${Number(itemData.itemId)}">
-        <span>x</span> <span class="itemQty">${itemData.qty}</span>
-
+         <span class="itemQty">${itemData.qty}</span>
       </div>
       <div class="order--item__total">
       <span class="item__currency">$ </span> <span class="totalPrice">${
@@ -219,6 +385,43 @@ class App {
         <img src="images/Icon/Trash.png">
       </div>
       </div>`;
+  }
+
+  _generateSpecialModal(specialBtnItemId, specialBtnCategId, totalPcs) {
+    let markup = [];
+
+    console.log(totalPcs);
+    markup.push(`<div class="modal hidden" data-category-id="1">
+                    <button class="close-modal">×</button>
+                    <h1 class="special-menu--header">Select <span>${totalPcs}</span> pcs:</h1>
+                    <div class="special-menu--items">`);
+
+    for (const [key, { catgId, name, img, special_deal }] of Object.entries(
+      menuItems
+    )) {
+      if (catgId === specialBtnCategId && special_deal === false)
+        markup.push(`<div class="special-menu--item" data-item-id="${key}>
+                        <img src="${img}">
+                        <div class="special-menu--item-name">${name}</div>
+                        <div class="order--item__qty">
+                          <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
+                          <span class="order--item__qty-num">0</span>
+                          <button type="button" class="order--item__qty-increase">&#43;</button>
+                        </div>
+                      </div>`);
+    }
+    markup.push(`</div>
+                  <div class="special-menu--footer">
+                    <div class="order--item__qty">
+                      <span class="total-qty order--item__qty-num">0</span>
+                      <p class="order--item__qty-pcs">pcs</p>
+                    </div>
+                      <button class="btnAdd disabled" disabled>Add</button>
+                  </div>
+              </div>
+              <div class="overlay hidden"></div>`);
+
+    return markup.join(' ');
   }
 
   // _submitOrder() {}
