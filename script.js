@@ -38,25 +38,23 @@ class App {
     );
 
     const menuSpecialBtnItemId = Number(
-      document.querySelector('.menu--special--item__button').attributes[
-        'data-item-id'
-      ].nodeValue
+      document
+        .querySelector('.menu--special--item__button')
+        .getAttribute('data-item-id')
     );
 
     const specialBtnCategId = Number(
       document
         .querySelector('.menu--special--item__button')
-        .closest('.menu--items').attributes['data-category-id'].nodeValue
+        .closest('.menu--items')
+        .getAttribute('data-category-id')
     );
 
     const totalPcs = menuItems[menuSpecialBtnItemId].mix_qty;
+    const specialMixPrice = menuItems[menuSpecialBtnItemId].special_mix_price;
 
     this._render(
-      this._generateSpecialModal(
-        menuSpecialBtnItemId,
-        specialBtnCategId,
-        totalPcs
-      ),
+      this._generateSpecialModal(specialBtnCategId, totalPcs),
       '.menu',
       'beforeend'
     );
@@ -67,10 +65,12 @@ class App {
     const btnIncrease = document.querySelectorAll('.order--item__qty-increase');
     const btnDecrease = document.querySelectorAll('.order--item__qty-decrease');
     const btnAdd = document.querySelector('.special-menu--footer .btnAdd');
-    const itemQty = document.querySelectorAll('.order--item__qty-num');
+    const itemQty = document.querySelectorAll(
+      '.special-menu--items .order--item__qty-num'
+    );
     const totalQty = document.querySelector('.special-menu--footer .total-qty');
 
-    this._addModalEventListeners(
+    this._addModalEventListeners({
       menuSpecialBtn,
       modal,
       overlay,
@@ -80,8 +80,156 @@ class App {
       btnAdd,
       itemQty,
       totalQty,
-      totalPcs
+      totalPcs,
+      specialMixPrice,
+    });
+  }
+
+  _addModalEventListeners(selectors) {
+    const {
+      menuSpecialBtn,
+      modal,
+      overlay,
+      btnCloseModal,
+      btnIncrease,
+      btnDecrease,
+      btnAdd,
+      itemQty,
+      totalQty,
+      totalPcs,
+      specialMixPrice,
+    } = selectors;
+
+    const closeModal = function () {
+      modal.classList.add('hidden');
+      overlay.classList.add('hidden');
+
+      // Reset Quantities
+      itemQty.forEach(function (el) {
+        el.textContent = 0;
+      });
+      totalQty.textContent = 0;
+
+      // Disable decrease buttons
+      btnDecrease.forEach(function (el) {
+        el.classList.add('disabled');
+        el.disabled = true;
+      });
+
+      // Enable Increase Buttons
+      btnIncrease.forEach(function (el) {
+        el.classList.remove('disabled');
+        el.disabled = false;
+      });
+      // Disable Add Button
+      btnAdd.classList.add('disabled');
+      btnAdd.disabled = true;
+    };
+
+    const openModal = function () {
+      modal.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+
+      itemQty.forEach((el) => {
+        console.log(el.textContent);
+      });
+    };
+
+    const changeQty = function (el, inc, totalQtyNum) {
+      let itemQtyNum;
+      inc
+        ? (itemQtyNum = Number(el.previousElementSibling.textContent))
+        : (itemQtyNum = Number(el.nextElementSibling.textContent));
+
+      inc ? itemQtyNum++ : itemQtyNum--;
+      inc ? totalQtyNum++ : totalQtyNum--;
+
+      inc
+        ? (el.previousElementSibling.textContent = String(itemQtyNum))
+        : (el.nextElementSibling.textContent = String(itemQtyNum));
+
+      totalQty.textContent = String(totalQtyNum);
+
+      return totalQtyNum;
+    };
+
+    menuSpecialBtn.addEventListener('click', openModal);
+    btnCloseModal.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+
+    btnIncrease.forEach((el) =>
+      el.addEventListener('click', function () {
+        let totalQtyNum = Number(totalQty.textContent);
+
+        totalQtyNum = changeQty(el, true, totalQtyNum);
+
+        if (totalQtyNum > 0) {
+          btnDecrease.forEach(function (el) {
+            if (Number(el.nextElementSibling.textContent) > 0) {
+              el.classList.remove('disabled');
+              el.disabled = false;
+            }
+          });
+        }
+
+        if (totalQtyNum === Number(totalPcs)) {
+          // enable add button
+          // disable increase
+          btnAdd.classList.remove('disabled');
+          btnAdd.disabled = false;
+
+          btnIncrease.forEach(function (el) {
+            el.classList.add('disabled');
+            el.disabled = true;
+          });
+        }
+      })
     );
+
+    btnDecrease.forEach((el) =>
+      el.addEventListener('click', function () {
+        let totalQtyNum = Number(totalQty.textContent);
+
+        totalQtyNum = changeQty(el, false, totalQtyNum);
+
+        if (Number(el.nextElementSibling.textContent) === 0) {
+          el.classList.add('disabled');
+          el.disabled = true;
+        }
+
+        if (totalQtyNum !== Number(totalPcs)) {
+          // enable add button
+          // disable increase
+          btnAdd.classList.add('disabled');
+          btnAdd.disabled = true;
+
+          btnIncrease.forEach(function (el) {
+            el.classList.remove('disabled');
+            el.disabled = false;
+          });
+        }
+      })
+    );
+
+    btnAdd.addEventListener('click', () => {
+      this._showSpecialItemOrderForm(totalPcs, specialMixPrice);
+      closeModal();
+
+      const specialEdit = document.querySelector('.order--item__edit');
+      const specialEditId = document
+        .querySelector('.order--item__edit')
+        .getAttribute('data-special-item-id');
+
+      specialEdit.addEventListener('click', openModal);
+
+      const specialDeleteBtn = document.querySelector(
+        '.special-container--header .order--item__remove'
+      );
+      specialDeleteBtn.addEventListener(
+        'click',
+        this._removeItemOrder.bind(this, specialEditId, true)
+      );
+    });
   }
 
   _render(markup, className, position) {
@@ -123,7 +271,7 @@ class App {
     const itemId = btn.getAttribute('data-item-id');
     const currItemLog = this.#currentOrderLog[itemId];
     const itemQty = document.querySelector(
-      `.order--item__qty[data-item-id="${Number(itemId)}"] .itemQty`
+      `.order--item[data-item-id="${Number(itemId)}"] .itemQty`
     );
     const specialItem = false;
 
@@ -153,7 +301,10 @@ class App {
       };
 
       this._render(
-        this._generateItemOrderMarkup({ itemId, name, priceD, qty, img }),
+        this._generateItemOrderMarkup(
+          { itemId, name, priceD, qty, img },
+          false
+        ),
         '.order__details',
         'afterbegin'
       );
@@ -161,146 +312,75 @@ class App {
       const deleteBtn = document.querySelector('.order--item__remove');
       deleteBtn.addEventListener(
         'click',
-        this._removeItemOrder.bind(this, itemId)
+        this._removeItemOrder.bind(this, itemId, false)
       );
     }
   }
 
-  _removeItemOrder(itemId) {
+  _showSpecialItemOrderForm(totalPcs, specialMixPrice) {
+    const specialMenuItems = document.querySelectorAll('.special-menu--item');
+    const specialItemId = 'id' + new Date().getTime();
+
+    this._render(
+      this._generateSpecialContainer(totalPcs, specialMixPrice, specialItemId),
+      '.order__details',
+      'afterbegin'
+    );
+
+    specialMenuItems.forEach((item) => {
+      const itemId = item.getAttribute('data-item-id');
+      const name = menuItems[itemId].name;
+      const specialPrice = Number(menuItems[itemId].special_mix_price).toFixed(
+        2
+      );
+      const img = menuItems[itemId].img;
+      const qty = Number(
+        item.querySelector('.order--item__qty-num').textContent
+      );
+      const specialItem = true;
+
+      if (qty > 0) {
+        this.#currentOrderLog[specialItemId] = {
+          itemId,
+          name,
+          specialPrice,
+          qty,
+          img,
+          specialItem,
+        };
+
+        console.log(this.#currentOrderLog);
+
+        this._render(
+          this._generateItemOrderMarkup(
+            { itemId, name, priceD: specialPrice, qty, img },
+            true
+          ),
+          '.special-container',
+          'beforeend'
+        );
+      }
+    });
+  }
+
+  _removeItemOrder(itemId, special) {
     //delete item from CurrentOrderLog Object
     delete this.#currentOrderLog[itemId];
 
+    console.log(itemId);
     //select item to delete from UI
-    const deleteItem = document.querySelector(
-      `.order--item__qty[data-item-id="${Number(itemId)}"]`
+    const orderItem = document.querySelector(
+      `.order--item[data-item-id="${Number(itemId)}"]`
     );
 
+    const specialOrderItem = document.querySelector(
+      `.special-container[data-special-item-id= "${itemId}"]`
+    );
+
+    console.log(specialOrderItem);
     // delete item from UI
-    deleteItem.parentElement.remove();
-  }
 
-  _addModalEventListeners(...args) {
-    const [
-      menuSpecialBtn,
-      modal,
-      overlay,
-      btnCloseModal,
-      btnIncrease,
-      btnDecrease,
-      btnAdd,
-      itemQty,
-      totalQty,
-      totalPcs,
-    ] = args;
-
-    const closeModal = function () {
-      modal.classList.add('hidden');
-      overlay.classList.add('hidden');
-
-      // Reset Quantities
-      itemQty.forEach(function (el) {
-        el.textContent = 0;
-      });
-      totalQty.textContent = 0;
-
-      // Disable decrease buttons
-      btnDecrease.forEach(function (el) {
-        el.classList.add('disabled');
-        el.disabled = true;
-      });
-
-      // Enable Increase Buttons
-      btnIncrease.forEach(function (el) {
-        el.classList.remove('disabled');
-        el.disabled = false;
-      });
-      // Disable Add Button
-      btnAdd.classList.add('disabled');
-      btnAdd.disabled = true;
-    };
-
-    const openModal = function () {
-      modal.classList.remove('hidden');
-      overlay.classList.remove('hidden');
-    };
-
-    const changeQty = function (el, inc, totalQtyNum) {
-      let itemQtyNum;
-      inc
-        ? (itemQtyNum = Number(el.previousElementSibling.textContent))
-        : (itemQtyNum = Number(el.nextElementSibling.textContent));
-
-      inc ? itemQtyNum++ : itemQtyNum--;
-      inc ? totalQtyNum++ : totalQtyNum--;
-
-      inc
-        ? (el.previousElementSibling.textContent = String(itemQtyNum))
-        : (el.nextElementSibling.textContent = String(itemQtyNum));
-
-      console.log(itemQtyNum);
-      totalQty.textContent = String(totalQtyNum);
-
-      return totalQtyNum;
-    };
-
-    menuSpecialBtn.addEventListener('click', openModal);
-    btnCloseModal.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-
-    btnIncrease.forEach((el) =>
-      el.addEventListener('click', function () {
-        let totalQtyNum = Number(totalQty.textContent);
-
-        totalQtyNum = changeQty(el, true, totalQtyNum);
-
-        if (totalQtyNum > 0) {
-          btnDecrease.forEach(function (el) {
-            if (Number(el.nextElementSibling.textContent) > 0) {
-              el.classList.remove('disabled');
-              el.disabled = false;
-            }
-          });
-        }
-
-        if (totalQtyNum === Number(totalPcs)) {
-          // enable add button
-          // disable increase
-          btnAdd.classList.remove('disabled');
-          btnAdd.disabled = false;
-
-          btnIncrease.forEach(function (el) {
-            el.classList.add('disabled');
-            el.disabled = true;
-          });
-        }
-      })
-    );
-
-    btnDecrease.forEach((el) =>
-      el.addEventListener('click', function () {
-        console.log('decrease!');
-        let totalQtyNum = Number(totalQty.textContent);
-
-        totalQtyNum = changeQty(el, false, totalQtyNum);
-
-        if (Number(el.nextElementSibling.textContent) === 0) {
-          el.classList.add('disabled');
-          el.disabled = true;
-        }
-
-        if (totalQtyNum !== Number(totalPcs)) {
-          // enable add button
-          // disable increase
-          btnAdd.classList.add('disabled');
-          btnAdd.disabled = true;
-
-          btnIncrease.forEach(function (el) {
-            el.classList.remove('disabled');
-            el.disabled = false;
-          });
-        }
-      })
-    );
+    special ? specialOrderItem.remove() : orderItem.remove();
   }
 
   _generateInfoMarkup() {
@@ -363,34 +443,49 @@ class App {
     return markup.join(' ');
   }
 
-  _generateItemOrderMarkup(itemData) {
-    return `<div class="order--item">
-      <div class="item-content__thumb">
+  _generateItemOrderMarkup(itemData, special) {
+    return `<div class="order--item ${
+      special ? `special-grid` : ``
+    }" data-item-id="${itemData.itemId}">
+      <div class="item-content__thumb ${
+        special ? `special-content__thumb` : ``
+      }">
         <div class="thumb__image"><img src="${itemData.img}"></div>
-        <div class="thumb__title"><span>${itemData.name}</span></div>
-        <div class="thumb__price"><span>$ ${itemData.priceD}</span></div>
+        <div class="thumb__title ${
+          special ? `special-thumb__title` : ``
+        }"><span>${itemData.name}</span></div>
+      ${
+        special === false
+          ? `<div class="thumb__price"><span>${itemData.priceD}</span></div>`
+          : ''
+      }  
       </div>
-      <div class="order--item__qty" data-item-id="${Number(itemData.itemId)}">
+      <div class="order--item__qty">
          <span class="itemQty">${itemData.qty}</span>
       </div>
       <div class="order--item__total">
-      <span class="item__currency">$ </span> <span class="totalPrice">${
-        itemData.priceD
-      }</span>
+      ${
+        special === false
+          ? `<span class="item__currency">$ </span> <span class="totalPrice">${itemData.priceD}</span>`
+          : ''
+      }  
       </div>
       <div class="order--item__note">
         <input type="text" placeholder="Order Note...">
       </div>
-      <div class="order--item__remove">
-        <img src="images/Icon/Trash.png">
-      </div>
+
+      ${
+        special === false
+          ? '<div class="order--item__remove"> <img src="images/Icon/Trash.png"></div>'
+          : ''
+      }
+      
       </div>`;
   }
 
-  _generateSpecialModal(specialBtnItemId, specialBtnCategId, totalPcs) {
+  _generateSpecialModal(specialBtnCategId, totalPcs, edit) {
     let markup = [];
 
-    console.log(totalPcs);
     markup.push(`<div class="modal hidden" data-category-id="1">
                     <button class="close-modal">×</button>
                     <h1 class="special-menu--header">Select <span>${totalPcs}</span> pcs:</h1>
@@ -400,12 +495,12 @@ class App {
       menuItems
     )) {
       if (catgId === specialBtnCategId && special_deal === false)
-        markup.push(`<div class="special-menu--item" data-item-id="${key}>
+        markup.push(`<div class="special-menu--item" data-item-id="${key}">
                         <img src="${img}">
                         <div class="special-menu--item-name">${name}</div>
                         <div class="order--item__qty">
                           <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
-                          <span class="order--item__qty-num">0</span>
+                          <span class="order--item__qty-num">5</span>
                           <button type="button" class="order--item__qty-increase">&#43;</button>
                         </div>
                       </div>`);
@@ -422,6 +517,21 @@ class App {
               <div class="overlay hidden"></div>`);
 
     return markup.join(' ');
+  }
+
+  _generateSpecialContainer(totalPcs, specialMixPrice, specialItemId) {
+    return `<div class="special-container" data-special-item-id="${specialItemId}">
+              <div class="special-container--header">
+               <h1>MIX ${totalPcs} PCS FOR $ ${specialMixPrice}</h1>
+               <div class="order--item__remove">
+                <img src="images/Icon/Trash.png">
+               </div>
+               <div class="order--item__edit" data-special-item-id="${specialItemId}">
+                <img src="images/Icon/edit.png">
+               </div>               
+              </div>
+            
+            </div>`;
   }
 
   // _submitOrder() {}
