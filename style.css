@@ -86,7 +86,9 @@ input {
   height: 4.8rem;
 }
 
-.menu--items.hidden {
+.menu--items.hidden,
+.btnAdd.hidden,
+.btnSave.hidden {
   display: none;
 }
 
@@ -385,6 +387,7 @@ button.disabled {
 
 .special-container {
   border: 1px solid var(--color-light--2);
+  border-radius: 0.8rem;
   padding: 3rem;
   margin-bottom: 3rem;
 }

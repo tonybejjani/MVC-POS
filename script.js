@@ -65,6 +65,7 @@ class App {
     const btnIncrease = document.querySelectorAll('.order--item__qty-increase');
     const btnDecrease = document.querySelectorAll('.order--item__qty-decrease');
     const btnAdd = document.querySelector('.special-menu--footer .btnAdd');
+    const btnSave = document.querySelector('.special-menu--footer .btnSave');
     const itemQty = document.querySelectorAll(
       '.special-menu--items .order--item__qty-num'
     );
@@ -78,12 +79,21 @@ class App {
       btnIncrease,
       btnDecrease,
       btnAdd,
+      btnSave,
       itemQty,
       totalQty,
       totalPcs,
       specialMixPrice,
     });
   }
+
+  /*****************************************************************/
+  /*****************************************************************/
+  /*                                                               */
+  /*                        SPECIAL MIX MODAL                      */
+  /*                                                               */
+  /*****************************************************************/
+  /*****************************************************************/
 
   _addModalEventListeners(selectors) {
     const {
@@ -94,6 +104,7 @@ class App {
       btnIncrease,
       btnDecrease,
       btnAdd,
+      btnSave,
       itemQty,
       totalQty,
       totalPcs,
@@ -124,15 +135,66 @@ class App {
       // Disable Add Button
       btnAdd.classList.add('disabled');
       btnAdd.disabled = true;
+      btnAdd.classList.remove('hidden');
+      btnSave.classList.add('hidden');
     };
 
     const openModal = function () {
       modal.classList.remove('hidden');
       overlay.classList.remove('hidden');
+    };
 
-      itemQty.forEach((el) => {
-        console.log(el.textContent);
+    const updateModal = function (orderSpecialItemsId) {
+      openModal();
+
+      // qty counter
+      let specialOrderQty = 0;
+
+      // update current quantity in the modal to mtch "Mix Special Item" being edited
+      // enable and disable buttons accordingly
+      itemQty.forEach((item) => {
+        const specialModalItemId = Number(
+          item.closest('.special-menu--item').getAttribute('data-item-id')
+        );
+        const btnDecrease = item.previousElementSibling;
+
+        orderSpecialItemsId.forEach((specialItem) => {
+          /* match the corresponding order in the mix with 
+          the modal itemid to update the quantity when editing */
+          if (Number(specialItem.itemId) === specialModalItemId) {
+            item.textContent = String(specialItem.qty);
+
+            specialOrderQty += specialItem.qty;
+            // enable decrease button
+            btnDecrease.classList.remove('disabled');
+            btnDecrease.disabled = false;
+          }
+        });
+
+        // Update Modal quantity
+        totalQty.textContent = String(specialOrderQty);
+
+        /* Disbale increase button  and Enable Edit button */
+        if (specialOrderQty === Number(totalPcs)) {
+          // enable add button
+          // disable increase
+          btnSave.classList.remove('disabled');
+          btnSave.disabled = false;
+
+          btnIncrease.forEach(function (el) {
+            el.classList.add('disabled');
+            el.disabled = true;
+          });
+        }
       });
+
+      //
+      btnAdd.classList.add('hidden');
+      btnSave.classList.remove('hidden');
+
+      // btnAdd.addEventListener('click', () => {
+      //   console.log('test');
+      // });
     };
 
     const changeQty = function (el, inc, totalQtyNum) {
@@ -177,6 +239,8 @@ class App {
           // disable increase
           btnAdd.classList.remove('disabled');
           btnAdd.disabled = false;
+          btnSave.classList.remove('disabled');
+          btnSave.disabled = false;
 
           btnIncrease.forEach(function (el) {
             el.classList.add('disabled');
@@ -202,6 +266,8 @@ class App {
           // disable increase
           btnAdd.classList.add('disabled');
           btnAdd.disabled = true;
+          btnSave.classList.add('disabled');
+          btnSave.disabled = true;
 
           btnIncrease.forEach(function (el) {
             el.classList.remove('disabled');
@@ -212,29 +278,108 @@ class App {
     );
 
     btnAdd.addEventListener('click', () => {
-      this._showSpecialItemOrderForm(totalPcs, specialMixPrice);
+      const specialEditId = this._showSpecialItemOrderForm(
+        totalPcs,
+        specialMixPrice
+      );
+
       closeModal();
 
-      const specialEdit = document.querySelector('.order--item__edit');
-      const specialEditId = document
-        .querySelector('.order--item__edit')
-        .getAttribute('data-special-item-id');
+      const specialEdit = document.querySelector(
+        `.order--item__edit[data-special-item-id="${specialEditId}"]`
+      );
 
-      specialEdit.addEventListener('click', openModal);
+      specialEdit.addEventListener('click', () => {
+        // console.log(specialEdit);
+
+        btnSave.setAttribute('data-special-item-id', specialEditId);
+        const orderSpecialItemsId = this.#currentOrderLog[specialEditId];
+
+        updateModal(orderSpecialItemsId);
+      });
 
       const specialDeleteBtn = document.querySelector(
-        '.special-container--header .order--item__remove'
+        `.special-container--header .order--item__remove[data-special-item-id="${specialEditId}"]`
       );
+
       specialDeleteBtn.addEventListener(
         'click',
         this._removeItemOrder.bind(this, specialEditId, true)
       );
+    });
+
+    btnSave.addEventListener('click', () => {
+      const specialEditId = btnSave.getAttribute('data-special-item-id');
+
+      console.log(specialEditId);
+      this._showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId);
+      closeModal();
     });
   }
 
   _render(markup, className, position) {
     const container = document.querySelector(className);
     container.insertAdjacentHTML(position, markup);
+  }
+
+  _showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId) {
+    const specialMenuItems = document.querySelectorAll('.special-menu--item');
+    const specialContainerItems = document.querySelectorAll(
+      `.special-container[data-special-item-id='${specialEditId}'] .order--item`
+    );
+
+    console.log(specialContainerItems);
+    specialEditId
+      ? specialContainerItems.forEach((item) => {
+          item.remove();
+        })
+      : ((specialEditId = 'id' + new Date().getTime()),
+        this._render(
+          this._generateSpecialContainer(
+            totalPcs,
+            specialMixPrice,
+            specialEditId
+          ),
+          '.order__details',
+          'afterbegin'
+        ));
+
+    this.#currentOrderLog[specialEditId] = [];
+
+    specialMenuItems.forEach((item) => {
+      const itemId = item.getAttribute('data-item-id');
+      const name = menuItems[itemId].name;
+      const specialPrice = Number(menuItems[itemId].special_mix_price).toFixed(
+        2
+      );
+      const img = menuItems[itemId].img;
+      const qty = Number(
+        item.querySelector('.order--item__qty-num').textContent
+      );
+      const specialItem = true;
+
+      if (qty > 0) {
+        this.#currentOrderLog[specialEditId].push({
+          itemId,
+          name,
+          specialPrice,
+          qty,
+          img,
+          specialItem,
+        });
+
+        this._render(
+          this._generateItemOrderMarkup(
+            { itemId, name, priceD: specialPrice, qty, img },
+            true
+          ),
+          `.special-container[data-special-item-id='${specialEditId}']`,
+          'beforeend'
+        );
+      }
+    });
+
+    return specialEditId;
   }
 
   _showMenuCategItems(categLink, categLinks) {
@@ -273,6 +418,9 @@ class App {
     const itemQty = document.querySelector(
       `.order--item[data-item-id="${Number(itemId)}"] .itemQty`
     );
+
+    /* The items selected individually from the menu (meaning not in a "special mix" for instance )
+    are not special Items === false*/
     const specialItem = false;
 
     // On selecting an item, check if itemId already exists in current Order List
@@ -302,7 +450,7 @@ class App {
 
       this._render(
         this._generateItemOrderMarkup(
-          { itemId, name, priceD, qty, img },
+          { itemId, name, priceD, qty, img, specialItem },
           false
         ),
         '.order__details',
@@ -317,57 +465,10 @@ class App {
     }
   }
 
-  _showSpecialItemOrderForm(totalPcs, specialMixPrice) {
-    const specialMenuItems = document.querySelectorAll('.special-menu--item');
-    const specialItemId = 'id' + new Date().getTime();
-
-    this._render(
-      this._generateSpecialContainer(totalPcs, specialMixPrice, specialItemId),
-      '.order__details',
-      'afterbegin'
-    );
-
-    specialMenuItems.forEach((item) => {
-      const itemId = item.getAttribute('data-item-id');
-      const name = menuItems[itemId].name;
-      const specialPrice = Number(menuItems[itemId].special_mix_price).toFixed(
-        2
-      );
-      const img = menuItems[itemId].img;
-      const qty = Number(
-        item.querySelector('.order--item__qty-num').textContent
-      );
-      const specialItem = true;
-
-      if (qty > 0) {
-        this.#currentOrderLog[specialItemId] = {
-          itemId,
-          name,
-          specialPrice,
-          qty,
-          img,
-          specialItem,
-        };
-
-        console.log(this.#currentOrderLog);
-
-        this._render(
-          this._generateItemOrderMarkup(
-            { itemId, name, priceD: specialPrice, qty, img },
-            true
-          ),
-          '.special-container',
-          'beforeend'
-        );
-      }
-    });
-  }
-
   _removeItemOrder(itemId, special) {
     //delete item from CurrentOrderLog Object
     delete this.#currentOrderLog[itemId];
 
-    console.log(itemId);
     //select item to delete from UI
     const orderItem = document.querySelector(
       `.order--item[data-item-id="${Number(itemId)}"]`
@@ -377,11 +478,18 @@ class App {
       `.special-container[data-special-item-id= "${itemId}"]`
     );
 
-    console.log(specialOrderItem);
     // delete item from UI
 
     special ? specialOrderItem.remove() : orderItem.remove();
   }
+
+  /*****************************************************************/
+  /*****************************************************************/
+  /*                                                               */
+  /*                            VIEWS                              */
+  /*                                                               */
+  /*****************************************************************/
+  /*****************************************************************/
 
   _generateInfoMarkup() {
     const { logo, title, date } = info;
@@ -483,7 +591,7 @@ class App {
       </div>`;
   }
 
-  _generateSpecialModal(specialBtnCategId, totalPcs, edit) {
+  _generateSpecialModal(specialBtnCategId, totalPcs) {
     let markup = [];
 
     markup.push(`<div class="modal hidden" data-category-id="1">
@@ -500,7 +608,7 @@ class App {
                         <div class="special-menu--item-name">${name}</div>
                         <div class="order--item__qty">
                           <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
-                          <span class="order--item__qty-num">5</span>
+                          <span class="order--item__qty-num">0</span>
                           <button type="button" class="order--item__qty-increase">&#43;</button>
                         </div>
                       </div>`);
@@ -512,6 +620,7 @@ class App {
                       <p class="order--item__qty-pcs">pcs</p>
                     </div>
                       <button class="btnAdd disabled" disabled>Add</button>
+                      <button class="btnSave disabled hidden" disabled data-special-item-id="" >Save</button>
                   </div>
               </div>
               <div class="overlay hidden"></div>`);
@@ -523,7 +632,7 @@ class App {
     return `<div class="special-container" data-special-item-id="${specialItemId}">
               <div class="special-container--header">
                <h1>MIX ${totalPcs} PCS FOR $ ${specialMixPrice}</h1>
-               <div class="order--item__remove">
+               <div class="order--item__remove" data-special-item-id="${specialItemId}">
                 <img src="images/Icon/Trash.png">
                </div>
                <div class="order--item__edit" data-special-item-id="${specialItemId}">
