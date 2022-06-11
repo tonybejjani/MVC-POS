@@ -50,8 +50,8 @@ class App {
         .getAttribute('data-category-id')
     );
 
-    const totalPcs = menuItems[menuSpecialBtnItemId].mix_qty;
-    const specialMixPrice = menuItems[menuSpecialBtnItemId].special_mix_price;
+    const totalPcs = menuItems[menuSpecialBtnItemId].qty;
+    const specialMixPrice = menuItems[menuSpecialBtnItemId].price;
 
     this._render(
       this._generateSpecialModal(specialBtnCategId, totalPcs),
@@ -351,9 +351,7 @@ class App {
     specialMenuItems.forEach((item) => {
       const itemId = item.getAttribute('data-item-id');
       const name = menuItems[itemId].name;
-      const specialPrice = Number(menuItems[itemId].special_mix_price).toFixed(
-        2
-      );
+      const specialPrice = Number(specialMixPrice / totalPcs).toFixed(2);
       const img = menuItems[itemId].img;
       const qty = Number(
         item.querySelector('.order--item__qty-num').textContent
@@ -626,7 +624,7 @@ class App {
     for (const [key, { catgId, name, img, special_deal }] of Object.entries(
       menuItems
     )) {
-      if (catgId === specialBtnCategId && special_deal === false)
+      if (catgId === specialBtnCategId && !special_deal)
         markup.push(`<div class="special-menu--item" data-item-id="${key}">
                         <img src="${img}">
                         <div class="special-menu--item-name">${name}</div>

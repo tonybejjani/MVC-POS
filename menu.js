@@ -33,43 +33,35 @@ const menuItems = {
   0: {
     catgId: 1,
     catgName: 'Yumcha',
-    name: 'MIX 7 PCS',
-    price: 14.0,
-    special_mix_price: 14.0,
-    qty: 1,
+    name: 'MIX 8 PCS',
+    price: 12.0,
+    qty: 8,
     img: 'images/1x/mix.png',
     special_deal: true,
-    mix_qty: 7,
   },
   1: {
     catgId: 1,
     catgName: 'Yumcha',
     name: 'Pork Soup Dumpling',
     price: 2.0,
-    special_mix_price: 2.0,
     qty: 1,
     img: 'images/1x/xlb.png',
-    special_deal: false,
   },
   2: {
     catgId: 1,
     catgName: 'Yumcha',
     name: 'Prawn Dumpling',
     price: 2.5,
-    special_mix_price: 2.0,
     qty: 1,
     img: 'images/1x/hargow.png',
-    special_deal: false,
   },
   3: {
     catgId: 1,
     catgName: 'Yumcha',
     name: 'BBQ Pork Buns',
     price: 3,
-    special_mix_price: 2.0,
     qty: 1,
     img: 'images/1x/buns.png',
-    special_deal: false,
     special_deal_limit: 2,
   },
   4: {
@@ -77,20 +69,16 @@ const menuItems = {
     catgName: 'Yumcha',
     name: 'Chicken Dim Sims',
     price: 2,
-    special_mix_price: 2.0,
     qty: 1,
     img: 'images/1x/chicken.png',
-    special_deal: false,
   },
   5: {
     catgId: 1,
     catgName: 'Yumcha',
     name: 'Pork & Prawn Siumai',
     price: 2.5,
-    special_mix_price: 2.0,
     qty: 1,
     img: 'images/1x/siumai.png',
-    special_deal: false,
   },
   10: {
     catgId: 2,
@@ -99,7 +87,6 @@ const menuItems = {
     price: 7,
     qty: 1,
     img: 'images/1x/duck_x2.png',
-    special_deal: false,
   },
   11: {
     catgId: 2,
@@ -108,7 +95,6 @@ const menuItems = {
     price: 12,
     qty: 1,
     img: 'images/1x/duck_x4.png',
-    special_deal: false,
   },
   12: {
     catgId: 2,
@@ -117,7 +103,6 @@ const menuItems = {
     price: 16,
     qty: 1,
     img: 'images/1x/duck_x6.png',
-    special_deal: false,
   },
   20: {
     catgId: 3,
@@ -126,7 +111,6 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/water.png',
-    special_deal: false,
   },
   21: {
     catgId: 3,
@@ -135,7 +119,6 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/coke.png',
-    special_deal: false,
   },
   22: {
     catgId: 3,
@@ -144,7 +127,6 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/coke-zero.png',
-    special_deal: false,
   },
   23: {
     catgId: 3,
@@ -153,7 +135,6 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/fanta.png',
-    special_deal: false,
   },
 
   24: {
@@ -163,7 +144,6 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/sprite.png',
-    special_deal: false,
   },
   25: {
     catgId: 3,
@@ -172,7 +152,6 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/solo.png',
-    special_deal: false,
   },
   26: {
     catgId: 4,
@@ -181,6 +160,5 @@ const menuItems = {
     price: 3,
     qty: 1,
     img: 'images/1x/crackers.png',
-    special_deal: false,
   },
 };
