@@ -284,6 +284,7 @@ class App {
       );
 
       closeModal();
+      this._updateOrderPrice();
 
       const specialEdit = document.querySelector(
         `.order--item__edit[data-special-item-id="${specialEditId}"]`
@@ -314,6 +315,7 @@ class App {
       console.log(specialEditId);
       this._showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId);
       closeModal();
+      this._updateOrderPrice();
     });
   }
 
@@ -344,7 +346,7 @@ class App {
           'afterbegin'
         ));
 
-    this.#currentOrderLog[specialEditId] = [];
+    this.#currentOrderLog[specialEditId] = [{ mixPrice: specialMixPrice }];
 
     specialMenuItems.forEach((item) => {
       const itemId = item.getAttribute('data-item-id');
@@ -413,10 +415,13 @@ class App {
       menuItems[btn.getAttribute('data-item-id')];
 
     const priceD = price.toFixed(2); //convert price to decimal
+    const totalPrice = price;
     const itemId = btn.getAttribute('data-item-id');
     const currItemLog = this.#currentOrderLog[itemId];
     const itemQty = document.querySelector(
-      `.order--item[data-item-id="${Number(itemId)}"] .itemQty`
+      `.order--item.order--item-normal[data-item-id="${Number(
+        itemId
+      )}"] .itemQty`
     );
 
     /* The items selected individually from the menu (meaning not in a "special mix" for instance )
@@ -432,11 +437,10 @@ class App {
 
       //update UI: item qty & total price
       itemQty.textContent = currItemLog.qty;
-      itemQty.parentElement.nextElementSibling.querySelector(
+      itemQty.parentElement.previousElementSibling.querySelector(
         '.totalPrice'
       ).textContent = currItemLog.totalPrice.toFixed(2);
 
-      console.log(this.#currentOrderLog);
       // 2- if NO: add new item to #currentOrderLog object
     } else {
       this.#currentOrderLog[itemId] = {
@@ -446,6 +450,7 @@ class App {
         qty,
         img,
         specialItem,
+        totalPrice,
       };
 
       this._render(
@@ -463,15 +468,36 @@ class App {
         this._removeItemOrder.bind(this, itemId, false)
       );
     }
+
+    console.log(this.#currentOrderLog);
+
+    this._updateOrderPrice();
+  }
+
+  _updateOrderPrice() {
+    const totalEl = document.querySelector('.order-total--price span');
+    let total = 0;
+
+    for (const [key, { totalPrice }] of Object.entries(this.#currentOrderLog)) {
+      if (key.startsWith('id')) {
+        total += this.#currentOrderLog[key][0].mixPrice;
+      } else {
+        total += totalPrice;
+      }
+    }
+
+    totalEl.textContent = total.toFixed(2);
   }
 
   _removeItemOrder(itemId, special) {
     //delete item from CurrentOrderLog Object
     delete this.#currentOrderLog[itemId];
 
+    this._updateOrderPrice();
+
     //select item to delete from UI
     const orderItem = document.querySelector(
-      `.order--item[data-item-id="${Number(itemId)}"]`
+      `.order--item.order--item-normal[data-item-id="${Number(itemId)}"]`
     );
 
     const specialOrderItem = document.querySelector(
@@ -553,40 +579,38 @@ class App {
 
   _generateItemOrderMarkup(itemData, special) {
     return `<div class="order--item ${
-      special ? `special-grid` : ``
+      special ? `order--item-special` : `order--item-normal`
     }" data-item-id="${itemData.itemId}">
       <div class="item-content__thumb ${
         special ? `special-content__thumb` : ``
       }">
-        <div class="thumb__image"><img src="${itemData.img}"></div>
-        <div class="thumb__title ${
-          special ? `special-thumb__title` : ``
-        }"><span>${itemData.name}</span></div>
-      ${
-        special === false
-          ? `<div class="thumb__price"><span>${itemData.priceD}</span></div>`
-          : ''
-      }  
-      </div>
-      <div class="order--item__qty">
-         <span class="itemQty">${itemData.qty}</span>
-      </div>
-      <div class="order--item__total">
-      ${
-        special === false
-          ? `<span class="item__currency">$ </span> <span class="totalPrice">${itemData.priceD}</span>`
-          : ''
-      }  
-      </div>
-      <div class="order--item__note">
-        <input type="text" placeholder="Order Note...">
-      </div>
+          <div class="thumb__image"><img src="${itemData.img}"></div>
+          <div class="thumb__title ${
+            special ? `special-thumb__title` : ``
+          }"><span>${itemData.name}</span></div>
+        ${
+          special === false
+            ? `<div class="thumb__price"><span>${itemData.priceD}</span></div>`
+            : ''
+        }  
+        </div>
 
-      ${
-        special === false
-          ? '<div class="order--item__remove"> <img src="images/Icon/Trash.png"></div>'
-          : ''
-      }
+       
+        <div class="order--item__total">
+        ${
+          special === false
+            ? `<span class="item__currency">$ </span> <span class="totalPrice">${itemData.priceD}</span>`
+            : ''
+        }  
+        </div>
+        <div class="order--item__qty">
+        <span class="itemQty">${itemData.qty}</span>
+      </div>
+        ${
+          special === false
+            ? '<div class="order--item__remove"> <img src="images/Icon/Trash.png"></div>'
+            : ''
+        }
       
       </div>`;
   }
