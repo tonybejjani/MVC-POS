@@ -1,0 +1,22 @@
+{
+  "name": "pos",
+  "version": "1.0.0",
+  "description": "Point of Sale system",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonybejjani/POS.git"
+  },
+  "author": "Antoine Bejjani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonybejjani/POS/issues"
+  },
+  "homepage": "https://github.com/tonybejjani/POS#readme",
+  "devDependencies": {
+    "parcel": "^2.6.1"
+  }
+}
