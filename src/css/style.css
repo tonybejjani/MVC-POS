@@ -442,14 +442,6 @@ button.disabled {
   flex-basis: 15%;
 }
 
-.order--heading__quantity {
-  /* text-align: end; */
-}
-
-.order--heading__price {
-  /* text-align: end; */
-}
-
 .client-info {
   height: 5rem;
   font-size: 2.4rem;
@@ -524,10 +516,6 @@ button.disabled {
   padding: 0rem 1rem;
   font-size: 2rem;
 
-
-}
-
-.order--item__remove {
 
 }
 
