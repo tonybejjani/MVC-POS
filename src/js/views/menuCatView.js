@@ -9,15 +9,31 @@ class menuCatView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  addHandlerRender(handler) {
+  activateMenuCat() {
     const menuCatItems = document.querySelectorAll('.menu--items');
     const menuCatLinks = document.querySelectorAll('.menu--navbar__link');
 
     menuCatLinks.forEach((catLink) =>
-      catLink.addEventListener(
-        'click',
-        handler.bind(this, catLink, menuCatLinks, menuCatItems)
-      )
+      catLink.addEventListener('click', function () {
+        if (catLink.closest('li').classList.contains('menu--navbar__active'))
+          return;
+
+        menuCatLinks.forEach((link) => {
+          link.closest('li').classList.remove('menu--navbar__active');
+
+          if (link.dataset.categoryId === catLink.dataset.categoryId) {
+            link.closest('li').classList.add('menu--navbar__active');
+          }
+        });
+
+        menuCatItems.forEach((catItem) => {
+          catItem.classList.add('hidden');
+
+          if (catLink.dataset.categoryId === catItem.dataset.categoryId) {
+            catItem.classList.remove('hidden');
+          }
+        });
+      })
     );
   }
 

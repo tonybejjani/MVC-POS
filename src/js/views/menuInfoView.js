@@ -1,5 +1,5 @@
 /** @format */
-class infoView {
+class menuInfoView {
   #parentElement = document.querySelector('.info');
   #data;
 
@@ -17,4 +17,4 @@ class infoView {
   }
 }
 
-export default new infoView();
+export default new menuInfoView();

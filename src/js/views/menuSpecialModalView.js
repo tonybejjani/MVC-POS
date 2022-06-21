@@ -1,6 +1,6 @@
 /** @format */
 
-class specialMixModalView {
+class menuSpecialModalView {
   #parentElement = document.querySelector('.menu');
   #data;
 
@@ -11,9 +11,45 @@ class specialMixModalView {
   }
 
   addHandlerRender(handler) {
-    const menuItemBtns = document.querySelectorAll('.menu--item__button');
-    menuItemBtns.forEach((btn) => {
-      btn.addEventListener('click', handler.bind(this, btn));
+    const menuSpecialBtn = document.querySelector(
+      '.menu--special--item__button'
+    );
+
+    const menuSpecialBtnItemId = Number(
+      document
+        .querySelector('.menu--special--item__button')
+        .getAttribute('data-item-id')
+    );
+
+    console.log(menuSpecialBtnItemId);
+
+    const totalPcs = this.#data[menuSpecialBtnItemId].qty;
+    const specialMixPrice = this.#data[menuSpecialBtnItemId].price;
+    const modal = document.querySelector('.modal');
+    const overlay = document.querySelector('.overlay');
+    const btnCloseModal = document.querySelector('.close-modal');
+    const btnIncrease = document.querySelectorAll('.order--item__qty-increase');
+    const btnDecrease = document.querySelectorAll('.order--item__qty-decrease');
+    const btnAdd = document.querySelector('.special-menu--footer .btnAdd');
+    const btnSave = document.querySelector('.special-menu--footer .btnSave');
+    const itemQty = document.querySelectorAll(
+      '.special-menu--items .order--item__qty-num'
+    );
+    const totalQty = document.querySelector('.special-menu--footer .total-qty');
+
+    handler({
+      menuSpecialBtn,
+      modal,
+      overlay,
+      btnCloseModal,
+      btnIncrease,
+      btnDecrease,
+      btnAdd,
+      btnSave,
+      itemQty,
+      totalQty,
+      totalPcs,
+      specialMixPrice,
     });
   }
 
@@ -67,4 +103,4 @@ class specialMixModalView {
   }
 }
 
-export default new specialMixModalView();
+export default new menuSpecialModalView();

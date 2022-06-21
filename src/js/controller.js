@@ -4,14 +4,14 @@
 
 // Icons
 import trash from 'url:../img/icon/trash.png';
-import edit from 'url:../img/icon/edit.png';
 
 // Views
 import menuCatView from './views/menuCatView.js';
-import infoView from './views/infoView.js';
+import menuInfoView from './views/menuInfoView.js';
 import menuItemsView from './views/menuItemsView.js';
-import specialMixModalView from './views/specialMixModalView.js';
-import itemOrderView from './views/itemOrderView.js';
+import menuSpecialModalView from './views/menuSpecialModalView.js';
+import orderItemView from './views/orderItemView.js';
+import orderSpecialBoxView from './views/orderSpecialBoxView.js';
 
 import * as model from './model.js';
 // Polyfilling
@@ -19,54 +19,16 @@ import 'core-js/stable';
 import 'regenerator-runtime'; // polyfilling async-await
 
 class App {
-  #currentOrderLog = {};
-
   constructor() {
-    infoView.render(model.state.info);
+    menuInfoView.render(model.state.info);
     menuCatView.render(model.state.menuCategories);
     menuItemsView.render(model.state);
-    menuCatView.addHandlerRender(this._showMenuCats);
-    menuItemsView.addHandlerRender(this._showItemOrderForm.bind(this));
-    specialMixModalView.render(model.state.menuItems);
-
-    const menuSpecialBtn = document.querySelector(
-      '.menu--special--item__button'
+    menuCatView.activateMenuCat();
+    menuItemsView.addHandlerRender(this._showOrderItemForm.bind(this));
+    menuSpecialModalView.render(model.state.menuItems);
+    menuSpecialModalView.addHandlerRender(
+      this._addModalEventListeners.bind(this)
     );
-
-    const menuSpecialBtnItemId = Number(
-      document
-        .querySelector('.menu--special--item__button')
-        .getAttribute('data-item-id')
-    );
-
-    const totalPcs = model.state.menuItems[menuSpecialBtnItemId].qty;
-    const specialMixPrice = model.state.menuItems[menuSpecialBtnItemId].price;
-    const modal = document.querySelector('.modal');
-    const overlay = document.querySelector('.overlay');
-    const btnCloseModal = document.querySelector('.close-modal');
-    const btnIncrease = document.querySelectorAll('.order--item__qty-increase');
-    const btnDecrease = document.querySelectorAll('.order--item__qty-decrease');
-    const btnAdd = document.querySelector('.special-menu--footer .btnAdd');
-    const btnSave = document.querySelector('.special-menu--footer .btnSave');
-    const itemQty = document.querySelectorAll(
-      '.special-menu--items .order--item__qty-num'
-    );
-    const totalQty = document.querySelector('.special-menu--footer .total-qty');
-
-    this._addModalEventListeners({
-      menuSpecialBtn,
-      modal,
-      overlay,
-      btnCloseModal,
-      btnIncrease,
-      btnDecrease,
-      btnAdd,
-      btnSave,
-      itemQty,
-      totalQty,
-      totalPcs,
-      specialMixPrice,
-    });
   }
 
   _render(markup, className, position) {
@@ -123,6 +85,7 @@ class App {
       overlay.classList.remove('hidden');
     };
 
+    // update values in modal when editing a Special Mix Order Item
     const updateModal = function (orderSpecialItemsId) {
       openModal();
 
@@ -252,7 +215,7 @@ class App {
     );
 
     btnAdd.addEventListener('click', () => {
-      const specialEditId = this._showSpecialItemOrderForm(
+      const specialEditId = this._showOrderSpecialItemForm(
         totalPcs,
         specialMixPrice
       );
@@ -268,7 +231,7 @@ class App {
         // console.log(specialEdit);
 
         btnSave.setAttribute('data-special-item-id', specialEditId);
-        const orderSpecialItemsId = this.#currentOrderLog[specialEditId];
+        const orderSpecialItemsId = model.state.currentOrderLog[specialEditId];
 
         updateModal(orderSpecialItemsId);
       });
@@ -287,13 +250,13 @@ class App {
       const specialEditId = btnSave.getAttribute('data-special-item-id');
 
       console.log(specialEditId);
-      this._showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId);
+      this._showOrderSpecialItemForm(totalPcs, specialMixPrice, specialEditId);
       closeModal();
       this._updateOrderPrice();
     });
   }
 
-  _showItemOrderForm(btn) {
+  _showOrderItemForm(btn) {
     /* get data from menuItems object according to item selected on
      "data-item-id" attribute of html element */
 
@@ -303,7 +266,7 @@ class App {
     const priceD = price.toFixed(2); //convert price to decimal
     const totalPrice = price;
     const itemId = btn.getAttribute('data-item-id');
-    const currItemLog = this.#currentOrderLog[itemId];
+    const currItemLog = model.state.currentOrderLog[itemId];
     const itemQty = document.querySelector(
       `.order--item.order--item-normal[data-item-id="${Number(
         itemId
@@ -315,10 +278,9 @@ class App {
     const specialItem = false;
 
     // On selecting an item, check if itemId already exists in current Order List
-
     // 1- if YES: update Qty & total price
     if (currItemLog) {
-      //update qty and total price in #currentOrderLog Object
+      //update qty and total pricmodel.state.currentOrderLog Object
       currItemLog.qty++;
       currItemLog.totalPrice = currItemLog.price * currItemLog.qty;
 
@@ -328,9 +290,9 @@ class App {
         '.totalPrice'
       ).textContent = currItemLog.totalPrice.toFixed(2);
 
-      // 2- if NO: add new item to #currentOrderLog object
+      // 2- if NO: add new itemodel.state.currentOrderLog object
     } else {
-      this.#currentOrderLog[itemId] = {
+      model.state.currentOrderLog[itemId] = {
         itemId,
         name,
         price,
@@ -340,7 +302,7 @@ class App {
         totalPrice,
       };
 
-      itemOrderView.render({
+      orderItemView.render({
         itemId,
         name,
         priceD,
@@ -349,14 +311,6 @@ class App {
         specialItem,
         special: false,
       });
-      // this._render(
-      //   this._generateItemOrderMarkup(
-      //     { itemId, name, priceD, qty, img, specialItem },
-      //     false
-      //   ),
-      //   '.order__details',
-      //   'afterbegin'
-      // );
 
       const deleteBtn = document.querySelector('.order--item__remove');
       deleteBtn.addEventListener(
@@ -365,12 +319,12 @@ class App {
       );
     }
 
-    console.log(this.#currentOrderLog);
+    console.log(model.state.currentOrderLog);
 
     this._updateOrderPrice();
   }
 
-  _showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId) {
+  _showOrderSpecialItemForm(totalPcs, specialMixPrice, specialEditId) {
     const specialMenuItems = document.querySelectorAll('.special-menu--item');
     const specialContainerItems = document.querySelectorAll(
       `.special-container[data-special-item-id='${specialEditId}'] .order--item`
@@ -381,17 +335,15 @@ class App {
           item.remove();
         })
       : ((specialEditId = 'id' + new Date().getTime()),
-        this._render(
-          this._generateSpecialContainer(
-            totalPcs,
-            specialMixPrice,
-            specialEditId
-          ),
-          '.order__details',
-          'afterbegin'
-        ));
+        orderSpecialBoxView.render({
+          totalPcs,
+          specialMixPrice,
+          specialEditId,
+        }));
 
-    this.#currentOrderLog[specialEditId] = [{ mixPrice: specialMixPrice }];
+    model.state.currentOrderLog[specialEditId] = [
+      { mixPrice: specialMixPrice },
+    ];
 
     specialMenuItems.forEach((item) => {
       const itemId = item.getAttribute('data-item-id');
@@ -404,7 +356,7 @@ class App {
       const specialItem = true;
 
       if (qty > 0) {
-        this.#currentOrderLog[specialEditId].push({
+        model.state.currentOrderLog[specialEditId].push({
           itemId,
           name,
           specialPrice,
@@ -413,7 +365,7 @@ class App {
           specialItem,
         });
 
-        // specialItemOrderView.render({
+        // specialorderItemView.render({
         //   itemId,
         //   name,
         //   priceD,
@@ -423,7 +375,7 @@ class App {
         // });
 
         this._render(
-          this._generateItemOrderMarkup(
+          this._generateOrderItemMarkup(
             { itemId, name, priceD: specialPrice, qty, img },
             true
           ),
@@ -436,36 +388,15 @@ class App {
     return specialEditId;
   }
 
-  _showMenuCats(catLink, catLinks, menuCatItems) {
-    console.log(this);
-    console.log(catLink);
-    if (catLink.closest('li').classList.contains('menu--navbar__active'))
-      return;
-
-    catLinks.forEach((link) => {
-      link.closest('li').classList.remove('menu--navbar__active');
-
-      if (link.dataset.categoryId === catLink.dataset.categoryId) {
-        link.closest('li').classList.add('menu--navbar__active');
-      }
-    });
-
-    menuCatItems.forEach((catItem) => {
-      catItem.classList.add('hidden');
-
-      if (catLink.dataset.categoryId === catItem.dataset.categoryId) {
-        catItem.classList.remove('hidden');
-      }
-    });
-  }
-
   _updateOrderPrice() {
     const totalEl = document.querySelector('.order-total--price span');
     let total = 0;
 
-    for (const [key, { totalPrice }] of Object.entries(this.#currentOrderLog)) {
+    for (const [key, { totalPrice }] of Object.entries(
+      model.state.currentOrderLog
+    )) {
       if (key.startsWith('id')) {
-        total += this.#currentOrderLog[key][0].mixPrice;
+        total += model.state.currentOrderLog[key][0].mixPrice;
       } else {
         total += totalPrice;
       }
@@ -476,7 +407,7 @@ class App {
 
   _removeItemOrder(itemId, special) {
     //delete item from CurrentOrderLog Object
-    delete this.#currentOrderLog[itemId];
+    delete model.state.currentOrderLog[itemId];
 
     this._updateOrderPrice();
 
@@ -501,7 +432,7 @@ class App {
   /*****************************************************************/
   /*****************************************************************/
 
-  _generateItemOrderMarkup(itemData, special) {
+  _generateOrderItemMarkup(itemData, special) {
     return `<div class="order--item ${
       special ? `order--item-special` : `order--item-normal`
     }" data-item-id="${itemData.itemId}">
@@ -538,23 +469,6 @@ class App {
       
       </div>`;
   }
-
-  _generateSpecialContainer(totalPcs, specialMixPrice, specialItemId) {
-    return `<div class="special-container" data-special-item-id="${specialItemId}">
-              <div class="special-container--header">
-               <h1>MIX ${totalPcs} PCS FOR $ ${specialMixPrice}</h1>
-               <div class="order--item__remove" data-special-item-id="${specialItemId}">
-                <img src="${trash}#trash">
-               </div>
-               <div class="order--item__edit" data-special-item-id="${specialItemId}">
-                <img src="${edit}">
-               </div>               
-              </div>
-            
-            </div>`;
-  }
-
-  // _submitOrder() {}
 }
 
 const app = new App();

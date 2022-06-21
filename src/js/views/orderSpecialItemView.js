@@ -1,6 +1,6 @@
 /** @format */
 import trash from 'url:../../img/icon/trash.png';
-class specialItemOrderView {
+class orderSpecialItemView {
   #parentElement = document.querySelector('.order__details');
   #data;
 
@@ -37,4 +37,4 @@ class specialItemOrderView {
   }
 }
 
-export default new specialItemOrderView();
+export default new orderSpecialItemView();

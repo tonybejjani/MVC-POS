@@ -1,6 +1,6 @@
 /** @format */
 import trash from 'url:../../img/icon/trash.png';
-class itemOrderView {
+class orderItemView {
   #parentElement = document.querySelector('.order__details');
   #data;
 
@@ -50,4 +50,4 @@ class itemOrderView {
   }
 }
 
-export default new itemOrderView();
+export default new orderItemView();
