@@ -541,8 +541,6 @@ var _trashPng = require("url:../img/icon/trash.png");
 var _trashPngDefault = parcelHelpers.interopDefault(_trashPng);
 var _editPng = require("url:../img/icon/edit.png");
 var _editPngDefault = parcelHelpers.interopDefault(_editPng);
-var _infoIconPng = require("url:../img/icon/info-icon.png");
-var _infoIconPngDefault = parcelHelpers.interopDefault(_infoIconPng);
 // Views
 var _menuCatViewJs = require("./views/menuCatView.js");
 var _menuCatViewJsDefault = parcelHelpers.interopDefault(_menuCatViewJs);
@@ -550,31 +548,26 @@ var _infoViewJs = require("./views/infoView.js");
 var _infoViewJsDefault = parcelHelpers.interopDefault(_infoViewJs);
 var _menuItemsViewJs = require("./views/menuItemsView.js");
 var _menuItemsViewJsDefault = parcelHelpers.interopDefault(_menuItemsViewJs);
+var _specialMixModalViewJs = require("./views/specialMixModalView.js");
+var _specialMixModalViewJsDefault = parcelHelpers.interopDefault(_specialMixModalViewJs);
+var _itemOrderViewJs = require("./views/itemOrderView.js");
+var _itemOrderViewJsDefault = parcelHelpers.interopDefault(_itemOrderViewJs);
 var _modelJs = require("./model.js");
 var _regeneratorRuntime = require("regenerator-runtime"); // polyfilling async-await
 "use strict";
 class App {
     #currentOrderLog = {};
     constructor(){
-        //render App General Info
         (0, _infoViewJsDefault.default).render(_modelJs.state.info);
-        //render UI menu categories
         (0, _menuCatViewJsDefault.default).render(_modelJs.state.menuCategories);
-        //render UI menu items
         (0, _menuItemsViewJsDefault.default).render(_modelJs.state);
-        // this._render(this._generateMenuItemsMarkup(), '.menu', 'beforeend');
-        const menuItemBtns = document.querySelectorAll(".menu--item__button");
-        const menuCategLinks = document.querySelectorAll(".menu--navbar__link");
-        menuCategLinks.forEach((categlink)=>categlink.addEventListener("click", this._showMenuCategItems.bind(this, categlink, menuCategLinks)));
-        menuItemBtns.forEach((btn)=>btn.addEventListener("click", this._showItemOrderForm.bind(this, btn)));
-        /////////////////////////////////////////////////
-        // Render "Special Mix" Modal
+        (0, _menuCatViewJsDefault.default).addHandlerRender(this._showMenuCats);
+        (0, _menuItemsViewJsDefault.default).addHandlerRender(this._showItemOrderForm.bind(this));
+        (0, _specialMixModalViewJsDefault.default).render(_modelJs.state.menuItems);
         const menuSpecialBtn = document.querySelector(".menu--special--item__button");
         const menuSpecialBtnItemId = Number(document.querySelector(".menu--special--item__button").getAttribute("data-item-id"));
-        const specialBtnCategId = Number(document.querySelector(".menu--special--item__button").closest(".menu--items").getAttribute("data-category-id"));
         const totalPcs = _modelJs.state.menuItems[menuSpecialBtnItemId].qty;
         const specialMixPrice = _modelJs.state.menuItems[menuSpecialBtnItemId].price;
-        this._render(this._generateSpecialModal(specialBtnCategId, totalPcs), ".menu", "beforeend");
         const modal = document.querySelector(".modal");
         const overlay = document.querySelector(".overlay");
         const btnCloseModal = document.querySelector(".close-modal");
@@ -744,57 +737,6 @@ class App {
             this._updateOrderPrice();
         });
     }
-    _showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId) {
-        const specialMenuItems = document.querySelectorAll(".special-menu--item");
-        const specialContainerItems = document.querySelectorAll(`.special-container[data-special-item-id='${specialEditId}'] .order--item`);
-        console.log(specialContainerItems);
-        specialEditId ? specialContainerItems.forEach((item)=>{
-            item.remove();
-        }) : (specialEditId = "id" + new Date().getTime(), this._render(this._generateSpecialContainer(totalPcs, specialMixPrice, specialEditId), ".order__details", "afterbegin"));
-        this.#currentOrderLog[specialEditId] = [
-            {
-                mixPrice: specialMixPrice
-            }
-        ];
-        specialMenuItems.forEach((item)=>{
-            const itemId = item.getAttribute("data-item-id");
-            const name = _modelJs.state.menuItems[itemId].name;
-            const specialPrice = Number(specialMixPrice / totalPcs).toFixed(2);
-            const img = _modelJs.state.menuItems[itemId].img;
-            const qty = Number(item.querySelector(".order--item__qty-num").textContent);
-            const specialItem = true;
-            if (qty > 0) {
-                this.#currentOrderLog[specialEditId].push({
-                    itemId,
-                    name,
-                    specialPrice,
-                    qty,
-                    img,
-                    specialItem
-                });
-                this._render(this._generateItemOrderMarkup({
-                    itemId,
-                    name,
-                    priceD: specialPrice,
-                    qty,
-                    img
-                }, true), `.special-container[data-special-item-id='${specialEditId}']`, "beforeend");
-            }
-        });
-        return specialEditId;
-    }
-    _showMenuCategItems(categLink, categLinks) {
-        const menuCategItems = document.querySelectorAll(".menu--items");
-        if (categLink.closest("li").classList.contains("menu--navbar__active")) return;
-        categLinks.forEach((link)=>{
-            link.closest("li").classList.remove("menu--navbar__active");
-            if (link.dataset.categoryId === categLink.dataset.categoryId) link.closest("li").classList.add("menu--navbar__active");
-        });
-        menuCategItems.forEach((categItems)=>{
-            categItems.classList.add("hidden");
-            if (categLink.dataset.categoryId === categItems.dataset.categoryId) categItems.classList.remove("hidden");
-        });
-    }
     _showItemOrderForm(btn) {
         /* get data from menuItems object according to item selected on
      "data-item-id" attribute of html element */ const { name , price , qty , img  } = _modelJs.state.menuItems[btn.getAttribute("data-item-id")];
@@ -825,19 +767,87 @@ class App {
                 specialItem,
                 totalPrice
             };
-            this._render(this._generateItemOrderMarkup({
+            (0, _itemOrderViewJsDefault.default).render({
                 itemId,
                 name,
                 priceD,
                 qty,
                 img,
-                specialItem
-            }, false), ".order__details", "afterbegin");
+                specialItem,
+                special: false
+            });
+            // this._render(
+            //   this._generateItemOrderMarkup(
+            //     { itemId, name, priceD, qty, img, specialItem },
+            //     false
+            //   ),
+            //   '.order__details',
+            //   'afterbegin'
+            // );
             const deleteBtn = document.querySelector(".order--item__remove");
             deleteBtn.addEventListener("click", this._removeItemOrder.bind(this, itemId, false));
         }
         console.log(this.#currentOrderLog);
         this._updateOrderPrice();
+    }
+    _showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId) {
+        const specialMenuItems = document.querySelectorAll(".special-menu--item");
+        const specialContainerItems = document.querySelectorAll(`.special-container[data-special-item-id='${specialEditId}'] .order--item`);
+        specialEditId ? specialContainerItems.forEach((item)=>{
+            item.remove();
+        }) : (specialEditId = "id" + new Date().getTime(), this._render(this._generateSpecialContainer(totalPcs, specialMixPrice, specialEditId), ".order__details", "afterbegin"));
+        this.#currentOrderLog[specialEditId] = [
+            {
+                mixPrice: specialMixPrice
+            }
+        ];
+        specialMenuItems.forEach((item)=>{
+            const itemId = item.getAttribute("data-item-id");
+            const name = _modelJs.state.menuItems[itemId].name;
+            const specialPrice = Number(specialMixPrice / totalPcs).toFixed(2);
+            const img = _modelJs.state.menuItems[itemId].img;
+            const qty = Number(item.querySelector(".order--item__qty-num").textContent);
+            const specialItem = true;
+            if (qty > 0) {
+                this.#currentOrderLog[specialEditId].push({
+                    itemId,
+                    name,
+                    specialPrice,
+                    qty,
+                    img,
+                    specialItem
+                });
+                // specialItemOrderView.render({
+                //   itemId,
+                //   name,
+                //   priceD,
+                //   specialPrice,
+                //   qty,
+                //   img,
+                // });
+                this._render(this._generateItemOrderMarkup({
+                    itemId,
+                    name,
+                    priceD: specialPrice,
+                    qty,
+                    img
+                }, true), `.special-container[data-special-item-id='${specialEditId}']`, "beforeend");
+            }
+        });
+        return specialEditId;
+    }
+    _showMenuCats(catLink, catLinks, menuCatItems) {
+        console.log(this);
+        console.log(catLink);
+        if (catLink.closest("li").classList.contains("menu--navbar__active")) return;
+        catLinks.forEach((link)=>{
+            link.closest("li").classList.remove("menu--navbar__active");
+            if (link.dataset.categoryId === catLink.dataset.categoryId) link.closest("li").classList.add("menu--navbar__active");
+        });
+        menuCatItems.forEach((catItem)=>{
+            catItem.classList.add("hidden");
+            if (catLink.dataset.categoryId === catItem.dataset.categoryId) catItem.classList.remove("hidden");
+        });
     }
     _updateOrderPrice() {
         const totalEl = document.querySelector(".order-total--price span");
@@ -875,34 +885,6 @@ class App {
       
       </div>`;
     }
-    _generateSpecialModal(specialBtnCategId, totalPcs) {
-        let markup = [];
-        markup.push(`<div class="modal hidden" data-category-id="1">
-                    <button class="close-modal">×</button>
-                    <h1 class="special-menu--header">Select <span>${totalPcs}</span> pcs:</h1>
-                    <div class="special-menu--items">`);
-        for (const [key, { catgId , name , img , special_deal  }] of Object.entries(_modelJs.state.menuItems))if (catgId === specialBtnCategId && !special_deal) markup.push(`<div class="special-menu--item" data-item-id="${key}">
-                        <img src="${img}">
-                        <div class="special-menu--item-name">${name}</div>
-                        <div class="order--item__qty">
-                          <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
-                          <span class="order--item__qty-num">0</span>
-                          <button type="button" class="order--item__qty-increase">&#43;</button>
-                        </div>
-                      </div>`);
-        markup.push(`</div>
-                  <div class="special-menu--footer">
-                    <div class="order--item__qty">
-                      <span class="total-qty order--item__qty-num">0</span>
-                      <p class="order--item__qty-pcs">pcs</p>
-                    </div>
-                      <button class="btnAdd disabled" disabled>Add</button>
-                      <button class="btnSave disabled hidden" disabled data-special-item-id="" >Save</button>
-                  </div>
-              </div>
-              <div class="overlay hidden"></div>`);
-        return markup.join(" ");
-    }
     _generateSpecialContainer(totalPcs, specialMixPrice, specialItemId) {
         return `<div class="special-container" data-special-item-id="${specialItemId}">
               <div class="special-container--header">
@@ -920,7 +902,7 @@ class App {
 }
 const app = new App();
 
-},{"core-js/modules/es.array.includes.js":"dkJzX","core-js/modules/web.immediate.js":"49tUX","url:../img/icon/trash.png":"ekdv0","url:../img/icon/edit.png":"7NSly","url:../img/icon/info-icon.png":"7hCDx","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model.js":"Y4A21","./views/menuCatView.js":"2LnaN","./views/infoView.js":"6Mibo","./views/menuItemsView.js":"c7MkN"}],"dkJzX":[function(require,module,exports) {
+},{"core-js/modules/es.array.includes.js":"dkJzX","core-js/modules/web.immediate.js":"49tUX","url:../img/icon/edit.png":"7NSly","regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./model.js":"Y4A21","./views/menuCatView.js":"2LnaN","./views/infoView.js":"6Mibo","./views/menuItemsView.js":"c7MkN","./views/specialMixModalView.js":"aEdya","./views/itemOrderView.js":"dkaJj","url:../img/icon/trash.png":"ekdv0"}],"dkJzX":[function(require,module,exports) {
 "use strict";
 var $ = require("../internals/export");
 var $includes = require("../internals/array-includes").includes;
@@ -2155,8 +2137,8 @@ $({
     setImmediate: setImmediate
 });
 
-},{"../internals/export":"dIGt4","../internals/global":"i8HOC","../internals/task":"7jDg7"}],"ekdv0":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "Trash.1f22d026.png" + "?" + Date.now();
+},{"../internals/export":"dIGt4","../internals/global":"i8HOC","../internals/task":"7jDg7"}],"7NSly":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "edit.ae9abf9f.png" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
 "use strict";
@@ -2192,13 +2174,7 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"7NSly":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "edit.ae9abf9f.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"7hCDx":[function(require,module,exports) {
-module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "info-icon.bf05e7f6.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"dXNgZ":[function(require,module,exports) {
+},{}],"dXNgZ":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -2799,6 +2775,10 @@ exports.export = function(dest, destName, get) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
+parcelHelpers.export(exports, "loadMenu", ()=>loadMenu);
+/** @format */ var _regeneratorRuntime = require("regenerator-runtime");
+var _configJs = require("./config.js");
+var _helpersJs = require("./helpers.js");
 const state = {
     info: {
         logo: "src/img/general/LOGO.png",
@@ -2960,8 +2940,52 @@ const state = {
         }
     }
 };
+const loadMenu = async function() {
+    try {
+        const data = await (0, _helpersJs.getJSON)(`${(0, _configJs.API_URL)}`);
+        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    // handle menu data here
+    // const { } = data.data;
+    } catch (err) {
+        console.error(`${err}💥 💥 💥 💥`);
+    }
+};
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2LnaN":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+parcelHelpers.export(exports, "TIMEOUT_SEC", ()=>TIMEOUT_SEC);
+const API_URL = "";
+const TIMEOUT_SEC = 10;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hGI1E":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getJSON", ()=>getJSON);
+/** @format */ var _configJs = require("./config.js");
+const timeout = function(s) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error(`Request took too long! Timeout after ${s} second`));
+        }, s * 1000);
+    });
+};
+const getJSON = async function(url) {
+    try {
+        const res = await Promise.race([
+            fetch(url),
+            timeout((0, _configJs.TIMEOUT_SEC))
+        ]);
+        const data = await res.json();
+        if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+},{"./config.js":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2LnaN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /** @format */ class menuCatView {
@@ -2970,12 +2994,13 @@ parcelHelpers.defineInteropFlag(exports);
     render(data) {
         this.#data = data;
         const markup = this._generateMarkup();
-        // this._clear();
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     }
-    // _clear() {
-    //   this.#parentElement.innerHTML = '';
-    // }
+    addHandlerRender(handler) {
+        const menuCatItems = document.querySelectorAll(".menu--items");
+        const menuCatLinks = document.querySelectorAll(".menu--navbar__link");
+        menuCatLinks.forEach((catLink)=>catLink.addEventListener("click", handler.bind(this, catLink, menuCatLinks, menuCatItems)));
+    }
     _generateMarkup() {
         let markup = [];
         for (const { id: categoryId , name , active  } of Object.values(this.#data))markup.push(`<li class="${active ? "menu--navbar__active" : ""}">
@@ -2995,12 +3020,8 @@ parcelHelpers.defineInteropFlag(exports);
     render(data) {
         this.#data = data;
         const markup = this._generateMarkup();
-        // this._clear();
         this.#parentElement.insertAdjacentHTML("afterbegin", markup);
     }
-    // _clear() {
-    //   this.#parentElement.innerHTML = '';
-    // }
     _generateMarkup() {
         return `
     <div class="info__logo"><img src="${this.#data.logo}"></div>
@@ -3013,19 +3034,22 @@ exports.default = new infoView();
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c7MkN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-/** @format */ // import infoIcon from 'url:../src/img/icon/info-icon.png';
+/** @format */ var _infoIconPng = require("url:../../img/icon/info-icon.png");
+var _infoIconPngDefault = parcelHelpers.interopDefault(_infoIconPng);
 class menuCatView {
     #parentElement = document.querySelector(".menu");
     #data;
     render(data) {
         this.#data = data;
         const markup = this._generateMarkup();
-        // this._clear();
         this.#parentElement.insertAdjacentHTML("beforeend", markup);
     }
-    // _clear() {
-    //   this.#parentElement.innerHTML = '';
-    // }
+    addHandlerRender(handler) {
+        const menuItemBtns = document.querySelectorAll(".menu--item__button");
+        menuItemBtns.forEach((btn)=>{
+            btn.addEventListener("click", handler.bind(this, btn));
+        });
+    }
     _generateMarkup() {
         let markup = [];
         // for each category load corresponsding items markup
@@ -3034,7 +3058,7 @@ class menuCatView {
             for (const [key, { catgId: productCatgId , name , price , qty , img , special_deal  }, ] of Object.entries(this.#data.menuItems))if (productCatgId === categoryId) markup.push(`<div class="menu--item" data-item-id="${key}">
                           <div class="menu--item__image"><img src="${img}"></div>
                           <div class="menu--item__details">
-                            
+                            <div class="menu--item__info"><img src="${(0, _infoIconPngDefault.default)}"></div>
                             <h2 class="menu--item__title">${name}</h2>
                             <div class="menu--item__price">$ ${price}</div>
                             <button class="${special_deal ? "menu--special--item__button" : "menu--item__button"}" data-item-id="${key}">Select</button>
@@ -3047,6 +3071,108 @@ class menuCatView {
 }
 exports.default = new menuCatView();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequirea71f")
+},{"url:../../img/icon/info-icon.png":"7hCDx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7hCDx":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "info-icon.bf05e7f6.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"aEdya":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/** @format */ class specialMixModalView {
+    #parentElement = document.querySelector(".menu");
+    #data;
+    render(data) {
+        this.#data = data;
+        const markup = this._generateMarkup();
+        this.#parentElement.insertAdjacentHTML("beforeend", markup);
+    }
+    addHandlerRender(handler) {
+        const menuItemBtns = document.querySelectorAll(".menu--item__button");
+        menuItemBtns.forEach((btn)=>{
+            btn.addEventListener("click", handler.bind(this, btn));
+        });
+    }
+    _generateMarkup() {
+        const menuSpecialBtnItemId = Number(document.querySelector(".menu--special--item__button").getAttribute("data-item-id"));
+        const totalPcs = this.#data[menuSpecialBtnItemId].qty;
+        const specialBtnCatId = Number(document.querySelector(".menu--special--item__button").closest(".menu--items").getAttribute("data-category-id"));
+        let markup = [];
+        markup.push(`<div class="modal hidden" data-category-id="1">
+                      <button class="close-modal">×</button>
+                      <h1 class="special-menu--header">Select <span>${totalPcs}</span> pcs:</h1>
+                      <div class="special-menu--items">`);
+        for (const [key, { catgId , name , img , special_deal  }] of Object.entries(this.#data))if (catgId === specialBtnCatId && !special_deal) markup.push(`<div class="special-menu--item" data-item-id="${key}">
+                          <img src="${img}">
+                          <div class="special-menu--item-name">${name}</div>
+                          <div class="order--item__qty">
+                            <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
+                            <span class="order--item__qty-num">0</span>
+                            <button type="button" class="order--item__qty-increase">&#43;</button>
+                          </div>
+                        </div>`);
+        markup.push(`</div>
+                    <div class="special-menu--footer">
+                      <div class="order--item__qty">
+                        <span class="total-qty order--item__qty-num">0</span>
+                        <p class="order--item__qty-pcs">pcs</p>
+                      </div>
+                        <button class="btnAdd disabled" disabled>Add</button>
+                        <button class="btnSave disabled hidden" disabled data-special-item-id="" >Save</button>
+                    </div>
+                </div>
+                <div class="overlay hidden"></div>`);
+        return markup.join(" ");
+    }
+}
+exports.default = new specialMixModalView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dkaJj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/** @format */ var _trashPng = require("url:../../img/icon/trash.png");
+var _trashPngDefault = parcelHelpers.interopDefault(_trashPng);
+class itemOrderView {
+    #parentElement = document.querySelector(".order__details");
+    #data;
+    render(data) {
+        this.#data = data;
+        const markup = this._generateMarkup();
+        this.#parentElement.insertAdjacentHTML("afterbegin", markup);
+    }
+    addHandlerRender(handler) {
+    // const menuItemBtns = document.querySelectorAll('.menu--item__button');
+    // menuItemBtns.forEach((btn) => {
+    //   btn.addEventListener('click', handler.bind(this, btn));
+    // });
+    }
+    _generateMarkup() {
+        return `<div class="order--item order--item-normal" data-item-id="${this.#data.itemId}">
+                <div class="item-content__thumb">
+
+                    <div class="thumb__image"><img src="${this.#data.img}"></div>
+                    <div class="thumb__title"><span>${this.#data.name}</span></div>
+                    <div class="thumb__price"><span>${this.#data.priceD} </span></div>
+                </div>
+        
+              
+                <div class="order--item__total">
+                  <span class="item__currency">$ </span> 
+                  <span class="totalPrice">${this.#data.priceD}</span>
+                </div>
+
+                <div class="order--item__qty">
+                  <span class="itemQty">${this.#data.qty}</span>
+                </div>
+              <div class="order--item__remove"> <img src="${0, _trashPngDefault.default}#trash"></div>
+                    
+              
+            </div>`;
+    }
+}
+exports.default = new itemOrderView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../../img/icon/trash.png":"ekdv0"}],"ekdv0":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("hWUTQ") + "Trash.1f22d026.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}]},["fA0o9","aenu9"], "aenu9", "parcelRequirea71f")
 
 //# sourceMappingURL=index.e37f48ea.js.map

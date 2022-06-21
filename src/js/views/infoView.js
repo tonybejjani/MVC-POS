@@ -6,13 +6,8 @@ class infoView {
   render(data) {
     this.#data = data;
     const markup = this._generateMarkup();
-    // this._clear();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
-
-  // _clear() {
-  //   this.#parentElement.innerHTML = '';
-  // }
 
   _generateMarkup() {
     return `

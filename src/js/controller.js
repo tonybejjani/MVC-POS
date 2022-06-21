@@ -5,12 +5,14 @@
 // Icons
 import trash from 'url:../img/icon/trash.png';
 import edit from 'url:../img/icon/edit.png';
-import infoIcon from 'url:../img/icon/info-icon.png';
 
 // Views
 import menuCatView from './views/menuCatView.js';
 import infoView from './views/infoView.js';
 import menuItemsView from './views/menuItemsView.js';
+import specialMixModalView from './views/specialMixModalView.js';
+import itemOrderView from './views/itemOrderView.js';
+
 import * as model from './model.js';
 // Polyfilling
 import 'core-js/stable';
@@ -20,32 +22,12 @@ class App {
   #currentOrderLog = {};
 
   constructor() {
-    //render App General Info
     infoView.render(model.state.info);
-
-    //render UI menu categories
     menuCatView.render(model.state.menuCategories);
-
-    //render UI menu items
     menuItemsView.render(model.state);
-    // this._render(this._generateMenuItemsMarkup(), '.menu', 'beforeend');
-
-    const menuItemBtns = document.querySelectorAll('.menu--item__button');
-    const menuCategLinks = document.querySelectorAll('.menu--navbar__link');
-
-    menuCategLinks.forEach((categlink) =>
-      categlink.addEventListener(
-        'click',
-        this._showMenuCategItems.bind(this, categlink, menuCategLinks)
-      )
-    );
-
-    menuItemBtns.forEach((btn) =>
-      btn.addEventListener('click', this._showItemOrderForm.bind(this, btn))
-    );
-
-    /////////////////////////////////////////////////
-    // Render "Special Mix" Modal
+    menuCatView.addHandlerRender(this._showMenuCats);
+    menuItemsView.addHandlerRender(this._showItemOrderForm.bind(this));
+    specialMixModalView.render(model.state.menuItems);
 
     const menuSpecialBtn = document.querySelector(
       '.menu--special--item__button'
@@ -57,22 +39,8 @@ class App {
         .getAttribute('data-item-id')
     );
 
-    const specialBtnCategId = Number(
-      document
-        .querySelector('.menu--special--item__button')
-        .closest('.menu--items')
-        .getAttribute('data-category-id')
-    );
-
     const totalPcs = model.state.menuItems[menuSpecialBtnItemId].qty;
     const specialMixPrice = model.state.menuItems[menuSpecialBtnItemId].price;
-
-    this._render(
-      this._generateSpecialModal(specialBtnCategId, totalPcs),
-      '.menu',
-      'beforeend'
-    );
-
     const modal = document.querySelector('.modal');
     const overlay = document.querySelector('.overlay');
     const btnCloseModal = document.querySelector('.close-modal');
@@ -325,13 +293,89 @@ class App {
     });
   }
 
+  _showItemOrderForm(btn) {
+    /* get data from menuItems object according to item selected on
+     "data-item-id" attribute of html element */
+
+    const { name, price, qty, img } =
+      model.state.menuItems[btn.getAttribute('data-item-id')];
+
+    const priceD = price.toFixed(2); //convert price to decimal
+    const totalPrice = price;
+    const itemId = btn.getAttribute('data-item-id');
+    const currItemLog = this.#currentOrderLog[itemId];
+    const itemQty = document.querySelector(
+      `.order--item.order--item-normal[data-item-id="${Number(
+        itemId
+      )}"] .itemQty`
+    );
+
+    /* The items selected individually from the menu (meaning not in a "special mix" for instance )
+    are not special Items === false*/
+    const specialItem = false;
+
+    // On selecting an item, check if itemId already exists in current Order List
+
+    // 1- if YES: update Qty & total price
+    if (currItemLog) {
+      //update qty and total price in #currentOrderLog Object
+      currItemLog.qty++;
+      currItemLog.totalPrice = currItemLog.price * currItemLog.qty;
+
+      //update UI: item qty & total price
+      itemQty.textContent = currItemLog.qty;
+      itemQty.parentElement.previousElementSibling.querySelector(
+        '.totalPrice'
+      ).textContent = currItemLog.totalPrice.toFixed(2);
+
+      // 2- if NO: add new item to #currentOrderLog object
+    } else {
+      this.#currentOrderLog[itemId] = {
+        itemId,
+        name,
+        price,
+        qty,
+        img,
+        specialItem,
+        totalPrice,
+      };
+
+      itemOrderView.render({
+        itemId,
+        name,
+        priceD,
+        qty,
+        img,
+        specialItem,
+        special: false,
+      });
+      // this._render(
+      //   this._generateItemOrderMarkup(
+      //     { itemId, name, priceD, qty, img, specialItem },
+      //     false
+      //   ),
+      //   '.order__details',
+      //   'afterbegin'
+      // );
+
+      const deleteBtn = document.querySelector('.order--item__remove');
+      deleteBtn.addEventListener(
+        'click',
+        this._removeItemOrder.bind(this, itemId, false)
+      );
+    }
+
+    console.log(this.#currentOrderLog);
+
+    this._updateOrderPrice();
+  }
+
   _showSpecialItemOrderForm(totalPcs, specialMixPrice, specialEditId) {
     const specialMenuItems = document.querySelectorAll('.special-menu--item');
     const specialContainerItems = document.querySelectorAll(
       `.special-container[data-special-item-id='${specialEditId}'] .order--item`
     );
 
-    console.log(specialContainerItems);
     specialEditId
       ? specialContainerItems.forEach((item) => {
           item.remove();
@@ -369,6 +413,15 @@ class App {
           specialItem,
         });
 
+        // specialItemOrderView.render({
+        //   itemId,
+        //   name,
+        //   priceD,
+        //   specialPrice,
+        //   qty,
+        //   img,
+        // });
+
         this._render(
           this._generateItemOrderMarkup(
             { itemId, name, priceD: specialPrice, qty, img },
@@ -383,94 +436,27 @@ class App {
     return specialEditId;
   }
 
-  _showMenuCategItems(categLink, categLinks) {
-    const menuCategItems = document.querySelectorAll('.menu--items');
-
-    if (categLink.closest('li').classList.contains('menu--navbar__active'))
+  _showMenuCats(catLink, catLinks, menuCatItems) {
+    console.log(this);
+    console.log(catLink);
+    if (catLink.closest('li').classList.contains('menu--navbar__active'))
       return;
 
-    categLinks.forEach((link) => {
+    catLinks.forEach((link) => {
       link.closest('li').classList.remove('menu--navbar__active');
 
-      if (link.dataset.categoryId === categLink.dataset.categoryId) {
+      if (link.dataset.categoryId === catLink.dataset.categoryId) {
         link.closest('li').classList.add('menu--navbar__active');
       }
     });
 
-    menuCategItems.forEach((categItems) => {
-      categItems.classList.add('hidden');
+    menuCatItems.forEach((catItem) => {
+      catItem.classList.add('hidden');
 
-      if (categLink.dataset.categoryId === categItems.dataset.categoryId) {
-        categItems.classList.remove('hidden');
+      if (catLink.dataset.categoryId === catItem.dataset.categoryId) {
+        catItem.classList.remove('hidden');
       }
     });
-  }
-
-  _showItemOrderForm(btn) {
-    /* get data from menuItems object according to item selected on
-     "data-item-id" attribute of html element */
-
-    const { name, price, qty, img } =
-      model.state.menuItems[btn.getAttribute('data-item-id')];
-
-    const priceD = price.toFixed(2); //convert price to decimal
-    const totalPrice = price;
-    const itemId = btn.getAttribute('data-item-id');
-    const currItemLog = this.#currentOrderLog[itemId];
-    const itemQty = document.querySelector(
-      `.order--item.order--item-normal[data-item-id="${Number(
-        itemId
-      )}"] .itemQty`
-    );
-
-    /* The items selected individually from the menu (meaning not in a "special mix" for instance )
-    are not special Items === false*/
-    const specialItem = false;
-
-    // On selecting an item, check if itemId already exists in current Order List
-    // 1- if YES: update Qty & total price
-    if (currItemLog) {
-      //update qty and total price in #currentOrderLog Object
-      currItemLog.qty++;
-      currItemLog.totalPrice = currItemLog.price * currItemLog.qty;
-
-      //update UI: item qty & total price
-      itemQty.textContent = currItemLog.qty;
-      itemQty.parentElement.previousElementSibling.querySelector(
-        '.totalPrice'
-      ).textContent = currItemLog.totalPrice.toFixed(2);
-
-      // 2- if NO: add new item to #currentOrderLog object
-    } else {
-      this.#currentOrderLog[itemId] = {
-        itemId,
-        name,
-        price,
-        qty,
-        img,
-        specialItem,
-        totalPrice,
-      };
-
-      this._render(
-        this._generateItemOrderMarkup(
-          { itemId, name, priceD, qty, img, specialItem },
-          false
-        ),
-        '.order__details',
-        'afterbegin'
-      );
-
-      const deleteBtn = document.querySelector('.order--item__remove');
-      deleteBtn.addEventListener(
-        'click',
-        this._removeItemOrder.bind(this, itemId, false)
-      );
-    }
-
-    console.log(this.#currentOrderLog);
-
-    this._updateOrderPrice();
   }
 
   _updateOrderPrice() {
@@ -551,43 +537,6 @@ class App {
         }
       
       </div>`;
-  }
-
-  _generateSpecialModal(specialBtnCategId, totalPcs) {
-    let markup = [];
-
-    markup.push(`<div class="modal hidden" data-category-id="1">
-                    <button class="close-modal">×</button>
-                    <h1 class="special-menu--header">Select <span>${totalPcs}</span> pcs:</h1>
-                    <div class="special-menu--items">`);
-
-    for (const [key, { catgId, name, img, special_deal }] of Object.entries(
-      model.state.menuItems
-    )) {
-      if (catgId === specialBtnCategId && !special_deal)
-        markup.push(`<div class="special-menu--item" data-item-id="${key}">
-                        <img src="${img}">
-                        <div class="special-menu--item-name">${name}</div>
-                        <div class="order--item__qty">
-                          <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
-                          <span class="order--item__qty-num">0</span>
-                          <button type="button" class="order--item__qty-increase">&#43;</button>
-                        </div>
-                      </div>`);
-    }
-    markup.push(`</div>
-                  <div class="special-menu--footer">
-                    <div class="order--item__qty">
-                      <span class="total-qty order--item__qty-num">0</span>
-                      <p class="order--item__qty-pcs">pcs</p>
-                    </div>
-                      <button class="btnAdd disabled" disabled>Add</button>
-                      <button class="btnSave disabled hidden" disabled data-special-item-id="" >Save</button>
-                  </div>
-              </div>
-              <div class="overlay hidden"></div>`);
-
-    return markup.join(' ');
   }
 
   _generateSpecialContainer(totalPcs, specialMixPrice, specialItemId) {

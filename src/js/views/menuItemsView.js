@@ -1,5 +1,5 @@
 /** @format */
-// import infoIcon from 'url:../src/img/icon/info-icon.png';
+import infoIcon from 'url:../../img/icon/info-icon.png';
 
 class menuCatView {
   #parentElement = document.querySelector('.menu');
@@ -8,13 +8,16 @@ class menuCatView {
   render(data) {
     this.#data = data;
     const markup = this._generateMarkup();
-    // this._clear();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
-  // _clear() {
-  //   this.#parentElement.innerHTML = '';
-  // }
+  addHandlerRender(handler) {
+    const menuItemBtns = document.querySelectorAll('.menu--item__button');
+
+    menuItemBtns.forEach((btn) => {
+      btn.addEventListener('click', handler.bind(this, btn));
+    });
+  }
 
   _generateMarkup() {
     let markup = [];
@@ -37,7 +40,7 @@ class menuCatView {
           markup.push(`<div class="menu--item" data-item-id="${key}">
                           <div class="menu--item__image"><img src="${img}"></div>
                           <div class="menu--item__details">
-                            
+                            <div class="menu--item__info"><img src="${infoIcon}"></div>
                             <h2 class="menu--item__title">${name}</h2>
                             <div class="menu--item__price">$ ${price}</div>
                             <button class="${

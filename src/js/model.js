@@ -1,5 +1,9 @@
 /** @format */
+import { async } from 'regenerator-runtime';
+import { API_URL } from './config.js';
+import { getJSON } from './helpers.js';
 
+// : To be developed: State should get Data from APi
 export const state = {
   info: {
     logo: 'src/img/general/LOGO.png',
@@ -163,4 +167,18 @@ export const state = {
       img: 'src/img/menu/crackers.png',
     },
   },
+};
+
+// to be developed: load the menuItems through API
+export const loadMenu = async function () {
+  try {
+    const data = await getJSON(`${API_URL}`);
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+
+    // handle menu data here
+    // const { } = data.data;
+  } catch (err) {
+    console.error(`${err}💥 💥 💥 💥`);
+  }
 };

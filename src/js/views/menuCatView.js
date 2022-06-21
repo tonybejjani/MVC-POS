@@ -6,13 +6,20 @@ class menuCatView {
   render(data) {
     this.#data = data;
     const markup = this._generateMarkup();
-    // this._clear();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
-  // _clear() {
-  //   this.#parentElement.innerHTML = '';
-  // }
+  addHandlerRender(handler) {
+    const menuCatItems = document.querySelectorAll('.menu--items');
+    const menuCatLinks = document.querySelectorAll('.menu--navbar__link');
+
+    menuCatLinks.forEach((catLink) =>
+      catLink.addEventListener(
+        'click',
+        handler.bind(this, catLink, menuCatLinks, menuCatItems)
+      )
+    );
+  }
 
   _generateMarkup() {
     let markup = [];
