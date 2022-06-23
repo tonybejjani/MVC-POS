@@ -1,13 +1,13 @@
 /** @format */
 import trash from 'url:../../img/icon/trash.png';
 import edit from 'url:../../img/icon/edit.png';
+
 class orderSpecialBoxView {
   #parentElement = document.querySelector('.order__details');
   #data;
 
   render(data) {
     this.#data = data;
-    console.log(this.#data);
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
@@ -17,6 +17,25 @@ class orderSpecialBoxView {
     // menuItemBtns.forEach((btn) => {
     //   btn.addEventListener('click', handler.bind(this, btn));
     // });
+  }
+
+  checkSpecialEditId(totalPcs, specialMixPrice, specialEditId) {
+    const specialContainerItems = document.querySelectorAll(
+      `.special-container[data-special-item-id='${specialEditId}'] .order--item`
+    );
+
+    specialEditId
+      ? specialContainerItems.forEach((item) => {
+          item.remove();
+        })
+      : ((specialEditId = 'id' + new Date().getTime()),
+        this.render({
+          totalPcs,
+          specialMixPrice,
+          specialEditId,
+        }));
+
+    return specialEditId;
   }
 
   _generateMarkup() {

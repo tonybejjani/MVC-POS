@@ -1,13 +1,16 @@
 /** @format */
 import trash from 'url:../../img/icon/trash.png';
 class orderSpecialItemView {
-  #parentElement = document.querySelector('.order__details');
+  #parentElement;
   #data;
 
   render(data) {
     this.#data = data;
     const markup = this._generateMarkup();
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    this.#parentElement = document.querySelector(
+      `.special-container[data-special-item-id='${this.#data.specialEditId}']`
+    );
+    this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
   addHandlerRender(handler) {
@@ -15,6 +18,14 @@ class orderSpecialItemView {
     // menuItemBtns.forEach((btn) => {
     //   btn.addEventListener('click', handler.bind(this, btn));
     // });
+  }
+
+  removeSpecialItem(itemId) {
+    const specialOrderItem = document.querySelector(
+      `.special-container[data-special-item-id= "${itemId}"]`
+    );
+
+    specialOrderItem.remove();
   }
 
   _generateMarkup() {

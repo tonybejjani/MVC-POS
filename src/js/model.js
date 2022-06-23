@@ -170,7 +170,7 @@ export const state = {
   },
 };
 
-// to be developed: load the menuItems through API
+// load the menuItems through API setup skeleton
 export const loadMenu = async function () {
   try {
     const data = await getJSON(`${API_URL}`);

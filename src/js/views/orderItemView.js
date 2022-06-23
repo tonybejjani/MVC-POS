@@ -3,6 +3,7 @@ import trash from 'url:../../img/icon/trash.png';
 class orderItemView {
   #parentElement = document.querySelector('.order__details');
   #data;
+  #itemQty;
 
   render(data) {
     this.#data = data;
@@ -11,10 +12,29 @@ class orderItemView {
   }
 
   addHandlerRender(handler) {
-    // const menuItemBtns = document.querySelectorAll('.menu--item__button');
-    // menuItemBtns.forEach((btn) => {
-    //   btn.addEventListener('click', handler.bind(this, btn));
-    // });
+    const deleteBtn = document.querySelector('.order--item__remove');
+    deleteBtn.addEventListener('click', handler);
+  }
+
+  updateItemTotalPrice(itemId, currItemLog) {
+    this.#itemQty = document.querySelector(
+      `.order--item.order--item-normal[data-item-id="${Number(
+        itemId
+      )}"] .itemQty`
+    );
+
+    this.#itemQty.textContent = currItemLog.qty;
+    this.#itemQty.parentElement.previousElementSibling.querySelector(
+      '.totalPrice'
+    ).textContent = currItemLog.totalPrice.toFixed(2);
+  }
+
+  removeItem(itemId) {
+    const orderItem = document.querySelector(
+      `.order--item.order--item-normal[data-item-id="${Number(itemId)}"]`
+    );
+
+    orderItem.remove();
   }
 
   _generateMarkup() {
