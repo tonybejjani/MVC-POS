@@ -29,9 +29,6 @@ class App {
     menuSpecialModalView.render(model.state.menuItems);
     menuSpecialModalView.addModalEventListeners();
     menuSpecialModalView.addHandlerAdd(this._controlOrderSpecialMix.bind(this));
-    // menuSpecialModalView.addHandlerSave(
-    //   this._controlOrderSpecialMix.bind(this)
-    // );
   }
 
   _controlOrderItemForm(btn) {
@@ -92,27 +89,37 @@ class App {
   }
 
   _controlOrderSpecialMix(totalPcs, specialMixPrice) {
-    // add the special Mix item to state and UI
-
+    // 1- add the special Mix item to state and UI
     const specialEditId = this._controlOrderSpecialItemForm(
       totalPcs,
       specialMixPrice
     );
 
-    // close the modal
+    // 2- close the modal
     menuSpecialModalView.closeModal();
 
-    // update price
+    // 3- update order price in state and UI
     this._controlOrderPrice();
 
+    // 4- add new ID to edit
     const specialEditBtn =
       menuSpecialModalView.getSpecialEditBtn(specialEditId);
+
+    // 5- Clicking Edit:
+    //    1- set ID on save btn
+    //    2- add event handler to save btn
+    //    3- update items of Modal to reflect values edited
 
     specialEditBtn.addEventListener('click', () => {
       menuSpecialModalView.setBtnSaveId(specialEditId);
 
-      const orderSpecialItemsId = model.state.currentOrderLog[specialEditId];
-      this._updateModal(orderSpecialItemsId);
+      //execute save event only once each time we click edit
+      menuSpecialModalView.addHandlerSave(
+        this._controlOrderSpecialItemForm.bind(this)
+      );
+
+      const orderSpecialItems = model.state.currentOrderLog[specialEditId];
+      menuSpecialModalView.updateModal(orderSpecialItems);
     });
 
     const specialRemoveBtn =
@@ -120,23 +127,22 @@ class App {
 
     specialRemoveBtn.addEventListener(
       'click',
-      this._removeItemOrder.bind(this, specialEditId, true)
+      this._controlOrderSpecialItemRemove.bind(this, specialEditId, true)
     );
   }
 
-  _controlOrderSpecialItemForm(totalPcs, specialMixPrice, specialEditId) {
+  _controlOrderSpecialItemForm(totalPcs, specialMixPrice, saveSpecialEditId) {
     // check specialEditId:
     // If clicking on Save === ID already exists: reset container by removing items
     // If clicking on Add === create new container with ID
     // Return the ID
 
-    if (!specialEditId) {
-      specialEditId = orderSpecialBoxView.checkSpecialEditId({
-        totalPcs,
-        specialMixPrice,
-        specialEditId,
-      });
-    }
+    const specialEditId = orderSpecialBoxView.checkSpecialEditId(
+      totalPcs,
+      specialMixPrice,
+      saveSpecialEditId
+    );
+
     model.state.currentOrderLog[specialEditId] = [
       { mixPrice: specialMixPrice },
     ];
@@ -175,6 +181,10 @@ class App {
       }
     });
 
+    if (saveSpecialEditId) {
+      menuSpecialModalView.closeModal();
+    }
+
     return specialEditId;
   }
 
@@ -193,7 +203,7 @@ class App {
 
     // To be inserted to seperate view
     const totalEl = document.querySelector('.order-total--price span');
-    totalEl.textContent = total.toFixed(2);
+    totalEl.textContent = Number(total).toFixed(2);
   }
 
   _controlOrderItemRemove(itemId) {
@@ -212,7 +222,7 @@ class App {
     delete model.state.currentOrderLog[itemId];
 
     //Delete Item from UI
-    orderSpecialItemView.removeItem(itemId);
+    orderSpecialItemView.removeSpecialItem(itemId);
 
     // update Total Order Price
     this._controlOrderPrice();

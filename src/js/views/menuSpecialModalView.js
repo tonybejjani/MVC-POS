@@ -17,6 +17,7 @@ class menuSpecialModalView {
   #specialBtnCatId;
   #menuSpecialBtnItemId;
   #specialMixPrice;
+  #specialEditId;
 
   render(data) {
     this.#data = data;
@@ -28,13 +29,28 @@ class menuSpecialModalView {
   addHandlerAdd(handler) {
     this.#btnAdd.addEventListener(
       'click',
-      handler.bind(this.#totalPcs, this.#specialMixPrice)
+      handler.bind(this, this.#totalPcs, this.#specialMixPrice)
     );
   }
 
-  // addHandlerSave(handler) {
-  //   this.#btnSave.addEventListener('click', handler.bind());
-  // }
+  addHandlerSave(handler) {
+    // console.log(this.#btnSave.getAttribute('data-special-item-id'));
+    this.#btnSave.addEventListener(
+      'click',
+      handler.bind(
+        this,
+        this.#totalPcs,
+        this.#specialMixPrice,
+        this.#specialEditId
+      ),
+      { once: true }
+    );
+  }
+
+  removeEventSave(handler) {
+    console.log(handler);
+    this.#btnSave.removeEventListener('click', handler);
+  }
 
   getSpecialEditBtn(specialEditId) {
     return document.querySelector(
@@ -49,6 +65,7 @@ class menuSpecialModalView {
   }
 
   setBtnSaveId(specialEditId) {
+    this.#specialEditId = specialEditId;
     this.#btnSave.setAttribute('data-special-item-id', specialEditId);
   }
 
@@ -71,6 +88,7 @@ class menuSpecialModalView {
   }
 
   closeModal() {
+    console.log('closeModal');
     this.#modal.classList.add('hidden');
     this.#overlay.classList.add('hidden');
 
@@ -105,7 +123,7 @@ class menuSpecialModalView {
   }
 
   // Edit a Specific Mix Order Item by updating the modal values and saving
-  _updateModal(orderSpecialItemsId) {
+  updateModal(orderSpecialItemsId) {
     this._openModal();
 
     // qty counter
