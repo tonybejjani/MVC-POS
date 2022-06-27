@@ -152,4 +152,4 @@ sftp-config.json
 
 # parcel cash
 
-.parcel-cache/data.mdb
+.parcel-cache
