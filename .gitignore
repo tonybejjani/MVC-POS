@@ -148,7 +148,6 @@ sftp-config.json
 # Visual Studio Code - https://code.visualstudio.com/
 .settings/
 .vscode/
-
-
-# parcel cash
+.cache/
 .parcel-cache/
+
