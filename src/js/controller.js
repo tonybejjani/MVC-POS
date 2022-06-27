@@ -1,26 +1,29 @@
 /** @format */
 'use strict';
 // Data
-
-// Icons
-import trash from 'url:../img/icon/trash.png';
-
-// Views
-import menuCatView from './views/menuCatView.js';
-import menuInfoView from './views/menuInfoView.js';
-import menuItemsView from './views/menuItemsView.js';
-import menuSpecialModalView from './views/menuSpecialModalView.js';
-import orderItemView from './views/orderItemView.js';
-import orderSpecialBoxView from './views/orderSpecialBoxView.js';
-import orderSpecialItemView from './views/orderSpecialItemView.js';
-
 import * as model from './model.js';
+
+// Views Menu
+import menuTempView from './views/menu/menuTempView.js';
+import menuInfoView from './views/menu/menuInfoView.js';
+import menuCatView from './views/menu/menuCatView.js';
+import menuItemsView from './views/menu/menuItemsView.js';
+import menuSpecialModalView from './views/menu/menuSpecialModalView.js';
+
+// Views Order
+import orderSidebarView from './views/order/orderSidebarView.js';
+import orderItemView from './views/order/orderItemView.js';
+import orderSpecialBoxView from './views/order/orderSpecialBoxView.js';
+import orderSpecialItemView from './views/order/orderSpecialItemView.js';
+
 // Polyfilling
 import 'core-js/stable';
 import 'regenerator-runtime'; // polyfilling async-await
 
 class App {
   constructor() {
+    menuTempView.render();
+    orderSidebarView.render();
     menuInfoView.render(model.state.info);
     menuCatView.render(model.state.menuCategories);
     menuItemsView.render(model.state);
@@ -28,7 +31,9 @@ class App {
     menuItemsView.addHandlerRender(this._controlOrderItemForm.bind(this));
     menuSpecialModalView.render(model.state.menuItems);
     menuSpecialModalView.addModalEventListeners();
-    menuSpecialModalView.addHandlerAdd(this._controlOrderSpecialMix.bind(this));
+    menuSpecialModalView.addHandlerAddOrder(
+      this._controlOrderSpecialMix.bind(this)
+    );
   }
 
   _controlOrderItemForm(btn) {
@@ -114,7 +119,7 @@ class App {
       menuSpecialModalView.setBtnSaveId(specialEditId);
 
       //execute save event only once each time we click edit
-      menuSpecialModalView.addHandlerSave(
+      menuSpecialModalView.addHandlerSaveOrder(
         this._controlOrderSpecialItemForm.bind(this)
       );
 
@@ -188,6 +193,7 @@ class App {
     return specialEditId;
   }
 
+  // Update Total Order Price
   _controlOrderPrice() {
     let total = 0;
 
@@ -201,11 +207,11 @@ class App {
       }
     }
 
+    orderSidebarView.updateOrderPrice(total);
     // To be inserted to seperate view
-    const totalEl = document.querySelector('.order-total--price span');
-    totalEl.textContent = Number(total).toFixed(2);
   }
 
+  // Remove Normal Item
   _controlOrderItemRemove(itemId) {
     // delete item from state
     delete model.state.currentOrderLog[itemId];
@@ -217,6 +223,7 @@ class App {
     this._controlOrderPrice();
   }
 
+  // Remove Special Item
   _controlOrderSpecialItemRemove(itemId) {
     // delete item from state
     delete model.state.currentOrderLog[itemId];

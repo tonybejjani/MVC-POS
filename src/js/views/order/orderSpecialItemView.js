@@ -1,5 +1,5 @@
 /** @format */
-import trash from 'url:../../img/icon/trash.png';
+import trash from 'url:../../../img/icon/trash.png';
 class orderSpecialItemView {
   #parentElement;
   #data;
@@ -11,13 +11,6 @@ class orderSpecialItemView {
       `.special-container[data-special-item-id='${this.#data.specialEditId}']`
     );
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
-  }
-
-  addHandlerRender(handler) {
-    // const menuItemBtns = document.querySelectorAll('.menu--item__button');
-    // menuItemBtns.forEach((btn) => {
-    //   btn.addEventListener('click', handler.bind(this, btn));
-    // });
   }
 
   removeSpecialItem(itemId) {

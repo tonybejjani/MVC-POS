@@ -1,9 +1,10 @@
 /** @format */
 class menuInfoView {
-  #parentElement = document.querySelector('.info');
+  #parentElement;
   #data;
 
   render(data) {
+    this.#parentElement = document.querySelector('.info');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);

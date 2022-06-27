@@ -1,11 +1,12 @@
 /** @format */
-import trash from 'url:../../img/icon/trash.png';
+import trash from 'url:../../../img/icon/trash.png';
 class orderItemView {
-  #parentElement = document.querySelector('.order__details');
+  #parentElement;
   #data;
   #itemQty;
 
   render(data) {
+    this.#parentElement = document.querySelector('.order__details');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);

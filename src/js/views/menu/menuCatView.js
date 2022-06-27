@@ -1,9 +1,10 @@
 /** @format */
 class menuCatView {
-  #parentElement = document.querySelector('.menu--navbar');
+  #parentElement;
   #data;
 
   render(data) {
+    this.#parentElement = document.querySelector('.menu--navbar');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);

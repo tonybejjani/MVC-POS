@@ -39,9 +39,9 @@ export const state = {
     0: {
       catgId: 1,
       catgName: 'Yumcha',
-      name: 'MIX 8 PCS',
-      price: 12.0,
-      qty: 8,
+      name: 'MIX 10 PCS',
+      price: 7.0,
+      qty: 4,
       img: 'src/img/menu/mix.png',
       special_deal: true,
     },

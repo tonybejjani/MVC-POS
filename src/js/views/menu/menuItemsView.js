@@ -1,11 +1,12 @@
 /** @format */
-import infoIcon from 'url:../../img/icon/info-icon.png';
+import infoIcon from 'url:../../../img/icon/info-icon.png';
 
 class menuCatView {
-  #parentElement = document.querySelector('.menu');
+  #parentElement;
   #data;
 
   render(data) {
+    this.#parentElement = document.querySelector('.menu');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);

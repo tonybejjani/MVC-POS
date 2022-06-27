@@ -1,7 +1,7 @@
 /** @format */
 
 class menuSpecialModalView {
-  #parentElement = document.querySelector('.menu');
+  #parentElement;
   #data;
   #modal;
   #overlay;
@@ -20,20 +20,21 @@ class menuSpecialModalView {
   #specialEditId;
 
   render(data) {
+    this.#parentElement = document.querySelector('.menu');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
     this._initElements();
   }
 
-  addHandlerAdd(handler) {
+  addHandlerAddOrder(handler) {
     this.#btnAdd.addEventListener(
       'click',
       handler.bind(this, this.#totalPcs, this.#specialMixPrice)
     );
   }
 
-  addHandlerSave(handler) {
+  addHandlerSaveOrder(handler) {
     // console.log(this.#btnSave.getAttribute('data-special-item-id'));
     this.#btnSave.addEventListener(
       'click',
@@ -45,11 +46,6 @@ class menuSpecialModalView {
       ),
       { once: true }
     );
-  }
-
-  removeEventSave(handler) {
-    console.log(handler);
-    this.#btnSave.removeEventListener('click', handler);
   }
 
   getSpecialEditBtn(specialEditId) {

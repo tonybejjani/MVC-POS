@@ -1,22 +1,16 @@
 /** @format */
-import trash from 'url:../../img/icon/trash.png';
-import edit from 'url:../../img/icon/edit.png';
+import trash from 'url:../../../img/icon/trash.png';
+import edit from 'url:../../../img/icon/edit.png';
 
 class orderSpecialBoxView {
-  #parentElement = document.querySelector('.order__details');
+  #parentElement;
   #data;
 
   render(data) {
+    this.#parentElement = document.querySelector('.order__details');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
-
-  addHandlerRender(handler) {
-    // const menuItemBtns = document.querySelectorAll('.menu--item__button');
-    // menuItemBtns.forEach((btn) => {
-    //   btn.addEventListener('click', handler.bind(this, btn));
-    // });
   }
 
   checkSpecialEditId(totalPcs, specialMixPrice, specialEditId) {
