@@ -151,5 +151,4 @@ sftp-config.json
 
 
 # parcel cash
-
-.parcel-cache
+.parcel-cache/
