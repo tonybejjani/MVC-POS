@@ -149,4 +149,4 @@ sftp-config.json
 .settings/
 .vscode/
 .cache/
-.parcel-cache
+.parcel-cache/

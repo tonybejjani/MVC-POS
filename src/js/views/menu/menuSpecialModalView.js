@@ -10,6 +10,7 @@ class menuSpecialModalView {
   #btnDecrease;
   #btnAdd;
   #btnSave;
+  #btnEdit;
   #itemQty;
   #totalQty;
   #totalPcs;
@@ -18,52 +19,6 @@ class menuSpecialModalView {
   #menuSpecialBtnItemId;
   #specialMixPrice;
   #specialEditId;
-
-  render(data) {
-    this.#parentElement = document.querySelector('.menu');
-    this.#data = data;
-    const markup = this._generateMarkup();
-    this.#parentElement.insertAdjacentHTML('beforeend', markup);
-    this._initElements();
-  }
-
-  addHandlerAddOrder(handler) {
-    this.#btnAdd.addEventListener(
-      'click',
-      handler.bind(this, this.#totalPcs, this.#specialMixPrice)
-    );
-  }
-
-  addHandlerSaveOrder(handler) {
-    // console.log(this.#btnSave.getAttribute('data-special-item-id'));
-    this.#btnSave.addEventListener(
-      'click',
-      handler.bind(
-        this,
-        this.#totalPcs,
-        this.#specialMixPrice,
-        this.#specialEditId
-      ),
-      { once: true }
-    );
-  }
-
-  getSpecialEditBtn(specialEditId) {
-    return document.querySelector(
-      `.order--item__edit[data-special-item-id="${specialEditId}"]`
-    );
-  }
-
-  getSpecialRemoveBtn(specialEditId) {
-    return document.querySelector(
-      `.special-container--header .order--item__remove[data-special-item-id="${specialEditId}"]`
-    );
-  }
-
-  setBtnSaveId(specialEditId) {
-    this.#specialEditId = specialEditId;
-    this.#btnSave.setAttribute('data-special-item-id', specialEditId);
-  }
 
   _initElements() {
     this.#parentElement = document.querySelector('.menu');
@@ -83,8 +38,89 @@ class menuSpecialModalView {
     );
   }
 
+  render(data) {
+    this.#parentElement = document.querySelector('.menu');
+    this.#data = data;
+    const markup = this._generateMarkup();
+    this.#parentElement.insertAdjacentHTML('beforeend', markup);
+    this._initElements();
+  }
+
+  addHandlerAddOrder(handler) {
+    this.#btnAdd.addEventListener(
+      'click',
+      handler.bind(this, this.#totalPcs, this.#specialMixPrice)
+    );
+  }
+
+  addHandlerSaveOrder(handler) {
+    this._setBtnSaveId(this.#specialEditId);
+
+    this.#btnSave.addEventListener(
+      'click',
+      handler.bind(
+        this,
+        this.#totalPcs,
+        this.#specialMixPrice,
+        this.#specialEditId
+      ),
+      { once: true }
+    );
+  }
+
+  addHandlerEditOrder(handler) {
+    this._setSpecialEditBtnEl(this.#specialEditId);
+    this.#btnEdit.addEventListener('click', handler);
+  }
+
+  addHandlerRemoveOrder(handler) {
+    const specialRemoveBtn = this._getSpecialRemoveBtnEl(this.#specialEditId);
+
+    specialRemoveBtn.addEventListener(
+      'click',
+      handler.bind(this, this.#specialEditId, true),
+      { once: true }
+    );
+  }
+
+  _setSpecialEditBtnEl(specialEditId) {
+    this.#btnEdit = document.querySelector(
+      `.order--item__edit[data-special-item-id="${specialEditId}"]`
+    );
+  }
+
+  //public
+  setSpecialEditId(specialEditId) {
+    this.#specialEditId = specialEditId;
+  }
+
+  _setBtnSaveId(specialEditId) {
+    this.#btnSave.setAttribute('data-special-item-id', specialEditId);
+  }
+
+  setTotalPcs(totalPcs) {
+    this.#totalPcs = totalPcs;
+  }
+
+  setSpecialMixPrice(specialMixPrice) {
+    this.#specialMixPrice = specialMixPrice;
+  }
+
+  _getSpecialRemoveBtnEl(specialEditId) {
+    return document.querySelector(
+      `.special-container--header .order--item__remove[data-special-item-id="${specialEditId}"]`
+    );
+  }
+
+  getTotalPcs() {
+    return this.#totalPcs;
+  }
+
+  getSpecialMixPrice() {
+    return this.#specialMixPrice;
+  }
+
   closeModal() {
-    console.log('closeModal');
     this.#modal.classList.add('hidden');
     this.#overlay.classList.add('hidden');
 

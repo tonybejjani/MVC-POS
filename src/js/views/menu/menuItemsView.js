@@ -20,6 +20,18 @@ class menuCatView {
     });
   }
 
+  getMenuItems() {
+    return document.querySelectorAll('.special-menu--item');
+  }
+
+  getMenuItem(item) {
+    return item.querySelector('.order--item__qty-num');
+  }
+
+  getMenuItemText(item) {
+    return item.querySelector('.order--item__qty-num').textContent;
+  }
+
   _generateMarkup() {
     let markup = [];
 
