@@ -4,6 +4,7 @@ class orderItemView {
   #parentElement;
   #data;
   #itemQty;
+  #btn;
 
   render(data) {
     this.#parentElement = document.querySelector('.order__details');
@@ -30,6 +31,14 @@ class orderItemView {
     ).textContent = currItemLog.totalPrice.toFixed(2);
   }
 
+  setBtnEl(btn) {
+    this.#btn = btn;
+  }
+
+  getBtnId() {
+    return this.#btn.getAttribute('data-item-id');
+  }
+
   removeItem(itemId) {
     const orderItem = document.querySelector(
       `.order--item.order--item-normal[data-item-id="${Number(itemId)}"]`
@@ -50,15 +59,15 @@ class orderItemView {
                     <div class="thumb__title"><span>${
                       this.#data.name
                     }</span></div>
-                    <div class="thumb__price"><span>${
-                      this.#data.priceD
-                    } </span></div>
+                    <div class="thumb__price"><span>${this.#data.price.toFixed(
+                      2
+                    )} </span></div>
                 </div>
         
               
                 <div class="order--item__total">
                   <span class="item__currency">$ </span> 
-                  <span class="totalPrice">${this.#data.priceD}</span>
+                  <span class="totalPrice">${this.#data.price.toFixed(2)}</span>
                 </div>
 
                 <div class="order--item__qty">

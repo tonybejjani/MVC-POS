@@ -37,19 +37,30 @@ class App {
   }
 
   _controlOrderItemForm(btn) {
+    // set btn El global in view
+    orderItemView.setBtnEl(btn);
+
     // The items selected individually from the menu (meaning not in a "special mix")
     // are not special Items === false
     const specialItem = false;
 
-    // Retrieve data from menuItems object according to item selected on
-    // "data-item-id" attribute of html element
+    // Retrieve data from state of item
     const { name, price, qty, img } =
-      model.state.menuItems[btn.getAttribute('data-item-id')];
-
-    const priceD = price.toFixed(2);
+      model.state.menuItems[orderItemView.getBtnId()];
     const totalPrice = price;
-    const itemId = btn.getAttribute('data-item-id');
+    const itemId = orderItemView.getBtnId();
     const currItemLog = model.state.currentOrderLog[itemId];
+
+    // pack all data
+    const data = {
+      itemId,
+      name,
+      price,
+      qty,
+      img,
+      specialItem,
+      totalPrice,
+    };
 
     // On selecting an item, check if itemId already exists in current Order List
     // 1- if YES: update Qty & total price
@@ -61,35 +72,22 @@ class App {
       //update qty & total of item in UI
       orderItemView.updateItemTotalPrice(itemId, currItemLog);
 
-      // 2- if NO: add new object to state
+      // 2- if NO: push item to state log
     } else {
-      model.state.currentOrderLog[itemId] = {
-        itemId,
-        name,
-        price,
-        qty,
-        img,
-        specialItem,
-        totalPrice,
-      };
+      model.state.currentOrderLog[itemId] = data;
 
-      // Display the order Item in the UI
-      orderItemView.render({
-        itemId,
-        name,
-        priceD,
-        qty,
-        img,
-        specialItem,
-        special: false,
-      });
+      // Display the order item in the UI
+      orderItemView.render(data);
 
-      // Add Delete Item event
+      // Add remove item event
       orderItemView.addHandlerRender(
         this._controlOrderItemRemove.bind(this, itemId, false)
       );
+
+      console.log(model.state.currentOrderLog);
     }
 
+    // Update total order price in temp view
     this._controlOrderPrice();
   }
 
@@ -159,27 +157,23 @@ class App {
       const specialPrice = Number(specialMixPrice / totalPcs).toFixed(2);
       const img = model.state.menuItems[itemId].img;
       const qty = Number(menuItemsView.getMenuItemText(item));
-
       const specialItem = true;
 
+      let data = {
+        itemId,
+        name,
+        specialPrice,
+        qty,
+        img,
+        specialItem,
+        specialEditId,
+      };
+      // push data to state
       if (qty > 0) {
-        model.state.currentOrderLog[specialEditId].push({
-          itemId,
-          name,
-          specialPrice,
-          qty,
-          img,
-          specialItem,
-        });
+        model.state.currentOrderLog[specialEditId].push(data);
 
-        orderSpecialItemView.render({
-          itemId,
-          name,
-          specialPrice,
-          qty,
-          img,
-          specialEditId,
-        });
+        // render item in view
+        orderSpecialItemView.render(data);
       }
     });
 
