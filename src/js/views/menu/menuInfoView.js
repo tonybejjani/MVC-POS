@@ -12,7 +12,7 @@ class menuInfoView {
 
   _generateMarkup() {
     return `
-    <div class="info__logo"><img src="${this.#data.logo}"></div>
+
     <div class="info__title">${this.#data.title}</div>
     <div class="info__date">${this.#data.date}</div>`;
   }

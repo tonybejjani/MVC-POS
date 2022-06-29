@@ -1,7 +1,7 @@
 /** @format */
 
 :root {
-  --color-brand--1: #fff200;
+  --color-brand--1: #FFFB2B;
 
   --color-shade-1: #fff64d;
   --color-shade-2: #fff64d;
@@ -36,10 +36,10 @@ body {
   height: 100vh;
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
-
+  background-color: var(--color-dark--2);
   display: grid;
   grid-template-rows: 100vh;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 8.7% 57% 34.25%;
 }
 
 /* GENERAL */
@@ -92,11 +92,115 @@ input {
   display: none;
 }
 
+/* NAVBAR */
+.navbar {
+  background-color: var(--color-dark--1);
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 4rem 0;
+  z-index: 0;
+}
+
+.navbar__logo {
+  background-image: url('../img/general/logo.png');
+  background-size:10.4rem;
+  background-repeat: no-repeat;
+  padding: 5.2rem;
+  align-self: center;
+}
+
+.navbar__links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+
+}
+
+
+.navbar__link {
+  display: block;
+  padding: 3.2rem;
+  background-repeat: no-repeat;
+  background-size: 2.8rem;
+  background-position: center;
+  align-self: center;
+}
+
+.navbar__link.navbar__link-restaurant {
+
+}
+
+.navbar__link--active {
+  background-color: var(--color-brand--1);
+  box-shadow: 0px 0px 23px -8px var(--color-brand--1);
+  border-radius: 14px;
+  position: relative;
+}
+
+.navbar__link--active::before {
+  content: "";
+  background-color: var(--color-dark--3);
+  padding: 4.4rem;
+  position: absolute; 
+  transform: translate(-50%, -50%);
+  /* margin-left: auto; 
+  margin-right: auto;  */
+  border-radius: 14px;
+  z-index: -1;
+
+}
+
+.navbar__link-cook {
+  background-image: url('../img/icon/navbar/yellow/cook.svg');
+}
+
+
+.navbar__link-dash {
+  background-image: url('../img/icon/navbar/yellow/dashboard.svg');
+}
+
+.navbar__link-settings {
+  background-image: url('../img/icon/navbar/yellow/settings.svg');
+}
+
+.navbar__link-home {
+  background-image: url('../img/icon/navbar/yellow/home.svg');
+}
+
+.navbar__link-logout {
+  background-image: url('../img/icon/navbar/yellow/logout.svg');
+}
+
+
+.navbar__link--active.navbar__link-cook {
+  background-image: url('../img/icon/navbar/dark/cook.svg');
+}
+
+
+.navbar__link--active.navbar__link-dash {
+  background-image: url('../img/icon/navbar/dark/dashboard.svg');
+}
+
+.navbar__link--active.navbar__link-settings {
+  background-image: url('../img/icon/navbar/dark/settings.svg');
+}
+
+.navbar__link--active.navbar__link-home {
+  background-image: url('../img/icon/navbar/dark/home.svg');
+}
+
+.navbar__link--active.navbar__link-logout {
+  background-image: url('../img/icon/navbar/dark/logout.svg');
+}
 /* MENU */
 .menu {
   /* min-width: 50rem; */
 
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 4rem 4rem 4rem 4rem;
   background-color: var(--color-dark--2);
   overflow: hidden;
 }
@@ -104,10 +208,11 @@ input {
 .info {
   font-size: 2.2rem;
   font-weight: 600;
-
+  padding-bottom: 2rem;
+/* 
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: 10fr 90fr;
+  grid-template-columns: 10fr 90fr; */
 }
 
 .info__logo {
@@ -155,7 +260,8 @@ input {
 
 .menu--navbar__link {
   text-decoration: none;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .menu--items {
@@ -167,7 +273,7 @@ input {
   row-gap: 7rem; */
   display: flex;
   flex-wrap: wrap;
-  height: 70%;
+  height: 75%;
   gap: 8rem;
   justify-content: flex-start;
 }

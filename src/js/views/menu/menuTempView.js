@@ -6,7 +6,7 @@ class menuTempView {
   render(data) {
     this.#data = data;
     const markup = this._generateMarkup();
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
   _generateMarkup() {
