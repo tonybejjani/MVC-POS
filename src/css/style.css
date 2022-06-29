@@ -64,7 +64,8 @@ button {
   border-radius: 0.5rem;
   transition: all 0.2s;
   font-size: 1.6rem;
-  font-weight: bold;
+  font-weight: 600;
+  font-family: 'barlow', sans-serif;
   width: 100%;
 }
 
@@ -342,7 +343,7 @@ button.menu--special--item__button {
   border: 1px solid var(--color-light--2);
   color: var(--color-brand--1);
   font-size: 1.8rem;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 0.2px;
 }
 
@@ -578,7 +579,7 @@ button.disabled {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  height: 20%;
+  height: 8%;
 }
 
 .order-total--title,
@@ -705,7 +706,7 @@ button.disabled {
 }
 
 .order--item__note {
-  grid-column: -4/ -2;
+padding-bottom: 2rem;
 }
 
 .order--item__note input {
@@ -728,4 +729,68 @@ button.disabled {
   padding: 1.1rem;
   width: 4.8rem;
   vertical-align: middle;
+}
+
+.order-pay {
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+  height: 12%;
+}
+.order-pay .order-pay-btn {
+  background-color: var(--color-dark--1);
+  color: var(--color-light--2);
+  width: 10rem;
+  height: 6rem;
+  border: 1px solid var(--color-light--2);
+  border-radius: 8px; 
+  font-family: 'barlow', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding-top: 2.4rem;
+  position:relative;
+  background-repeat: no-repeat;
+  background-size: 2.4rem;
+  background-position-x: 50%;
+  background-position-y: 15%;
+}
+
+.order-pay .order-pay__credit{
+
+  background-image: url('../img/icon/card.svg');
+
+}
+
+.order-pay .order-pay__cash{
+  background-image: url('../img/icon/wallet.svg');
+  background-size: 2rem;
+  background-position-y: 25%;
+
+}
+
+.order-pay .order-pay__credit.order-pay-btn--active {
+  background-image: url('../img/icon/card-light.svg');
+}
+
+.order-pay .order-pay__cash.order-pay-btn--active {
+  background-image: url('../img/icon/wallet-light.svg');
+}
+
+.order-pay .order-pay-btn--active{
+  background-color: var(--color-dark--2);
+  color: var(--color-light--1)
+}
+
+
+
+.order-pay .order-pay-btn--active::after {
+  content: "";
+  background-image: url('../img/icon/checkmark-circle.svg');
+  background-repeat: no-repeat;
+  position: absolute; 
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
+
 }

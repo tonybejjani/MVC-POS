@@ -35,9 +35,13 @@ class orderSidebarView {
           <p class="order-total--title">Sub total</p>
           <p class="order-total--price">$ <span>0.00</span></p>
         </div>
-                <!-- <div class="order--item__note">
-          <input type="text" placeholder="Order Note...">
-        </div> -->
+        <!-- <div class="order-note">
+           <input type="text" placeholder="Order Note...">
+         </div> -->
+        <div class="order-pay">
+          <button type="button" class="order-pay-btn order-pay__credit ">Credit Card</button>
+          <button type="button" class="order-pay-btn order-pay__cash order-pay-btn--active">Cash</button>
+        </div>
         <div class="order-footer">
           <button type="button" class="order--list__save hidden">Save Order</button>
           <button type="button" class="order--list__submit">Submit Order</button>
