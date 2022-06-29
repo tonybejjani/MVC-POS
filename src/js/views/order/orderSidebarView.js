@@ -5,6 +5,7 @@ class orderSidebarView {
 
   render(data) {
     this.#data = data;
+    console.log(this.#parentElement);
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }

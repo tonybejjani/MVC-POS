@@ -11,10 +11,10 @@ class menuTempView {
 
   _generateMarkup() {
     return `
-    <div class="menu">
-    <div class="info"></div>
-    <ul class="menu--navbar"></ul>
-  </div> `;
+      <div class="menu">
+        <div class="info"></div>
+        <ul class="menu--navbar"></ul>
+      </div>`;
   }
 }
 

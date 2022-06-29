@@ -3,9 +3,9 @@
 :root {
   --color-brand--1: #FFFB2B;
 
-  --color-shade-1: #fff64d;
-  --color-shade-2: #fff64d;
-  --color-shade-3: #fffbb3;
+  --color-shade-1: #fffb40;
+  --color-shade-2: #fffd80;
+  --color-shade-3: #fffdaa;
 
   --color-dark--1: #1f1d2b;
   --color-dark--2: #252835;
@@ -39,9 +39,14 @@ body {
   background-color: var(--color-dark--2);
   display: grid;
   grid-template-rows: 100vh;
-  grid-template-columns: 8.7% 57% 34.25%;
+  grid-template-columns: 8.7% 91.3%;
 }
 
+.main {
+  display: grid;
+  grid-template-rows: 100vh;
+  grid-template-columns: 62% 38%;
+}
 /* GENERAL */
 a:link,
 a:visited {

@@ -4,6 +4,7 @@
 import * as model from './model.js';
 
 // Views Menu
+import navbarView from './views/navbar/navbarView.js';
 import menuTempView from './views/menu/menuTempView.js';
 import menuInfoView from './views/menu/menuInfoView.js';
 import menuCatView from './views/menu/menuCatView.js';
@@ -22,6 +23,7 @@ import 'regenerator-runtime'; // polyfilling async-await
 
 class App {
   constructor() {
+    navbarView.render();
     menuTempView.render();
     orderSidebarView.render();
     menuInfoView.render(model.state.info);
