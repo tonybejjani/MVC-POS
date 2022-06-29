@@ -1,11 +1,11 @@
 /** @format */
 class orderSidebarView {
-  #parentElement = document.querySelector('.main');
+  #parentElement;
   #data;
 
   render(data) {
     this.#data = data;
-    console.log(this.#parentElement);
+    this.#parentElement = document.querySelector('.home');
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }

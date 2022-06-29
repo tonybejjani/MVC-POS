@@ -1,6 +1,6 @@
 /** @format */
-import trash from 'url:../../../img/icon/trash.png';
-import edit from 'url:../../../img/icon/edit.png';
+import trash from 'url:../../../../img/icon/trash.png';
+import edit from 'url:../../../../img/icon/edit.png';
 
 class orderSpecialBoxView {
   #parentElement;

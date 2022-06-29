@@ -1,29 +1,24 @@
 /** @format */
-'use strict';
-// Data
-import * as model from './model.js';
 
-// Views Menu
-import navbarView from './views/navbar/navbarView.js';
-import menuTempView from './views/menu/menuTempView.js';
-import menuInfoView from './views/menu/menuInfoView.js';
-import menuCatView from './views/menu/menuCatView.js';
-import menuItemsView from './views/menu/menuItemsView.js';
-import menuSpecialModalView from './views/menu/menuSpecialModalView.js';
+// Data
+import * as model from '../model.js';
+
+import homeView from '../views/home/homeView.js';
+import menuTempView from '../views/home/menu/menuTempView.js';
+import menuInfoView from '../views/home/menu/menuInfoView.js';
+import menuCatView from '../views/home/menu/menuCatView.js';
+import menuItemsView from '../views/home/menu/menuItemsView.js';
+import menuSpecialModalView from '../views/home/menu/menuSpecialModalView.js';
 
 // Views Order
-import orderSidebarView from './views/order/orderSidebarView.js';
-import orderItemView from './views/order/orderItemView.js';
-import orderSpecialBoxView from './views/order/orderSpecialBoxView.js';
-import orderSpecialItemView from './views/order/orderSpecialItemView.js';
+import orderSidebarView from '../views/home/order/orderSidebarView.js';
+import orderItemView from '../views/home/order/orderItemView.js';
+import orderSpecialBoxView from '../views/home/order/orderSpecialBoxView.js';
+import orderSpecialItemView from '../views/home/order/orderSpecialItemView.js';
 
-// Polyfilling
-import 'core-js/stable';
-import 'regenerator-runtime'; // polyfilling async-await
-
-class App {
-  constructor() {
-    navbarView.render();
+class controllerHome {
+  renderHome() {
+    homeView.render();
     menuTempView.render();
     orderSidebarView.render();
     menuInfoView.render(model.state.info);
@@ -230,4 +225,4 @@ class App {
   }
 }
 
-const app = new App();
+export default new controllerHome();

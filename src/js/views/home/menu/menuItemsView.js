@@ -1,5 +1,5 @@
 /** @format */
-import infoIcon from 'url:../../../img/icon/info-icon.png';
+import infoIcon from 'url:../../../../img/icon/info-icon.png';
 
 class menuCatView {
   #parentElement;

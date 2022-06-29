@@ -1,5 +1,5 @@
 /** @format */
-import trash from 'url:../../../img/icon/trash.png';
+import trash from 'url:../../../../img/icon/trash.png';
 class orderItemView {
   #parentElement;
   #data;

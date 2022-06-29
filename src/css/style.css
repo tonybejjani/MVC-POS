@@ -8,7 +8,7 @@
   --color-shade-3: #fffdaa;
 
   --color-dark--1: #1f1d2b;
-  --color-dark--2: #252835;
+  --color-dark--2: #252836;
   --color-dark--3: #393c49;
 
   --color-light--1: #fff;
@@ -42,7 +42,12 @@ body {
   grid-template-columns: 8.7% 91.3%;
 }
 
-.main {
+/* .main {
+
+} */
+
+/* Home Page */
+.home {
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns: 62% 38%;
@@ -129,14 +134,12 @@ input {
 .navbar__link {
   display: block;
   padding: 3.2rem;
+  border-radius: 14px;
   background-repeat: no-repeat;
   background-size: 2.8rem;
   background-position: center;
   align-self: center;
-}
-
-.navbar__link.navbar__link-restaurant {
-
+  transition: all 0.2s;
 }
 
 .navbar__link--active {
