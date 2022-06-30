@@ -14,7 +14,7 @@ class menuTempView {
     return `
       <div class="menu">
         <div class="info"></div>
-        <ul class="menu--navbar"></ul>
+        <ul class="menu-navbar"></ul>
       </div>`;
   }
 }

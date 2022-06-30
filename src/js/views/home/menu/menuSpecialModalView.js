@@ -30,7 +30,7 @@ class menuSpecialModalView {
     this.#btnAdd = document.querySelector('.special-menu--footer .btnAdd');
     this.#btnSave = document.querySelector('.special-menu--footer .btnSave');
     this.#itemQty = document.querySelectorAll(
-      '.special-menu--items .order--item__qty-num'
+      '.special-menu-items .order--item__qty-num'
     );
     this.#totalQty = document.querySelector('.special-menu--footer .total-qty');
     this.#menuSpecialBtn = document.querySelector(
@@ -165,7 +165,7 @@ class menuSpecialModalView {
     // enable and disable buttons accordingly
     this.#itemQty.forEach((item) => {
       const specialModalItemId = Number(
-        item.closest('.special-menu--item').getAttribute('data-item-id')
+        item.closest('.special-menu-item').getAttribute('data-item-id')
       );
       const btnDecrease = item.previousElementSibling;
 
@@ -302,7 +302,7 @@ class menuSpecialModalView {
     this.#specialBtnCatId = Number(
       document
         .querySelector('.menu--special--item__button')
-        .closest('.menu--items')
+        .closest('.menu-items')
         .getAttribute('data-category-id')
     );
 
@@ -322,15 +322,15 @@ class menuSpecialModalView {
                       <h1 class="special-menu--header">Select <span>${
                         this.#totalPcs
                       }</span> pcs:</h1>
-                      <div class="special-menu--items">`);
+                      <div class="special-menu-items">`);
 
     for (const [key, { catgId, name, img, special_deal }] of Object.entries(
       this.#data
     )) {
       if (catgId === this.#specialBtnCatId && !special_deal)
-        markup.push(`<div class="special-menu--item" data-item-id="${key}">
+        markup.push(`<div class="special-menu-item" data-item-id="${key}">
                           <img src="${img}">
-                          <div class="special-menu--item-name">${name}</div>
+                          <div class="special-menu-item-name">${name}</div>
                           <div class="order--item__qty">
                             <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
                             <span class="order--item__qty-num">0</span>

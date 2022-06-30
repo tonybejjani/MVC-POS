@@ -13,7 +13,7 @@ class menuCatView {
   }
 
   addHandlerRender(handler) {
-    const menuItemBtns = document.querySelectorAll('.menu--item__button');
+    const menuItemBtns = document.querySelectorAll('.menu-item__button');
 
     menuItemBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn));
@@ -21,7 +21,7 @@ class menuCatView {
   }
 
   getMenuItems() {
-    return document.querySelectorAll('.special-menu--item');
+    return document.querySelectorAll('.special-menu-item');
   }
 
   getMenuItem(item) {
@@ -40,7 +40,7 @@ class menuCatView {
       this.#data.menuCategories
     )) {
       markup.push(
-        `<div class="menu--items ${
+        `<div class="menu-items ${
           active ? '' : 'hidden'
         }" data-category-id="${categoryId}">`
       );
@@ -50,16 +50,16 @@ class menuCatView {
         { catgId: productCatgId, name, price, qty, img, special_deal },
       ] of Object.entries(this.#data.menuItems)) {
         if (productCatgId === categoryId) {
-          markup.push(`<div class="menu--item" data-item-id="${key}">
-                          <div class="menu--item__image"><img src="${img}"></div>
-                          <div class="menu--item__details">
-                            <div class="menu--item__info"><img src="${infoIcon}"></div>
-                            <h2 class="menu--item__title">${name}</h2>
-                            <div class="menu--item__price">$ ${price}</div>
+          markup.push(`<div class="menu-item" data-item-id="${key}">
+                          <div class="menu-item__image"><img src="${img}"></div>
+                          <div class="menu-item__details">
+                            <div class="menu-item__info"><img src="${infoIcon}"></div>
+                            <h2 class="menu-item__title">${name}</h2>
+                            <div class="menu-item__price">$ ${price}</div>
                             <button class="${
                               special_deal
                                 ? 'menu--special--item__button'
-                                : 'menu--item__button'
+                                : 'menu-item__button'
                             }" data-item-id="${key}">Select</button>
                           </div>
                       </div>`);

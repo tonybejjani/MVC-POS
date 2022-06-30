@@ -15,7 +15,7 @@ class navbarView {
   }
 
   // addHandlerRender(handler) {
-  //   const menuItemBtns = document.querySelectorAll('.menu--item__button');
+  //   const menuItemBtns = document.querySelectorAll('.menu-item__button');
 
   //   menuItemBtns.forEach((btn) => {
   //     btn.addEventListener('click', handler.bind(this, btn));
