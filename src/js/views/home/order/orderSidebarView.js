@@ -2,11 +2,12 @@
 class orderSidebarView {
   #parentElement;
   #data;
-  #btnPayIsClicked = false;
+  #btnPayIsClicked;
 
   render(data) {
     this.#data = data;
     this.#parentElement = document.querySelector('.home');
+    this.#btnPayIsClicked = false;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
@@ -27,12 +28,19 @@ class orderSidebarView {
     return document.querySelector('.order--list__submit');
   }
 
+  disablePayMethod() {
+    const payMethodBtn = document.querySelectorAll('.order-pay-btn');
+
+    payMethodBtn.forEach((btn) => {
+      btn.classList.remove('order-pay-btn--active');
+    });
+  }
+
   removePayMethod() {
     const payMethodBtn = document.querySelectorAll('.order-pay-btn');
     this.#btnPayIsClicked = false;
 
     payMethodBtn.forEach((btn) => {
-      console.log(btn);
       btn.classList.remove('order-pay-btn--active');
     });
   }

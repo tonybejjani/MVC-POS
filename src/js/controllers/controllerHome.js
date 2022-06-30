@@ -47,7 +47,6 @@ class controllerHome {
 
     payCredit ? (payMethod = 'CR') : (payMethod = 'C');
     model.state.currentOrderLog.payMethod = payMethod;
-    console.log(model.state.currentOrderLog);
   }
 
   _controlOrderItemForm(btn) {
@@ -97,8 +96,6 @@ class controllerHome {
       orderItemView.addHandlerRender(
         this._controlOrderItemRemove.bind(this, itemId, false)
       );
-
-      console.log(model.state.currentOrderLog);
     }
 
     // Update total order price in temp view
@@ -152,12 +149,8 @@ class controllerHome {
 
     if (total <= 0) return;
 
-    console.log('currentOrderLog:', model.state.currentOrderLog);
-
     // make a deep copy of currentOrder
     const newOrder = JSON.parse(JSON.stringify(model.state.currentOrderLog));
-
-    console.log('newOrder:', newOrder);
 
     model.state.orders.push(newOrder);
 
@@ -170,6 +163,9 @@ class controllerHome {
 
     // remove Pay method tick
     orderSidebarView.removePayMethod();
+
+    // disable Submit Order Btn
+    this._controlSubmitOrder();
   }
 
   _controlOrderSpecialMix(totalPcs, specialMixPrice) {
@@ -201,7 +197,11 @@ class controllerHome {
       this._controlOrderSpecialItemRemove.bind(this, specialEditId, true)
     );
 
-    // 7- disable/enable submit order btn
+    // 7- enable pay method default value
+    if (!orderSidebarView.checkBtnPayIsClicked())
+      orderSidebarView.triggerPayMethod();
+
+    // 8- disable/enable submit order btn
     this._controlSubmitOrder();
   }
 
@@ -277,6 +277,15 @@ class controllerHome {
     orderSidebarView.updateOrderPrice(total);
   }
 
+  _disablePayMethod() {
+    //check if order contains items by checking total price of Order in state
+    const total = this._checkTotalState();
+
+    if (total <= 0) {
+      orderSidebarView.removePayMethod();
+    }
+  }
+
   // Remove Normal Item
   _controlOrderItemRemove(itemId) {
     // delete item from state
@@ -287,6 +296,9 @@ class controllerHome {
 
     // update Total Order Price
     this._controlOrderPrice();
+
+    // Disable Tick Pay Method
+    this._disablePayMethod();
 
     // disable/enable submit order btn
     this._controlSubmitOrder();
@@ -302,6 +314,9 @@ class controllerHome {
 
     // update Total Order Price
     this._controlOrderPrice();
+
+    // Disable Tick Pay Method
+    this._disablePayMethod();
 
     // disable/enable submit order btn
     this._controlSubmitOrder();
