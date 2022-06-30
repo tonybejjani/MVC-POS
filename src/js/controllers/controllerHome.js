@@ -17,6 +17,7 @@ import orderSpecialBoxView from '../views/home/order/orderSpecialBoxView.js';
 import orderSpecialItemView from '../views/home/order/orderSpecialItemView.js';
 
 class controllerHome {
+  // render views associated to "Home Page" hash
   renderHome() {
     homeView.render();
     menuTempView.render();
@@ -32,21 +33,6 @@ class controllerHome {
       this._controlOrderSpecialMix.bind(this)
     );
     orderSidebarView.addHandlerPayMethod(this._controlPayMethod.bind(this));
-  }
-
-  _controlPayMethod(btnClick, btns) {
-    // remove all active classes
-    btns.forEach((btn) => btn.classList.remove('order-pay-btn--active'));
-
-    //toggle class
-    btnClick.classList.add('order-pay-btn--active');
-
-    //update state
-    let payCredit = btnClick.className.includes('credit');
-    let payMethod;
-
-    payCredit ? (payMethod = 'CR') : (payMethod = 'C');
-    model.state.currentOrderLog.payMethod = payMethod;
   }
 
   _controlOrderItemForm(btn) {
@@ -109,21 +95,19 @@ class controllerHome {
     this._controlSubmitOrder();
   }
 
-  _checkTotalState() {
-    let total = 0;
-    for (const [key, { totalPrice }] of Object.entries(
-      model.state.currentOrderLog
-    )) {
-      if (key.startsWith('mix')) {
-        total += model.state.currentOrderLog[key][0].mixPrice;
+  _controlPayMethod(btnClick, btns) {
+    // remove all active classes
+    btns.forEach((btn) => btn.classList.remove('order-pay-btn--active'));
 
-        // check if Key is a number (there is key called 'payMethod' to avoid)
-      } else if (isFinite(key)) {
-        total += totalPrice;
-      }
-    }
+    //toggle class
+    btnClick.classList.add('order-pay-btn--active');
 
-    return total;
+    //update state
+    let payCredit = btnClick.className.includes('credit');
+    let payMethod;
+
+    payCredit ? (payMethod = 'CR') : (payMethod = 'C');
+    model.state.currentOrderLog.payMethod = payMethod;
   }
 
   _controlSubmitOrder() {
@@ -152,6 +136,7 @@ class controllerHome {
     // make a deep copy of currentOrder
     const newOrder = JSON.parse(JSON.stringify(model.state.currentOrderLog));
 
+    // push new order to state
     model.state.orders.push(newOrder);
 
     // clear currentLog state
@@ -163,6 +148,9 @@ class controllerHome {
 
     // remove Pay method tick
     orderSidebarView.removePayMethod();
+
+    // reset Total
+    this._controlOrderPrice();
 
     // disable Submit Order Btn
     this._controlSubmitOrder();
@@ -277,6 +265,25 @@ class controllerHome {
     orderSidebarView.updateOrderPrice(total);
   }
 
+  // check Total inside the currentOrderLog state
+  _checkTotalState() {
+    let total = 0;
+    for (const [key, { totalPrice }] of Object.entries(
+      model.state.currentOrderLog
+    )) {
+      if (key.startsWith('mix')) {
+        total += model.state.currentOrderLog[key][0].mixPrice;
+
+        // check if Key is a number (there is key called 'payMethod' to avoid)
+      } else if (isFinite(key)) {
+        total += totalPrice;
+      }
+    }
+
+    return total;
+  }
+
+  // Remove the user default pay method
   _disablePayMethod() {
     //check if order contains items by checking total price of Order in state
     const total = this._checkTotalState();
