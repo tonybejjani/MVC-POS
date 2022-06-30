@@ -579,7 +579,8 @@ button.disabled {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  height: 8%;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .order-total--title,
@@ -731,11 +732,12 @@ padding-bottom: 2rem;
   vertical-align: middle;
 }
 
+/* PAY METHODS */
 .order-pay {
   display: flex;
   justify-content: end;
   gap: 2rem;
-  height: 12%;
+  grid-row-start: 2;
 }
 .order-pay .order-pay-btn {
   background-color: var(--color-dark--1);
@@ -744,7 +746,6 @@ padding-bottom: 2rem;
   height: 6rem;
   border: 1px solid var(--color-light--2);
   border-radius: 8px; 
-  font-family: 'barlow', sans-serif;
   font-size: 1.4rem;
   font-weight: 500;
   padding-top: 2.4rem;
@@ -752,36 +753,34 @@ padding-bottom: 2rem;
   background-repeat: no-repeat;
   background-size: 2.4rem;
   background-position-x: 50%;
-  background-position-y: 15%;
+  background-position-y: 23%;
 }
 
 .order-pay .order-pay__credit{
 
-  background-image: url('../img/icon/card.svg');
+  background-image: url('../img/icon/subtract--dark.svg');
 
 }
 
 .order-pay .order-pay__cash{
-  background-image: url('../img/icon/wallet.svg');
+  background-image: url('../img/icon/wallet--dark.svg');
   background-size: 2rem;
-  background-position-y: 25%;
+  background-position-y: 22%;
 
 }
 
 .order-pay .order-pay__credit.order-pay-btn--active {
-  background-image: url('../img/icon/card-light.svg');
+  background-image: url('../img/icon/subtract--light.svg');
 }
 
 .order-pay .order-pay__cash.order-pay-btn--active {
-  background-image: url('../img/icon/wallet-light.svg');
+  background-image: url('../img/icon/wallet--light.svg');
 }
 
 .order-pay .order-pay-btn--active{
   background-color: var(--color-dark--2);
   color: var(--color-light--1)
 }
-
-
 
 .order-pay .order-pay-btn--active::after {
   content: "";
@@ -793,4 +792,22 @@ padding-bottom: 2rem;
   width: 1.6rem;
   height: 1.6rem;
 
+}
+
+.order-transaction {
+  display: grid;
+  row-gap: 2rem;
+  height: 20%;
+  grid-template-columns: 60% 40%;
+}
+
+.order-note {
+  grid-row-start: 2;
+  width: 100%;
+}
+
+.order-note input {
+  width: 30.5rem;
+  height: 6rem;
+  padding: 2rem;
 }

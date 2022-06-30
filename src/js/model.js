@@ -32,7 +32,7 @@ export const state = {
     },
     3: {
       id: 4,
-      name: 'Entrees',
+      name: 'Sides',
       active: false,
     },
   },

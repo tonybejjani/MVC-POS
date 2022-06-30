@@ -31,6 +31,23 @@ class controllerHome {
     menuSpecialModalView.addHandlerAddOrder(
       this._controlOrderSpecialMix.bind(this)
     );
+    orderSidebarView.addHandlerPayMethod(this._controlPayMethod.bind(this));
+  }
+
+  _controlPayMethod(btnClick, btns) {
+    // remove all active classes
+    btns.forEach((btn) => btn.classList.remove('order-pay-btn--active'));
+
+    //toggle class
+    btnClick.classList.add('order-pay-btn--active');
+
+    //update state
+    let payCredit = btnClick.className.includes('credit');
+    let payMethod;
+
+    payCredit ? (payMethod = 'CR') : (payMethod = 'C');
+    model.state.currentOrderLog.payMethod = payMethod;
+    console.log(model.state.currentOrderLog);
   }
 
   _controlOrderItemForm(btn) {
@@ -86,6 +103,73 @@ class controllerHome {
 
     // Update total order price in temp view
     this._controlOrderPrice();
+
+    // Choose user default Pay Method
+    if (!orderSidebarView.checkBtnPayIsClicked())
+      orderSidebarView.triggerPayMethod();
+
+    // Enable Submit Order Btn if state is not empty
+    this._controlSubmitOrder();
+  }
+
+  _checkTotalState() {
+    let total = 0;
+    for (const [key, { totalPrice }] of Object.entries(
+      model.state.currentOrderLog
+    )) {
+      if (key.startsWith('mix')) {
+        total += model.state.currentOrderLog[key][0].mixPrice;
+
+        // check if Key is a number (there is key called 'payMethod' to avoid)
+      } else if (isFinite(key)) {
+        total += totalPrice;
+      }
+    }
+
+    return total;
+  }
+
+  _controlSubmitOrder() {
+    const submitBtn = orderSidebarView.getSubmitBtnEl();
+
+    //check if order contains items by checking total price of Order in state
+    const total = this._checkTotalState();
+
+    // enable btn submit if total is positive
+    if (total > 0) {
+      submitBtn.classList.remove('disabled');
+
+      // add save order event handler on click
+      orderSidebarView.addHandlerSubmitOrder(this._controlSaveOrder.bind(this));
+    } else {
+      submitBtn.classList.add('disabled');
+    }
+  }
+
+  _controlSaveOrder() {
+    //  if currentOrderLog has no items, return.
+    const total = this._checkTotalState();
+
+    if (total <= 0) return;
+
+    console.log('currentOrderLog:', model.state.currentOrderLog);
+
+    // make a deep copy of currentOrder
+    const newOrder = JSON.parse(JSON.stringify(model.state.currentOrderLog));
+
+    console.log('newOrder:', newOrder);
+
+    model.state.orders.push(newOrder);
+
+    // clear currentLog state
+    model.state.currentOrderLog = {};
+
+    // clear sideOrder UI
+    orderSidebarView.clearOrders();
+    console.log('orders:', model.state.orders);
+
+    // remove Pay method tick
+    orderSidebarView.removePayMethod();
   }
 
   _controlOrderSpecialMix(totalPcs, specialMixPrice) {
@@ -116,6 +200,9 @@ class controllerHome {
     menuSpecialModalView.addHandlerRemoveOrder(
       this._controlOrderSpecialItemRemove.bind(this, specialEditId, true)
     );
+
+    // 7- disable/enable submit order btn
+    this._controlSubmitOrder();
   }
 
   _controlOrderSpecialEdit(specialEditId) {
@@ -183,18 +270,8 @@ class controllerHome {
 
   // Update Total Order Price
   _controlOrderPrice() {
-    // Update total in State
-    let total = 0;
-
-    for (const [key, { totalPrice }] of Object.entries(
-      model.state.currentOrderLog
-    )) {
-      if (key.startsWith('id')) {
-        total += model.state.currentOrderLog[key][0].mixPrice;
-      } else {
-        total += totalPrice;
-      }
-    }
+    // get total in State
+    const total = this._checkTotalState();
 
     // Update Total in UI
     orderSidebarView.updateOrderPrice(total);
@@ -210,6 +287,9 @@ class controllerHome {
 
     // update Total Order Price
     this._controlOrderPrice();
+
+    // disable/enable submit order btn
+    this._controlSubmitOrder();
   }
 
   // Remove Special Item
@@ -222,6 +302,9 @@ class controllerHome {
 
     // update Total Order Price
     this._controlOrderPrice();
+
+    // disable/enable submit order btn
+    this._controlSubmitOrder();
   }
 }
 

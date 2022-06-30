@@ -22,7 +22,7 @@ class orderSpecialBoxView {
       ? specialContainerItems.forEach((item) => {
           item.remove();
         })
-      : ((specialEditId = 'id' + new Date().getTime()),
+      : ((specialEditId = 'mix' + new Date().getTime()),
         this.render({
           totalPcs,
           specialMixPrice,
