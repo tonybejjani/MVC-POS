@@ -25,17 +25,19 @@ class menuSpecialModalView {
     this.#modal = document.querySelector('.modal');
     this.#overlay = document.querySelector('.overlay');
     this.#btnCloseModal = document.querySelector('.close-modal');
-    this.#btnIncrease = document.querySelectorAll('.order--item__qty-increase');
-    this.#btnDecrease = document.querySelectorAll('.order--item__qty-decrease');
-    this.#btnAdd = document.querySelector('.special-menu--footer .btnAdd');
-    this.#btnSave = document.querySelector('.special-menu--footer .btnSave');
+    this.#btnIncrease = document.querySelectorAll(
+      '.curr-order__item__qty-increase'
+    );
+    this.#btnDecrease = document.querySelectorAll(
+      '.curr-order__item__qty-decrease'
+    );
+    this.#btnAdd = document.querySelector('.modal-menu__footer  .btnAdd');
+    this.#btnSave = document.querySelector('.modal-menu__footer  .btnSave');
     this.#itemQty = document.querySelectorAll(
-      '.special-menu-items .order--item__qty-num'
+      '.modal-menu-items .curr-order__item__qty-num'
     );
-    this.#totalQty = document.querySelector('.special-menu--footer .total-qty');
-    this.#menuSpecialBtn = document.querySelector(
-      '.menu--special--item__button'
-    );
+    this.#totalQty = document.querySelector('.modal-menu__footer  .total-qty');
+    this.#menuSpecialBtn = document.querySelector('.menu-item-special__button');
   }
 
   render(data) {
@@ -85,7 +87,7 @@ class menuSpecialModalView {
 
   _setSpecialEditBtnEl(specialEditId) {
     this.#btnEdit = document.querySelector(
-      `.order--item__edit[data-special-item-id="${specialEditId}"]`
+      `.curr-order__item__edit[data-special-item-id="${specialEditId}"]`
     );
   }
 
@@ -108,7 +110,7 @@ class menuSpecialModalView {
 
   _getSpecialRemoveBtnEl(specialEditId) {
     return document.querySelector(
-      `.special-container--header .order--item__remove[data-special-item-id="${specialEditId}"]`
+      `.curr-order__items-special-container__header .curr-order__item__remove[data-special-item-id="${specialEditId}"]`
     );
   }
 
@@ -165,7 +167,7 @@ class menuSpecialModalView {
     // enable and disable buttons accordingly
     this.#itemQty.forEach((item) => {
       const specialModalItemId = Number(
-        item.closest('.special-menu-item').getAttribute('data-item-id')
+        item.closest('.modal-menu-item').getAttribute('data-item-id')
       );
       const btnDecrease = item.previousElementSibling;
 
@@ -301,14 +303,14 @@ class menuSpecialModalView {
   _generateMarkup() {
     this.#specialBtnCatId = Number(
       document
-        .querySelector('.menu--special--item__button')
+        .querySelector('.menu-item-special__button')
         .closest('.menu-items')
         .getAttribute('data-category-id')
     );
 
     this.#menuSpecialBtnItemId = Number(
       document
-        .querySelector('.menu--special--item__button')
+        .querySelector('.menu-item-special__button')
         .getAttribute('data-item-id')
     );
 
@@ -319,30 +321,30 @@ class menuSpecialModalView {
 
     markup.push(`<div class="modal hidden" data-category-id="1">
                       <button class="close-modal">×</button>
-                      <h1 class="special-menu--header">Select <span>${
+                      <h1 class="modal-menu__header">Select <span>${
                         this.#totalPcs
                       }</span> pcs:</h1>
-                      <div class="special-menu-items">`);
+                      <div class="modal-menu-items">`);
 
     for (const [key, { catgId, name, img, special_deal }] of Object.entries(
       this.#data
     )) {
       if (catgId === this.#specialBtnCatId && !special_deal)
-        markup.push(`<div class="special-menu-item" data-item-id="${key}">
+        markup.push(`<div class="modal-menu-item" data-item-id="${key}">
                           <img src="${img}">
-                          <div class="special-menu-item-name">${name}</div>
-                          <div class="order--item__qty">
-                            <button type="button" class="order--item__qty-decrease disabled" disabled>&#8722;</button>
-                            <span class="order--item__qty-num">0</span>
-                            <button type="button" class="order--item__qty-increase">&#43;</button>
+                          <div class="modal-menu-item__name">${name}</div>
+                          <div class="curr-order__item__qty">
+                            <button type="button" class="curr-order__item__qty-decrease disabled" disabled>&#8722;</button>
+                            <span class="curr-order__item__qty-num">0</span>
+                            <button type="button" class="curr-order__item__qty-increase">&#43;</button>
                           </div>
                         </div>`);
     }
     markup.push(`</div>
-                    <div class="special-menu--footer">
-                      <div class="order--item__qty">
-                        <span class="total-qty order--item__qty-num">0</span>
-                        <p class="order--item__qty-pcs">pcs</p>
+                    <div class="modal-menu__footer ">
+                      <div class="curr-order__item__qty">
+                        <span class="total-qty curr-order__item__qty-num">0</span>
+                        <p class="curr-order__item__qty-pcs">pcs</p>
                       </div>
                         <button class="btnAdd disabled" disabled>Add</button>
                         <button class="btnSave disabled hidden" disabled data-special-item-id="" >Save</button>

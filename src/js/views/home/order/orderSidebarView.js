@@ -13,40 +13,50 @@ class orderSidebarView {
   }
 
   addHandlerPayMethod(handler) {
-    const payBtns = document.querySelectorAll('.order-pay-btn');
+    const payBtns = document.querySelectorAll(
+      '.curr-order__transaction-pay-btn'
+    );
     payBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn, payBtns));
     });
   }
 
   updateOrderPrice(total) {
-    const totalEl = document.querySelector('.order-total--price span');
+    const totalEl = document.querySelector(
+      '.curr-order__transaction-total-price span'
+    );
     totalEl.textContent = Number(total).toFixed(2);
   }
 
   getSubmitBtnEl() {
-    return document.querySelector('.order--list__submit');
+    return document.querySelector('.curr-order__footer-submit-btn');
   }
 
   disablePayMethod() {
-    const payMethodBtn = document.querySelectorAll('.order-pay-btn');
+    const payMethodBtn = document.querySelectorAll(
+      '.curr-order__transaction-pay-btn'
+    );
 
     payMethodBtn.forEach((btn) => {
-      btn.classList.remove('order-pay-btn--active');
+      btn.classList.remove('curr-order__transaction-pay-btn--active');
     });
   }
 
   removePayMethod() {
-    const payMethodBtn = document.querySelectorAll('.order-pay-btn');
+    const payMethodBtn = document.querySelectorAll(
+      '.curr-order__transaction-pay-btn'
+    );
     this.#btnPayIsClicked = false;
 
     payMethodBtn.forEach((btn) => {
-      btn.classList.remove('order-pay-btn--active');
+      btn.classList.remove('curr-order__transaction-pay-btn--active');
     });
   }
 
   triggerPayMethod() {
-    const payMethodBtn = document.querySelector('.order-pay__credit');
+    const payMethodBtn = document.querySelector(
+      '.curr-order__transaction-pay__credit'
+    );
 
     payMethodBtn.click();
     this.#btnPayIsClicked = true;
@@ -62,46 +72,47 @@ class orderSidebarView {
   }
 
   clearOrders() {
-    document.querySelector('.order-container .order__details').innerHTML = '';
+    document.querySelector(
+      '.curr-order__items .curr-order__items-details'
+    ).innerHTML = '';
   }
 
   _generateMarkup() {
     return `
-    <div class="order-sidebar">
-      <div class="heading">
-        <div class="client-info">
-          <div><label>Order #</label><input type="text" placeholder="123" class="order__number"></div>
+    <div class="curr-order">
+      <div class="curr-order__heading">
+        <div class="curr-order__heading-client-info">
+          <div><label>Order #</label><input type="text" placeholder="123" class="curr-order-number"></div>
         </div>
-        <div class="order--heading">
-          <p class="order--heading__item">Item</p>
-          <p class="order--heading__price">Price</p>
-          <p class="order--heading__quantity">Qty</p>
+        <div class="curr-order__heading-tab">
+          <p class="curr-order__heading-tab-item">Item</p>
+          <p class="curr-order__heading-tab-price">Price</p>
+          <p class="curr-order__heading-tab-qty">Qty</p>
         </div>
       </div>
-      <div class="order-container">
-        <div class="order">
-          <div class="order__details"></div>
+      <div class="curr-order__items">
+        <div class="curr-order__items-container">
+          <div class="curr-order__items-details"></div>
         </div>
-        <div class="order-transaction">
-            <div class="order-total">
-            <p class="order-total--title">Sub total</p>
-            <p class="order-total--price">$ <span>0.00</span></p>
+      </div>   
+      <div class="curr-order__transaction">
+            <div class="curr-order__transaction-total">
+            <p class="curr-order__transaction-total-title">Sub total</p>
+            <p class="curr-order__transaction-total-price">$ <span>0.00</span></p>
           </div>
-          <div class="order-note">
+          <div class="curr-order__transaction-note">
             <input type="text" placeholder=" Order Note...">
           </div>
-          <div class="order-pay">
-            <button type="button" class="order-pay-btn order-pay__credit" >Credit Card</button>
-            <button type="button" class="order-pay-btn order-pay__cash " >Cash</button>
+          <div class="curr-order__transaction-pay">
+            <button type="button" class="curr-order__transaction-pay-btn curr-order__transaction-pay__credit" >Credit Card</button>
+            <button type="button" class="curr-order__transaction-pay-btn curr-order__transaction-pay__cash " >Cash</button>
           </div>
         </div>
        
-        <div class="order-footer">
-          <button type="button" class="order--list__save hidden">Save Order</button>
-          <button type="button" class="order--list__submit disabled" >Submit Order</button>
-        </div>
-
-      </div>      
+        <div class="curr-order__footer">
+          <button type="button" class="curr-order__footer-save-btn hidden">Save Order</button>
+          <button type="button" class="curr-order__footer-submit-btn disabled" >Submit Order</button>
+        </div>   
     </div> `;
   }
 }

@@ -8,14 +8,16 @@ class orderSpecialItemView {
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement = document.querySelector(
-      `.special-container[data-special-item-id='${this.#data.specialEditId}']`
+      `.curr-order__items-special-container[data-special-item-id='${
+        this.#data.specialEditId
+      }']`
     );
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
   removeSpecialItem(itemId) {
     const specialOrderItem = document.querySelector(
-      `.special-container[data-special-item-id= "${itemId}"]`
+      `.curr-order__items-special-container[data-special-item-id= "${itemId}"]`
     );
 
     specialOrderItem.remove();
@@ -23,7 +25,7 @@ class orderSpecialItemView {
 
   _generateMarkup() {
     // _generateItemOrderMarkup(itemData, special) {
-    return `<div class="order--item order--item-special" data-item-id="${
+    return `<div class="curr-order__item curr-order__item-special" data-item-id="${
       this.#data.itemId
     }">
                 <div class="item-content__thumb special-content__thumb">
@@ -33,7 +35,7 @@ class orderSpecialItemView {
                     <div class="thumb__title special-thumb__title">
                       <span>${this.#data.name}</span></div>
                     </div>
-                    <div class="order--item__qty">
+                    <div class="curr-order__item__qty">
                       <span class="itemQty">${this.#data.qty}</span>
                     </div>
                 </div>

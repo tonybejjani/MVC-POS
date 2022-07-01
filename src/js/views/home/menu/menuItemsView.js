@@ -21,15 +21,15 @@ class menuCatView {
   }
 
   getMenuItems() {
-    return document.querySelectorAll('.special-menu-item');
+    return document.querySelectorAll('.modal-menu-item');
   }
 
   getMenuItem(item) {
-    return item.querySelector('.order--item__qty-num');
+    return item.querySelector('.curr-order__item__qty-num');
   }
 
   getMenuItemText(item) {
-    return item.querySelector('.order--item__qty-num').textContent;
+    return item.querySelector('.curr-order__item__qty-num').textContent;
   }
 
   _generateMarkup() {
@@ -58,7 +58,7 @@ class menuCatView {
                             <div class="menu-item__price">$ ${price}</div>
                             <button class="${
                               special_deal
-                                ? 'menu--special--item__button'
+                                ? 'menu-item-special__button'
                                 : 'menu-item__button'
                             }" data-item-id="${key}">Select</button>
                           </div>

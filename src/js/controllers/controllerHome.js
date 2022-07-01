@@ -97,10 +97,12 @@ class controllerHome {
 
   _controlPayMethod(btnClick, btns) {
     // remove all active classes
-    btns.forEach((btn) => btn.classList.remove('order-pay-btn--active'));
+    btns.forEach((btn) =>
+      btn.classList.remove('curr-order__transaction-pay-btn--active')
+    );
 
     //toggle class
-    btnClick.classList.add('order-pay-btn--active');
+    btnClick.classList.add('curr-order__transaction-pay-btn--active');
 
     //update state
     let payCredit = btnClick.className.includes('credit');

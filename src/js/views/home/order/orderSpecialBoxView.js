@@ -7,7 +7,7 @@ class orderSpecialBoxView {
   #data;
 
   render(data) {
-    this.#parentElement = document.querySelector('.order__details');
+    this.#parentElement = document.querySelector('.curr-order__items-details');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
@@ -15,7 +15,7 @@ class orderSpecialBoxView {
 
   checkSpecialEditId(totalPcs, specialMixPrice, specialEditId) {
     const specialContainerItems = document.querySelectorAll(
-      `.special-container[data-special-item-id='${specialEditId}'] .order--item`
+      `.curr-order__items-special-container[data-special-item-id='${specialEditId}'] .curr-order__item`
     );
 
     specialEditId
@@ -33,21 +33,21 @@ class orderSpecialBoxView {
   }
 
   _generateMarkup() {
-    return `<div class="special-container" data-special-item-id="${
+    return `<div class="curr-order__items-special-container" data-special-item-id="${
       this.#data.specialEditId
     }">
-              <div class="special-container--header">
+              <div class="curr-order__items-special-container__header">
               
                 <h1>MIX ${this.#data.totalPcs} PCS FOR $ ${
       this.#data.specialMixPrice
     }</h1> 
               
-               <div class="order--item__remove" data-special-item-id="${
+               <div class="curr-order__item__remove" data-special-item-id="${
                  this.#data.specialEditId
                }">
                 <img src="${trash}#trash">
                </div>
-               <div class="order--item__edit" data-special-item-id="${
+               <div class="curr-order__item__edit" data-special-item-id="${
                  this.#data.specialEditId
                }">
                 <img src="${edit}">
