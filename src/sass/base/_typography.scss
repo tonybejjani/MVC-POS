@@ -8,6 +8,11 @@ body {
 
 .heading--secondary {
   font-size: 1.9rem;
+
+
+  @include respond (md-laptop) { 
+      font-size: 1.7rem;
+  }
 }
 
 .heading--tertiary {

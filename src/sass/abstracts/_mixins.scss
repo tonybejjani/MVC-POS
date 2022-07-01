@@ -35,6 +35,11 @@ ORDER: Base + typography > general layout + grid > page layout > components
     {@content}; //1440px
   }
 
+  @if $breakpoint == md-laptop {
+    @media (max-width:85.62em)
+    {@content}; //1370px
+  }
+
   @if $breakpoint == tab-land {
     @media (max-width: 75em) {@content }; //1200px
   }

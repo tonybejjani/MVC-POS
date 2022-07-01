@@ -5,5 +5,9 @@
   background-color: $color-dark--2;
   display: grid;
   grid-template-rows: 100vh;
-  grid-template-columns: 8.7% 91.3%;
+  grid-template-columns: 7.7% 92.3%;
+
+  @include respond (md-laptop) {
+    grid-template-columns: 6.7% 93.3%;
+  }
 }

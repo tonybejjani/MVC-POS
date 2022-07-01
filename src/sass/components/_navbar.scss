@@ -15,6 +15,10 @@
     background-repeat: no-repeat;
     padding: 5.2rem;
     align-self: center;
+
+    @include respond (md-laptop) { 
+      display: none;
+    }
   }
 
   &__links {
@@ -32,7 +36,13 @@
     background-size: 2.8rem;
     background-position: center;
     align-self: center;
-    transition: all 0.2s;
+    transition: background-color 0.2s;
+
+    @include respond (md-laptop) {
+      padding: 2.4rem; 
+      background-size: 2.4rem;
+      border-radius: 8px;
+    }
 
     //.navbar__link
     &-cook {
@@ -62,6 +72,10 @@
       border-radius: 14px;
       position: relative;
 
+      @include respond (md-laptop) { 
+        box-shadow: 0px 0px 36px -8px;
+        border-radius: 8px;
+      }
       &::before {
         content: "";
         background-color: $color-dark--3;
@@ -70,6 +84,11 @@
         transform: translate(-50%, -50%);
         border-radius: 14px;
         z-index: -1;
+
+        @include respond (md-laptop) { 
+          padding: 3.2rem;
+          border-radius: 8px;
+        }
       }
 
       //.navbar__link--active
