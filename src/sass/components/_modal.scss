@@ -1,0 +1,49 @@
+
+.modal.hidden,
+.overlay.hidden {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 60%;
+
+  background-color: $color-dark--1;
+  padding: 3rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba($color-dark--0,0.3);
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-dark--0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+
+}
+
+.close-modal {
+  height: 5rem;
+  width: 5rem;
+  font-size: 5rem;
+  text-align: center;
+  color:   $color-light--1;
+  background: none;
+  align-self: end;
+
+  &:hover {
+    background: none;
+    color:   $color-brand--1;
+  }
+}

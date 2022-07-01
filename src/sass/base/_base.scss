@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+ 
+html {
+  font-size: 62.5%;
+
+}
+
+body {
+  box-sizing: border-box;
+  .container {
+    height: 100vh;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    background-color: $color-dark--2;
+    display: grid;
+    grid-template-rows: 100vh;
+    grid-template-columns: 8.7% 91.3%;
+  }
+}
+  
