@@ -54,7 +54,7 @@ class menuCatView {
                           <div class="menu-item__image"><img src="${img}"></div>
                           <div class="menu-item__details">
                             <div class="menu-item__info"><img src="${infoIcon}"></div>
-                            <h2 class="menu-item__title">${name}</h2>
+                            <h2 class="heading--secondary menu-item__title">${name}</h2>
                             <div class="menu-item__price">$ ${price}</div>
                             <button class="${
                               special_deal

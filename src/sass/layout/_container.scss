@@ -1,0 +1,9 @@
+.container {
+  height: 100vh;
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  background-color: $color-dark--2;
+  display: grid;
+  grid-template-rows: 100vh;
+  grid-template-columns: 8.7% 91.3%;
+}

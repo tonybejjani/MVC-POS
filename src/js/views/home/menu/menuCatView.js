@@ -16,14 +16,13 @@ class menuCatView {
 
     menuCatLinks.forEach((catLink) =>
       catLink.addEventListener('click', function () {
-        if (catLink.closest('li').classList.contains('menu-navbar__active'))
-          return;
+        if (catLink.classList.contains('menu-navbar__active')) return;
 
         menuCatLinks.forEach((link) => {
-          link.closest('li').classList.remove('menu-navbar__active');
+          link.classList.remove('menu-navbar__active');
 
           if (link.dataset.categoryId === catLink.dataset.categoryId) {
-            link.closest('li').classList.add('menu-navbar__active');
+            link.classList.add('menu-navbar__active');
           }
         });
 
@@ -42,8 +41,10 @@ class menuCatView {
     let markup = [];
 
     for (const { id: categoryId, name, active } of Object.values(this.#data)) {
-      markup.push(`<li class="${active ? 'menu-navbar__active' : ''}">
-          <a class="menu-navbar__link" data-category-id="${categoryId}">${name}</a>
+      markup.push(`<li>
+          <a class="menu-navbar__link ${
+            active ? 'menu-navbar__active' : ''
+          }" data-category-id="${categoryId}">${name}</a>
         </li>`);
     }
 
