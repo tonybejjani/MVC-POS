@@ -37,7 +37,7 @@ class menuSpecialModalView {
       '.modal-menu-items .curr-order__item__qty-num'
     );
     this.#totalQty = document.querySelector('.modal-menu__footer  .total-qty');
-    this.#menuSpecialBtn = document.querySelector('.menu-item-special__button');
+    this.#menuSpecialBtn = document.querySelector('.menu-item-special__link');
   }
 
   render(data) {
@@ -303,14 +303,14 @@ class menuSpecialModalView {
   _generateMarkup() {
     this.#specialBtnCatId = Number(
       document
-        .querySelector('.menu-item-special__button')
+        .querySelector('.menu-item-special__link')
         .closest('.menu-items')
         .getAttribute('data-category-id')
     );
 
     this.#menuSpecialBtnItemId = Number(
       document
-        .querySelector('.menu-item-special__button')
+        .querySelector('.menu-item-special__link')
         .getAttribute('data-item-id')
     );
 

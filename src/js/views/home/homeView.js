@@ -14,6 +14,20 @@ class homeView {
     this.#parentElement.innerHTML = '';
   }
 
+  _getPageParentEl() {
+    return document.querySelector('.home');
+  }
+
+  hidePage() {
+    const pageParentEl = this._getPageParentEl();
+    pageParentEl.classList.add('hidden');
+  }
+
+  showPage() {
+    const pageParentEl = this._getPageParentEl();
+    pageParentEl.classList.remove('hidden');
+  }
+
   _generateMarkup() {
     return `
     <div class="home"></div>`;

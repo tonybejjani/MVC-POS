@@ -5,17 +5,27 @@ class navbarView {
 
   render() {
     this.#parentElement = document.querySelector('.main');
-    this._hidePage();
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
-  _hidePage() {
-    this.#parentElement.innerHTML = '';
+  _getPageParentEl() {
+    return document.querySelector('.orders');
+  }
+
+  hidePage() {
+    const pageParentEl = this._getPageParentEl();
+    console.log(pageParentEl);
+    pageParentEl.classList.add('hidden');
+  }
+
+  showPage() {
+    const pageParentEl = this._getPageParentEl();
+    pageParentEl.classList.remove('hidden');
   }
 
   // addHandlerRender(handler) {
-  //   const menuItemBtns = document.querySelectorAll('.menu-item__button');
+  //   const menuItemBtns = document.querySelectorAll('.menu-item__link');
 
   //   menuItemBtns.forEach((btn) => {
   //     btn.addEventListener('click', handler.bind(this, btn));

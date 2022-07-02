@@ -36,7 +36,7 @@ class navbarView {
       </div>
       <div class="navbar__links">
         <a class="navbar__link navbar__link-home navbar__link--active" href="#home"></a>
-        <a class="navbar__link navbar__link-cook " href="#orders"></a>
+        <a class="navbar__link navbar__link-cook " href="#orders"><span class="navbar__link-cook-counter"></span></a>
         <a class="navbar__link navbar__link-dash " href="#dashboard"></a>
         <a class="navbar__link navbar__link-settings " href="#settings"></a>
         <a class="navbar__link navbar__link-logout " href="#logout"></a>

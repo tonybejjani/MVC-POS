@@ -12,6 +12,8 @@ import controllerOrders from './controllerOrders.js';
 // Polyfilling
 import 'core-js/stable';
 import 'regenerator-runtime'; // polyfilling async-await
+import homeView from '../views/home/homeView.js';
+import ordersView from '../views/orders/ordersView.js';
 
 class App {
   constructor() {
@@ -19,21 +21,27 @@ class App {
     navbarView.render();
     mainView.render();
     controllerHome.renderHome();
+    controllerOrders.renderOrders();
+    homeView.showPage();
+    ordersView.hidePage();
 
     // publish listener handler on navbar links
-    navbarView.addHandlerRender(this._showPage.bind(this));
+    navbarView.addHandlerRender(this._renderPage.bind(this));
   }
 
-  _showPage() {
+  _renderPage() {
     const hash = window.location.hash.slice(1);
     switch (hash) {
       case 'home':
         navbarView.activateNavIcon(hash);
-        controllerHome.renderHome();
+        homeView.showPage();
+        ordersView.hidePage();
         break;
       case 'orders':
         navbarView.activateNavIcon(hash);
-        controllerOrders.renderOrders();
+        homeView.hidePage();
+        ordersView.showPage();
+
         break;
       case 'dashboard':
         navbarView.activateNavIcon(hash);

@@ -18,4 +18,8 @@ body {
 .heading--tertiary {
  font-size: 2.4rem;
  font-weight: 400;
+
+ @include respond (sm-desktop) { 
+    font-size: 2.2rem;
+}
 }

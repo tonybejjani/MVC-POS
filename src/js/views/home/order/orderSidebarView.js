@@ -84,11 +84,11 @@ class orderSidebarView {
         <div class="curr-order__heading-client-info">
           <div><label>Order #</label><input type="text" placeholder="123" class="curr-order-number"></div>
         </div>
-        <div class="curr-order__heading-tab">
+        <!--<div class="curr-order__heading-tab">
           <p class="curr-order__heading-tab-item">Item</p>
           <p class="curr-order__heading-tab-price">Price</p>
           <p class="curr-order__heading-tab-qty">Qty</p>
-        </div>
+        </div>-->
       </div>
       <div class="curr-order__items">
         <div class="curr-order__items-container">

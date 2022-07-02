@@ -26,7 +26,7 @@
   
   
     @include respond (sm-desktop) { 
-  
+      
     }
   
     &__title {
@@ -38,12 +38,22 @@
       color: $color-light--1;
       font-size: 2.4rem;
       font-weight: 400;
+
+      @include respond (sm-desktop) { 
+        font-size: 2.2rem;
+        font-weight: 300;
+      }
     }
   
     &__date {
       color: $color-light--2;
       font-size: 2rem;
       font-weight: 300;
+
+      @include respond (sm-desktop) { 
+        font-size: 1.8rem;
+        font-weight: 300;
+      }
    
     }
     
@@ -68,7 +78,7 @@
     &__link {
       text-decoration: none;
       font-size: 2rem;
-      font-weight: 500;
+      font-weight: 400;
       cursor: pointer;
       padding-bottom: 2rem;
 
@@ -91,17 +101,20 @@
   justify-content: flex-start;
 
   @include respond (sm-desktop) { 
-    row-gap: 5rem;
+    row-gap: 10rem;
     column-gap: 5rem;
-    padding-top: 2rem;
+   
   }
 
   @include respond (lg-laptop) { 
-    row-gap: 5rem;
+    row-gap: 10rem;
     column-gap: 5rem;
   }
 
-
+  @include respond (md-laptop) { 
+    row-gap: 8rem;
+    column-gap: 3rem;
+  }
 }
 
 .menu-item {
@@ -111,22 +124,23 @@
     height: 24rem;
     width: 24rem;
     text-align: center;
-
+    cursor: pointer;
 
     @include respond (sm-desktop) { 
       width: 22rem;
     }
 
     @include respond (md-laptop) { 
-      width: 20rem;
+      width: 21rem;
+      border-radius: 1.5rem;
     }
 
     @include respond (tab-land) { 
-      width: 17rem;
+     
     }
 
     @include respond (tab-land-sm) { 
-      width: 15rem;
+      
     }
 
     
@@ -135,40 +149,30 @@
     }
 
     &__image img {
-      width: 13.2rem;
-      height: 13.2rem;
+      width: 15.2rem;
+      height: 15.2rem;
       position: absolute;
       top: -17%;
-      right: 22%;
+      right: 19%;
 
       @include respond (sm-desktop) { 
-        width: 9.2rem;
-        height: 9.2rem;
-        position: initial;
-        display: inline-block;
-        margin-top: 1rem;
+        width: 14.2rem;
+        height: 14.2rem;
+        right: 17%;
       }
 
-
       @include respond (md-laptop) { 
-        width: 7.2rem;
-        height: 7.2rem;
+       right: 16%;
       }
     }
     &__details {
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: center;
       gap: 1rem;
+      padding-top: 10rem;
 
-      @include respond (sm-desktop) { 
-       height:fit-content;
-      }
-
-      @include respond (md-laptop) { 
-        height: 63%;
-       }
     }
 
     &__title {
@@ -183,50 +187,41 @@
 
     &__info {
       position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      @include respond (md-laptop) { 
-        top: 1.2rem;
-        right: 1.2rem;
-      }
+      top: 10.5rem;
+      right: 2.5rem;
     }
 
     &__info img {
       width: 2.5rem;
       cursor: pointer;
-
-            
-      @include respond (md-laptop) { 
-        height: 63%;
-        width: 2rem;
-       }
     }
     
-    &__button,
-    &-special__button {
-      height: 5rem;
-      background: none;
-      border: 1px solid $color-light--2;
-      color: $color-brand--1;
-      font-size: 1.8rem;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-    }
-    
+    // &__button,
+    // &-special__button {
+    //   height: 5rem;
+    //   color: $color-brand--1;
+    //   letter-spacing: .2px;
+    //   background: none;
+    //   border: 1px $color-light--3;
+    //   border-style: solid;
+    //   font-size: 1.8rem;
+    //   font-weight: 600;
+    // }
   
-    &__button:hover,
-    &-special__button:hover {
-      background: $color-shade-2;
-      border: 1px solid $color-shade-2;
-      color: $color-dark--1;
-      cursor: pointer;
-    }
+    // &__button:hover,
+    // &-special__button:hover {
+    //   background: $color-brand--1;
+    //   color: $color-dark--1;
+    //   border-color: $color-brand--1;
+    //   cursor: pointer;
+    // }
   
-    &__button:active,
-    &-special__button:active {
-      border: 1px solid $color-brand--1;
-      background: $color-brand--1;
-    }
+    // &__button:active,
+    // &-special__button:active {
+    //   border: 1px $color-dark--1;
+    //   border-style: solid;
+  
+    // }
 }
 
 /////////////////////
@@ -323,43 +318,61 @@
 // 1- CURRENT ORDER HEADING */
 .curr-order {
   background-color: $color-dark--1;
-  padding: 3rem 3rem 3rem 3rem;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   border-left: 1px solid $color-dark--0;
   gap: 2rem;
+
+  @include respond (md-laptop) {
+    padding: 2rem;
+  }
 
   &-number {
     margin-left: 2rem;
     padding-left: 2rem;
     width: 9rem;
     font-size: 2.4rem;
+    
   }
 
   &__heading {
-    height: 13%;
-
-    &-tab {
-    width: 100%;
+    height: 8%;
     border-bottom: 1px solid $color-dark--3;
-    font-size: 1.8rem;
-    font-weight: 600;
-    display: flex;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
+    // &-tab {
+    // width: 100%;
+    // border-bottom: 1px solid $color-dark--3;
+    // font-size: 1.8rem;
+    // font-weight: 600;
+    // display: flex;
+    // padding-bottom: 1rem;
+    // padding-left: 7rem;
+    // justify-content: end;
+    // padding-right: 8.5rem;
     
-    
-    }
-    &-tab-item {
-      display: block;
-      flex-basis: 65%;
-      text-align: start;
-    }
+    // }
+    // &-tab-item {
+    //   display: block;
+    //   text-align: start;
+    //   flex-basis: 70%;
 
-    &-tab-qty,
-    &-tab-price {
-      display: block;
-      flex-basis: 15%;
-    }
+    // }
+
+    // &-tab-qty,
+    // &-tab-price {
+    //   display: block;
+    // }
+
+    // &-tab-qty {
+    //  padding-left: 4rem;
+      
+    // }
+
+    // &-tab-price {
+    //  padding-left: 4.5rem;
+
+    // }
 
     &-client-info {
       font-size: 2.4rem;
@@ -455,6 +468,13 @@
       padding: 1.1rem 1.8rem;
       border-radius: 0.8rem;
       width: 5rem;
+
+      @include respond (md-laptop) {
+        width: 4.4rem;
+        border-radius: 0.6rem;
+        padding: 1rem 1.8rem;
+        font-size: 1.6rem;
+      }
     }
     
     &__total {
@@ -463,6 +483,10 @@
       font-size: 1.8rem;
       text-align: end;
       width: 17%;
+
+      @include respond (md-laptop) {
+        font-size: 1.6rem;
+      }
     }
     
     &__note {
@@ -489,6 +513,11 @@
       padding: 1.1rem;
       width: 4.8rem;
       vertical-align: middle;
+
+      @include respond (md-laptop) {
+        width: 4.4rem;
+        border-radius: 0.6rem;
+      }
     }
 
     .item-content__thumb {
@@ -521,6 +550,10 @@
     .thumb__title,
     .thumb__price {
       font-size: 1.8rem;
+
+      @include respond (md-laptop) {
+        font-size: 1.6rem;
+      }
     }
     
     .thumb__image img {

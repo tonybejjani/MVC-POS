@@ -125,6 +125,7 @@ class controllerHome {
       // add save order event handler on click
       orderSidebarView.addHandlerSubmitOrder(this._controlSaveOrder.bind(this));
     } else {
+      // disable submit btn if order had no items
       submitBtn.classList.add('disabled');
     }
   }
@@ -133,6 +134,7 @@ class controllerHome {
     //  if currentOrderLog has no items, return.
     const total = this._checkTotalState();
 
+    // guard
     if (total <= 0) return;
 
     // make a deep copy of currentOrder
@@ -156,6 +158,8 @@ class controllerHome {
 
     // disable Submit Order Btn
     this._controlSubmitOrder();
+
+    // increment order counter
   }
 
   _controlOrderSpecialMix(totalPcs, specialMixPrice) {

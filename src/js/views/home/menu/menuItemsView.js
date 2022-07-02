@@ -13,7 +13,7 @@ class menuCatView {
   }
 
   addHandlerRender(handler) {
-    const menuItemBtns = document.querySelectorAll('.menu-item__button');
+    const menuItemBtns = document.querySelectorAll('.menu-item__link');
 
     menuItemBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn));
@@ -55,17 +55,15 @@ class menuCatView {
         { catgId: productCatgId, name, price, qty, img, special_deal },
       ] of Object.entries(this.#data.menuItems)) {
         if (productCatgId === categoryId) {
-          markup.push(`<div class="menu-item" data-item-id="${key}">
+          markup.push(`<div class="menu-item ${
+            special_deal ? 'menu-item-special__link' : 'menu-item__link'
+          }" data-item-id="${key}">
                           <div class="menu-item__image"><img src="${img}"></div>
                           <div class="menu-item__details">
                             <div class="menu-item__info"><img src="${infoIcon}"></div>
                             <h2 class="heading--secondary menu-item__title">${name}</h2>
                             <div class="menu-item__price">$ ${price}</div>
-                            <button class="${
-                              special_deal
-                                ? 'menu-item-special__button'
-                                : 'menu-item__button'
-                            }" data-item-id="${key}">Select</button>
+                           <!-- <button  data-item-id="${key}">Select</button> -->
                           </div>
                       </div>`);
         }

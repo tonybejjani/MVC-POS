@@ -55,6 +55,9 @@ body {
 .heading--tertiary {
   font-size: 2.4rem;
   font-weight: 400; }
+  @media (max-width: 97.5em) {
+    .heading--tertiary {
+      font-size: 2.2rem; } }
 
 button {
   background: #FFFB2B;
@@ -132,13 +135,27 @@ ul {
     background-size: 2.8rem;
     background-position: center;
     align-self: center; }
+    @media (max-width: 90em) {
+      .navbar__link {
+        padding: 2.8rem;
+        background-size: 2.6rem;
+        border-radius: 9px; } }
     @media (max-width: 85.62em) {
       .navbar__link {
         padding: 2.4rem;
         background-size: 2.4rem;
         border-radius: 8px; } }
     .navbar__link-cook {
-      background-image: url("../img/icon/navbar/yellow/cook.svg"); }
+      background-image: url("../img/icon/navbar/yellow/cook.svg");
+      position: relative; }
+      .navbar__link-cook-counter {
+        position: absolute;
+        display: block;
+        padding: 1.7rem;
+        background-color: #1f1d2b;
+        border-radius: 25px;
+        top: -20%;
+        right: -25%; }
     .navbar__link-dash {
       background-image: url("../img/icon/navbar/yellow/dashboard.svg"); }
     .navbar__link-settings {
@@ -152,6 +169,10 @@ ul {
       box-shadow: 0px 0px 23px -8px #FFFB2B;
       border-radius: 14px;
       position: relative; }
+      @media (max-width: 90em) {
+        .navbar__link--active {
+          box-shadow: 0px 0px 36px -8px;
+          border-radius: 8px; } }
       @media (max-width: 85.62em) {
         .navbar__link--active {
           box-shadow: 0px 0px 36px -8px;
@@ -164,6 +185,10 @@ ul {
         transform: translate(-50%, -50%);
         border-radius: 14px;
         z-index: -1; }
+        @media (max-width: 90em) {
+          .navbar__link--active::before {
+            padding: 4rem;
+            border-radius: 8px; } }
         @media (max-width: 85.62em) {
           .navbar__link--active::before {
             padding: 3.2rem;
@@ -227,9 +252,6 @@ ul {
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns: 7.7% 92.3%; }
-  @media (max-width: 85.62em) {
-    .container {
-      grid-template-columns: 6.7% 93.3%; } }
 
 .home {
   display: grid;
@@ -253,10 +275,18 @@ ul {
       color: #fff;
       font-size: 2.4rem;
       font-weight: 400; }
+      @media (max-width: 97.5em) {
+        .menu .info__event {
+          font-size: 2.2rem;
+          font-weight: 300; } }
     .menu .info__date {
       color: #abbbc2;
       font-size: 2rem;
       font-weight: 300; }
+      @media (max-width: 97.5em) {
+        .menu .info__date {
+          font-size: 1.8rem;
+          font-weight: 300; } }
   @media (max-width: 85.62em) {
     .menu {
       padding: 3rem; } }
@@ -274,7 +304,7 @@ ul {
     .menu-navbar__link {
       text-decoration: none;
       font-size: 2rem;
-      font-weight: 500;
+      font-weight: 400;
       cursor: pointer;
       padding-bottom: 2rem; }
       @media (max-width: 97.5em) {
@@ -292,13 +322,16 @@ ul {
   justify-content: flex-start; }
   @media (max-width: 97.5em) {
     .menu-items {
-      row-gap: 5rem;
-      column-gap: 5rem;
-      padding-top: 2rem; } }
+      row-gap: 10rem;
+      column-gap: 5rem; } }
   @media (max-width: 90em) {
     .menu-items {
-      row-gap: 5rem;
+      row-gap: 10rem;
       column-gap: 5rem; } }
+  @media (max-width: 85.62em) {
+    .menu-items {
+      row-gap: 8rem;
+      column-gap: 3rem; } }
 
 .menu-item {
   background-color: #1f1d2b;
@@ -306,50 +339,38 @@ ul {
   border-radius: 1rem;
   height: 24rem;
   width: 24rem;
-  text-align: center; }
+  text-align: center;
+  cursor: pointer; }
   @media (max-width: 97.5em) {
     .menu-item {
       width: 22rem; } }
   @media (max-width: 85.62em) {
     .menu-item {
-      width: 20rem; } }
-  @media (max-width: 75em) {
-    .menu-item {
-      width: 17rem; } }
-  @media (max-width: 65.62em) {
-    .menu-item {
-      width: 15rem; } }
+      width: 21rem;
+      border-radius: 1.5rem; } }
   .menu-item__price {
     font-size: 1.8rem; }
   .menu-item__image img {
-    width: 13.2rem;
-    height: 13.2rem;
+    width: 15.2rem;
+    height: 15.2rem;
     position: absolute;
     top: -17%;
-    right: 22%; }
+    right: 19%; }
     @media (max-width: 97.5em) {
       .menu-item__image img {
-        width: 9.2rem;
-        height: 9.2rem;
-        position: initial;
-        display: inline-block;
-        margin-top: 1rem; } }
+        width: 14.2rem;
+        height: 14.2rem;
+        right: 17%; } }
     @media (max-width: 85.62em) {
       .menu-item__image img {
-        width: 7.2rem;
-        height: 7.2rem; } }
+        right: 16%; } }
   .menu-item__details {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: 1rem; }
-    @media (max-width: 97.5em) {
-      .menu-item__details {
-        height: fit-content; } }
-    @media (max-width: 85.62em) {
-      .menu-item__details {
-        height: 63%; } }
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 10rem; }
   .menu-item__title {
     font-weight: 200;
     letter-spacing: 0.2px;
@@ -359,35 +380,11 @@ ul {
     margin: 0 auto; }
   .menu-item__info {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem; }
-    @media (max-width: 85.62em) {
-      .menu-item__info {
-        top: 1.2rem;
-        right: 1.2rem; } }
+    top: 10.5rem;
+    right: 2.5rem; }
   .menu-item__info img {
     width: 2.5rem;
     cursor: pointer; }
-    @media (max-width: 85.62em) {
-      .menu-item__info img {
-        height: 63%;
-        width: 2rem; } }
-  .menu-item__button, .menu-item-special__button {
-    height: 5rem;
-    background: none;
-    border: 1px solid #abbbc2;
-    color: #FFFB2B;
-    font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: 0.2px; }
-  .menu-item__button:hover, .menu-item-special__button:hover {
-    background: #fffd80;
-    border: 1px solid #fffd80;
-    color: #1f1d2b;
-    cursor: pointer; }
-  .menu-item__button:active, .menu-item-special__button:active {
-    border: 1px solid #FFFB2B;
-    background: #FFFB2B; }
 
 .modal-menu__header {
   border-bottom: 1px solid #393c49;
@@ -450,32 +447,23 @@ ul {
 
 .curr-order {
   background-color: #1f1d2b;
-  padding: 3rem 3rem 3rem 3rem;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   border-left: 1px solid #000;
   gap: 2rem; }
+  @media (max-width: 85.62em) {
+    .curr-order {
+      padding: 2rem; } }
   .curr-order-number {
     margin-left: 2rem;
     padding-left: 2rem;
     width: 9rem;
     font-size: 2.4rem; }
   .curr-order__heading {
-    height: 13%; }
-    .curr-order__heading-tab {
-      width: 100%;
-      border-bottom: 1px solid #393c49;
-      font-size: 1.8rem;
-      font-weight: 600;
-      display: flex;
-      padding-bottom: 1rem; }
-    .curr-order__heading-tab-item {
-      display: block;
-      flex-basis: 65%;
-      text-align: start; }
-    .curr-order__heading-tab-qty, .curr-order__heading-tab-price {
-      display: block;
-      flex-basis: 15%; }
+    height: 8%;
+    border-bottom: 1px solid #393c49;
+    padding-bottom: 2rem; }
     .curr-order__heading-client-info {
       font-size: 2.4rem;
       font-weight: 600;
@@ -541,12 +529,21 @@ ul {
     padding: 1.1rem 1.8rem;
     border-radius: 0.8rem;
     width: 5rem; }
+    @media (max-width: 85.62em) {
+      .curr-order__item__qty span {
+        width: 4.4rem;
+        border-radius: 0.6rem;
+        padding: 1rem 1.8rem;
+        font-size: 1.6rem; } }
   .curr-order__item__total {
     align-self: center;
     justify-self: end;
     font-size: 1.8rem;
     text-align: end;
     width: 17%; }
+    @media (max-width: 85.62em) {
+      .curr-order__item__total {
+        font-size: 1.6rem; } }
   .curr-order__item__note {
     padding-bottom: 2rem; }
   .curr-order__item__note input {
@@ -564,6 +561,11 @@ ul {
     padding: 1.1rem;
     width: 4.8rem;
     vertical-align: middle; }
+    @media (max-width: 85.62em) {
+      .curr-order__item__remove img,
+      .curr-order__item__edit img {
+        width: 4.4rem;
+        border-radius: 0.6rem; } }
   .curr-order__item .item-content__thumb {
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -583,6 +585,10 @@ ul {
   .curr-order__item .thumb__title,
   .curr-order__item .thumb__price {
     font-size: 1.8rem; }
+    @media (max-width: 85.62em) {
+      .curr-order__item .thumb__title,
+      .curr-order__item .thumb__price {
+        font-size: 1.6rem; } }
   .curr-order__item .thumb__image img {
     width: 6rem; }
 
@@ -680,5 +686,7 @@ ul {
 
 .menu-items.hidden,
 .btnAdd.hidden,
-.btnSave.hidden {
+.btnSave.hidden,
+.home.hidden,
+.orders.hidden {
   display: none; }

@@ -6,7 +6,7 @@ import { getJSON } from './helpers.js';
 // : To be developed: State should get Data from APi
 export const state = {
   orders: [],
-
+  ordersCounter: 0,
   currentOrderLog: {},
   info: {
     logo: 'src/img/general/LOGO.png',
