@@ -44,6 +44,10 @@ ORDER: Base + typography > general layout + grid > page layout > components
     @media (max-width: 75em) {@content }; //1200px
   }
 
+  @if $breakpoint == tab-land-sm {
+    @media (max-width: 65.62em) {@content }; //1200px
+  }
+
   @if $breakpoint == tab-port {
     @media (max-width: 56.25em) {@content }; //900px
   }

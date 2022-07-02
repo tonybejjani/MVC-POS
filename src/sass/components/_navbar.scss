@@ -9,16 +9,35 @@
   padding: 4rem 0;
   z-index: 0;
 
-  &__logo {
-    background-image: url('../img/general/logo.png');
-    background-size:10.4rem;
-    background-repeat: no-repeat;
-    padding: 5.2rem;
+  &__logo  {
+    // background-image: url('../img/general/logo.png');
+    // background-size:10.4rem;
+    // background-repeat: no-repeat;
+    // padding: 5.2rem;
+    // align-self: center;
+    
     align-self: center;
 
-    @include respond (md-laptop) { 
+    @include respond (tab-land) {
       display: none;
     }
+    
+    img {
+      width: 10rem;
+      
+      @include respond (lg-laptop) { 
+        width: 9rem;
+        // background-size: 5.2rem;
+      }
+
+      @include respond (md-laptop) { 
+        width: 8rem;
+        // background-size: 5.2rem;
+      }
+
+
+    }
+
   }
 
   &__links {
@@ -36,7 +55,7 @@
     background-size: 2.8rem;
     background-position: center;
     align-self: center;
-    transition: background-color 0.2s;
+    //transition: background-color 0.2s;
 
     @include respond (md-laptop) {
       padding: 2.4rem; 

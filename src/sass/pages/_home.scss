@@ -6,45 +6,63 @@
 
 /////////////////////
 // GENERAL INFO 
-.info {
-  font-size: 2.2rem;
-  font-weight: 600;
-  height: 13%;
 
-  @include respond (sm-desktop) { 
-    height: 15%;
-  }
-
-  &__title {
-    align-self: end;
-  }
-
-  &__date {
-    color: $color-light--2;
-    font-size: 1.8rem;
-    font-weight: 400;
-  }
-}
 
 /////////////////////
 /// MENU 
 
 .menu {
-  padding: 5rem 5rem;
+  padding: 5rem;
   background-color: $color-dark--2;
   overflow: hidden;
-  height: 100%;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
 
-  &-navbar {
-    width: 100%;
-    border-bottom: 1px solid #393c49;
-    margin-bottom: 2rem;
+  .info {
     display: flex;
-    gap: 4rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+  
+    @include respond (sm-desktop) { 
+  
+    }
+  
+    &__title {
+      align-self: end;
+  
+    }
+  
+    &__event {
+      color: $color-light--1;
+      font-size: 2.4rem;
+      font-weight: 400;
+    }
+  
+    &__date {
+      color: $color-light--2;
+      font-size: 2rem;
+      font-weight: 300;
+   
+    }
+    
+  }
+  @include respond (md-laptop) {
+    padding: 3rem;
+  }
+  &-navbar {
+    display: flex;
+    width: 100%;
+    gap: 6rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
     padding-bottom: 2rem;
-    height: 7%;
+    border-bottom: 1px solid #393c49;
+
     &__active {
-      border-bottom: 0.3rem solid $color-brand--1;
+      border-bottom: 0.5rem solid $color-brand--1;
+      border-radius: 2px;
     }
 
     &__link {
@@ -68,18 +86,18 @@
   padding-top: 8rem;
   display: flex;
   flex-wrap: wrap;
-  height: 80%;
+  flex-grow: 1;
   gap: 8rem;
   justify-content: flex-start;
 
   @include respond (sm-desktop) { 
-    row-gap: 2rem;
-    column-gap: 7rem;
+    row-gap: 5rem;
+    column-gap: 5rem;
     padding-top: 2rem;
   }
 
   @include respond (lg-laptop) { 
-    row-gap: 1rem;
+    row-gap: 5rem;
     column-gap: 5rem;
   }
 
@@ -100,6 +118,14 @@
     }
 
     @include respond (md-laptop) { 
+      width: 20rem;
+    }
+
+    @include respond (tab-land) { 
+      width: 17rem;
+    }
+
+    @include respond (tab-land-sm) { 
       width: 15rem;
     }
 

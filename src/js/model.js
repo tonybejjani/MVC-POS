@@ -10,8 +10,9 @@ export const state = {
   currentOrderLog: {},
   info: {
     logo: 'src/img/general/LOGO.png',
-    title: 'YUMCHA EAT ST.',
-    date: 'Tuesday 9th November 2023',
+    title: 'Yumcha Eat St.',
+    date: 'Tuesday, 9 Nov 2022',
+    event: 'Aussie Night Markets - Castle Hill ',
   },
 
   menuCategories: {
@@ -81,6 +82,31 @@ export const state = {
       img: 'src/img/menu/chicken.png',
     },
     5: {
+      catgId: 1,
+      catgName: 'Yumcha',
+      name: 'Pork & Prawn Siumai',
+      price: 2.5,
+      qty: 1,
+      img: 'src/img/menu/siumai.png',
+    },
+    6: {
+      catgId: 1,
+      catgName: 'Yumcha',
+      name: 'BBQ Pork Buns',
+      price: 3,
+      qty: 1,
+      img: 'src/img/menu/buns.png',
+      special_deal_limit: 2,
+    },
+    7: {
+      catgId: 1,
+      catgName: 'Yumcha',
+      name: 'Chicken Dim Sims',
+      price: 2,
+      qty: 1,
+      img: 'src/img/menu/chicken.png',
+    },
+    8: {
       catgId: 1,
       catgName: 'Yumcha',
       name: 'Pork & Prawn Siumai',

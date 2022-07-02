@@ -35,14 +35,19 @@ class menuCatView {
   _generateMarkup() {
     let markup = [];
 
+    markup.push(
+      `<h3 class="heading--tertiary menu-items__title">Choose Dishes</h3>`
+    );
     // for each category load corresponsding items markup
     for (const { id: categoryId, active } of Object.values(
       this.#data.menuCategories
     )) {
       markup.push(
-        `<div class="menu-items ${
+        ` 
+        <div class="menu-items ${
           active ? '' : 'hidden'
-        }" data-category-id="${categoryId}">`
+        }" data-category-id="${categoryId}">
+       `
       );
 
       for (const [
