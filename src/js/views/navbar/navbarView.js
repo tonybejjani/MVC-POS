@@ -29,6 +29,11 @@ class navbarView {
     });
   }
 
+  setCounterVal(count) {
+    const counterEl = document.querySelector('.navbar__link-cook-counter');
+    counterEl.classList.remove('hidden');
+    counterEl.textContent = String(count);
+  }
   _generateMarkup() {
     return `
     <div class="navbar">
@@ -36,7 +41,7 @@ class navbarView {
       </div>
       <div class="navbar__links">
         <a class="navbar__link navbar__link-home navbar__link--active" href="#home"></a>
-        <a class="navbar__link navbar__link-cook " href="#orders"><span class="navbar__link-cook-counter"></span></a>
+        <a class="navbar__link navbar__link-cook " href="#orders"><span class="navbar__link-cook-counter hidden"></span></a>
         <a class="navbar__link navbar__link-dash " href="#dashboard"></a>
         <a class="navbar__link navbar__link-settings " href="#settings"></a>
         <a class="navbar__link navbar__link-logout " href="#logout"></a>

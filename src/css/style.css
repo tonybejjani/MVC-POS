@@ -150,12 +150,15 @@ ul {
       position: relative; }
       .navbar__link-cook-counter {
         position: absolute;
+        background-color: #000;
         display: block;
-        padding: 1.7rem;
-        background-color: #1f1d2b;
         border-radius: 25px;
         top: -20%;
-        right: -25%; }
+        right: -25%;
+        padding: 0.6rem 1.5rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: #fff; }
     .navbar__link-dash {
       background-image: url("../img/icon/navbar/yellow/dashboard.svg"); }
     .navbar__link-settings {
@@ -684,9 +687,5 @@ ul {
 .curr-order__footer-save-btn.hidden {
   display: none; }
 
-.menu-items.hidden,
-.btnAdd.hidden,
-.btnSave.hidden,
-.home.hidden,
-.orders.hidden {
+.hidden {
   display: none; }

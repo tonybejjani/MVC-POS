@@ -21,10 +21,6 @@
 
 
 // MIXIN
-.menu-items.hidden,
-.btnAdd.hidden,
-.btnSave.hidden,
-.home.hidden,
-.orders.hidden {
+.hidden {
   display: none;
 }

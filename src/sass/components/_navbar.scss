@@ -74,14 +74,19 @@
     &-cook {
       background-image: url('../img/icon/navbar/yellow/cook.svg');
       position: relative;
+
       &-counter {
         position: absolute;
+        background-color: $color-dark--0;
         display: block;
-        padding: 1.7rem;
-        background-color: $color-dark--1;
         border-radius: 25px;  
         top: -20%;
         right: -25%;
+        padding: 0.6rem 1.5rem;
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: #fff;
+
       }
     }
 

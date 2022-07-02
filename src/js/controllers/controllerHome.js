@@ -3,18 +3,20 @@
 // Data
 import * as model from '../model.js';
 
+// Views Home Page
 import homeView from '../views/home/homeView.js';
 import menuTempView from '../views/home/menu/menuTempView.js';
 import menuInfoView from '../views/home/menu/menuInfoView.js';
 import menuCatView from '../views/home/menu/menuCatView.js';
 import menuItemsView from '../views/home/menu/menuItemsView.js';
 import menuSpecialModalView from '../views/home/menu/menuSpecialModalView.js';
-
-// Views Order
 import orderSidebarView from '../views/home/order/orderSidebarView.js';
 import orderItemView from '../views/home/order/orderItemView.js';
 import orderSpecialBoxView from '../views/home/order/orderSpecialBoxView.js';
 import orderSpecialItemView from '../views/home/order/orderSpecialItemView.js';
+
+// View Navbar Component
+import navbarView from '../views/navbar/navbarView.js';
 
 class controllerHome {
   // render views associated to "Home Page" hash
@@ -160,6 +162,7 @@ class controllerHome {
     this._controlSubmitOrder();
 
     // increment order counter
+    navbarView.setCounterVal(model.state.orders.length);
   }
 
   _controlOrderSpecialMix(totalPcs, specialMixPrice) {
