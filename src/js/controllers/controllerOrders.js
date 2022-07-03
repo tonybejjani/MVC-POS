@@ -10,7 +10,6 @@ class controllerOrders {
 
   renderOrders() {
     ordersView.render();
-
     //clear current order after changing page
     model.state.currentOrderLog = {};
   }

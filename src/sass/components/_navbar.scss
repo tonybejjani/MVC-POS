@@ -76,16 +76,21 @@
       position: relative;
 
       &-counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
-        background-color: $color-dark--0;
-        display: block;
-        border-radius: 25px;  
         top: -20%;
         right: -25%;
-        padding: 0.6rem 1.5rem;
+        height: 3rem;
+        width: 3rem;
+
+        border-radius: 50%;  
+        background-color: $color-counter;
         font-size: 1.6rem;
-        font-weight: 400;
-        color: #fff;
+        font-weight: 500;
+        color: $color-light--1;
+      
 
       }
     }

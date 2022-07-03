@@ -3,8 +3,9 @@ class navbarView {
   #parentElement;
   #data;
 
-  render() {
+  render(data) {
     this.#parentElement = document.querySelector('.main');
+    this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
@@ -33,8 +34,25 @@ class navbarView {
   // }
 
   _generateMarkup() {
-    return `
-    <div class = "orders"> This is the Orders View</div>`;
+    let markup = [];
+
+    markup.push('<div class = "orders">');
+
+    console.log(this.#data);
+    markup.push(`
+                  <div class = "orders__heading">
+                    <h1 class="heading--primary">Orders</h1>
+                    <h3 class="heading--tertiary">Tuesday 2 Nov, 2022</h3>
+                  </div>
+                  <div class="order-item">
+                    <h3 class="order-item__num">14</h3>
+                    <h3 class="order-item__status">Completed</h3>
+                  </div>
+                `);
+
+    markup.push('</div>');
+
+    return markup.join('');
   }
 }
 
