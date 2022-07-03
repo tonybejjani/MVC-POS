@@ -4,7 +4,6 @@ class navbarView {
   #data;
 
   render() {
-    console.log(this.#parentElement);
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }

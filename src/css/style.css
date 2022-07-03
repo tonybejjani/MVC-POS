@@ -250,6 +250,21 @@ ul {
     background: none;
     color: #FFFB2B; }
 
+.orders__container {
+  display: flex; }
+
+.orders__container > div {
+  border: 1px solid gray;
+  padding: 1em;
+  height: 10em;
+  width: 50%; }
+
+.movable-element {
+  border: 1px solid green;
+  background-color: #00ff0033;
+  height: 100%;
+  width: 100%; }
+
 .container {
   height: 100vh;
   overscroll-behavior-y: none;

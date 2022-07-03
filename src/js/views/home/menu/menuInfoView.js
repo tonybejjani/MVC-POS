@@ -6,7 +6,7 @@ class menuInfoView {
   render(data) {
     this.#parentElement = document.querySelector('.info');
     this.#data = data;
-    console.log(this.#data);
+
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
