@@ -146,7 +146,7 @@ ul {
         background-size: 2.4rem;
         border-radius: 8px; } }
     .navbar__link-cook {
-      /*background-image: url("../img/icon/navbar/yellow/cook.svg");*/
+      background-image: url("url:../img/icon/navbar/yellow/cook.svg");
       position: relative; }
       .navbar__link-cook-counter {
         display: flex;
@@ -163,13 +163,13 @@ ul {
         font-weight: 500;
         color: #fff; }
     .navbar__link-dash {
-      background-image: url("../img/icon/navbar/yellow/dashboard.svg"); }
+      background-image: url("url:../img/icon/navbar/yellow/dashboard.svg"); }
     .navbar__link-settings {
-      background-image: url("../img/icon/navbar/yellow/settings.svg"); }
+      background-image: url("url:../img/icon/navbar/yellow/settings.svg"); }
     .navbar__link-home {
-      background-image: url("../img/icon/navbar/yellow/home.svg"); }
+      background-image: url("url:../img/icon/navbar/yellow/home.svg"); }
     .navbar__link-logout {
-      background-image: url("../img/icon/navbar/yellow/logout.svg"); }
+      background-image: url("url:../img/icon/navbar/yellow/logout.svg"); }
     .navbar__link--active {
       background-color: #FFFB2B;
       box-shadow: 0px 0px 23px -8px #FFFB2B;
@@ -200,15 +200,15 @@ ul {
             padding: 3.2rem;
             border-radius: 8px; } }
       .navbar__link--active.navbar__link-cook {
-        background-image: url("../img/icon/navbar/dark/cook.svg"); }
+        background-image: url("url:../img/icon/navbar/dark/cook.svg"); }
       .navbar__link--active.navbar__link-dash {
-        background-image: url("../img/icon/navbar/dark/dashboard.svg"); }
+        background-image: url("url:../img/icon/navbar/dark/dashboard.svg"); }
       .navbar__link--active.navbar__link-settings {
-        background-image: url("../img/icon/navbar/dark/settings.svg"); }
+        background-image: url("url:../img/icon/navbar/dark/settings.svg"); }
       .navbar__link--active.navbar__link-home {
-        background-image: url("../img/icon/navbar/dark/home.svg"); }
+        background-image: url("url:../img/icon/navbar/dark/home.svg"); }
       .navbar__link--active.navbar__link-logout {
-        background-image: url("../img/icon/navbar/dark/logout.svg"); }
+        background-image: url("url:../img/icon/navbar/dark/logout.svg"); }
 
 .modal.hidden,
 .overlay.hidden {
@@ -664,29 +664,29 @@ ul {
       background-position-y: 23%;
       transition: none; }
     .curr-order__transaction-pay__credit {
-      background-image: url("../img/icon/subtract--dark.svg"); }
+      background-image: url("url:../img/icon/subtract--dark.svg"); }
       .curr-order__transaction-pay__credit:hover {
-        background-image: url("../img/icon/subtract--dark.svg");
+        background-image: url("url:../img/icon/subtract--dark.svg");
         background-color: #1f1d2b;
         cursor: pointer; }
     .curr-order__transaction-pay__cash {
-      background-image: url("../img/icon/wallet--dark.svg");
+      background-image: url("url:../img/icon/wallet--dark.svg");
       background-size: 2rem;
       background-position-y: 22%; }
       .curr-order__transaction-pay__cash:hover {
-        background-image: url("../img/icon/wallet--dark.svg");
+        background-image: url("url:../img/icon/wallet--dark.svg");
         background-color: #1f1d2b;
         cursor: pointer; }
     .curr-order__transaction-pay .curr-order__transaction-pay-btn--active {
       background-color: #252836;
       color: #fff; }
     .curr-order__transaction-pay__credit.curr-order__transaction-pay-btn--active {
-      background-image: url("../img/icon/subtract--light.svg"); }
+      background-image: url("url:../img/icon/subtract--light.svg"); }
     .curr-order__transaction-pay__cash.curr-order__transaction-pay-btn--active {
-      background-image: url("../img/icon/wallet--light.svg"); }
+      background-image: url("url:../img/icon/wallet--light.svg"); }
     .curr-order__transaction-pay-btn--active::after {
       content: "";
-      background-image: url("../img/icon/checkmark-circle.svg");
+      background-image: url("url:../img/icon/checkmark-circle.svg");
       background-repeat: no-repeat;
       position: absolute;
       top: 0.4rem;

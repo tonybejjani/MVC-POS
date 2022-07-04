@@ -631,10 +631,10 @@
 
 
     &__credit{
-      background-image: url('../img/icon/subtract--dark.svg');
+      background-image: url('url:../img/icon/subtract--dark.svg');
 
       &:hover {
-        background-image: url('../img/icon/subtract--dark.svg');
+        background-image: url('url:../img/icon/subtract--dark.svg');
         background-color: $color-dark--1;
         cursor: pointer;
         
@@ -643,12 +643,12 @@
 
   
     &__cash{
-      background-image: url('../img/icon/wallet--dark.svg');
+      background-image: url('url:../img/icon/wallet--dark.svg');
       background-size: 2rem;
       background-position-y: 22%;
 
       &:hover {
-        background-image: url('../img/icon/wallet--dark.svg');
+        background-image: url('url:../img/icon/wallet--dark.svg');
         background-color: $color-dark--1;
         cursor: pointer;
       }
@@ -661,16 +661,16 @@
     }
 
     &__credit.curr-order__transaction-pay-btn--active {
-      background-image: url('../img/icon/subtract--light.svg');
+      background-image: url('url:../img/icon/subtract--light.svg');
     }
 
     &__cash.curr-order__transaction-pay-btn--active {
-      background-image: url('../img/icon/wallet--light.svg');
+      background-image: url('url:../img/icon/wallet--light.svg');
     }
 
     &-btn--active::after {
       content: "";
-      background-image: url('../img/icon/checkmark-circle.svg');
+      background-image: url('url:../img/icon/checkmark-circle.svg');
       background-repeat: no-repeat;
       position: absolute; 
       top: 0.4rem;

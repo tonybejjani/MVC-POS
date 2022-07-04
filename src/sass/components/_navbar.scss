@@ -72,7 +72,7 @@
 
     //.navbar__link
     &-cook {
-      background-image: url('../img/icon/navbar/yellow/cook.svg');
+      background-image: url('url:../img/icon/navbar/yellow/cook.svg');
       position: relative;
 
       &-counter {
@@ -96,19 +96,19 @@
     }
 
     &-dash {
-      background-image: url('../img/icon/navbar/yellow/dashboard.svg');
+      background-image: url('url:../img/icon/navbar/yellow/dashboard.svg');
     }
 
     &-settings {
-      background-image: url('../img/icon/navbar/yellow/settings.svg');
+      background-image: url('url:../img/icon/navbar/yellow/settings.svg');
     }
 
     &-home {
-      background-image: url('../img/icon/navbar/yellow/home.svg');
+      background-image: url('url:../img/icon/navbar/yellow/home.svg');
     }
 
     &-logout {
-      background-image: url('../img/icon/navbar/yellow/logout.svg');
+      background-image: url('url:../img/icon/navbar/yellow/logout.svg');
     }
 
     //.navbar__link
@@ -149,23 +149,23 @@
 
       //.navbar__link--active
       &.navbar__link-cook {
-        background-image: url('../img/icon/navbar/dark/cook.svg');
+        background-image: url('url:../img/icon/navbar/dark/cook.svg');
       }
       
       &.navbar__link-dash {
-        background-image: url('../img/icon/navbar/dark/dashboard.svg');
+        background-image: url('url:../img/icon/navbar/dark/dashboard.svg');
       }
       
       &.navbar__link-settings {
-        background-image: url('../img/icon/navbar/dark/settings.svg');
+        background-image: url('url:../img/icon/navbar/dark/settings.svg');
       }
       
       &.navbar__link-home {
-        background-image: url('../img/icon/navbar/dark/home.svg');
+        background-image: url('url:../img/icon/navbar/dark/home.svg');
       }
       
       &.navbar__link-logout {
-        background-image: url('../img/icon/navbar/dark/logout.svg');
+        background-image: url('url:../img/icon/navbar/dark/logout.svg');
       }
 
     }
