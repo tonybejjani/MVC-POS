@@ -31,7 +31,7 @@ class orderSpecialItemView {
                 <div class="item-content__thumb special-content__thumb">
                     <div class="thumb__image"><img src="${
                       this.#data.img
-                    }"></div>
+                    }" crossorigin></div>
                     <div class="thumb__title special-thumb__title">
                       <span>${this.#data.name}</span></div>
                     </div>

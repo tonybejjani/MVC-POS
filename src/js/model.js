@@ -44,7 +44,7 @@ export const state = {
       name: 'MIX 10 PCS',
       price: 7.0,
       qty: 4,
-      img: 'src/img/menu/mix.png',
+      img: 'mix.png',
       special_deal: true,
     },
     1: {
@@ -53,7 +53,7 @@ export const state = {
       name: 'Pork Soup Dumpling',
       price: 2.0,
       qty: 1,
-      img: 'src/img/menu/xlb.png',
+      img: 'xlb.png',
     },
     2: {
       catgId: 1,
@@ -61,7 +61,7 @@ export const state = {
       name: 'Prawn Dumpling',
       price: 2.5,
       qty: 1,
-      img: 'src/img/menu/hargow.png',
+      img: 'hargow.png',
     },
     3: {
       catgId: 1,
@@ -69,7 +69,7 @@ export const state = {
       name: 'BBQ Pork Buns',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/buns.png',
+      img: 'buns.png',
       special_deal_limit: 2,
     },
     4: {
@@ -78,7 +78,7 @@ export const state = {
       name: 'Chicken Dim Sims',
       price: 2,
       qty: 1,
-      img: 'src/img/menu/chicken.png',
+      img: 'chicken.png',
     },
     5: {
       catgId: 1,
@@ -86,7 +86,7 @@ export const state = {
       name: 'Pork & Prawn Siumai',
       price: 2.5,
       qty: 1,
-      img: 'src/img/menu/siumai.png',
+      img: 'siumai.png',
     },
     6: {
       catgId: 1,
@@ -94,7 +94,7 @@ export const state = {
       name: 'BBQ Pork Buns',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/buns.png',
+      img: 'buns.png',
       special_deal_limit: 2,
     },
     7: {
@@ -103,7 +103,7 @@ export const state = {
       name: 'Chicken Dim Sims',
       price: 2,
       qty: 1,
-      img: 'src/img/menu/chicken.png',
+      img: 'chicken.png',
     },
     8: {
       catgId: 1,
@@ -111,7 +111,7 @@ export const state = {
       name: 'Pork & Prawn Siumai',
       price: 2.5,
       qty: 1,
-      img: 'src/img/menu/siumai.png',
+      img: 'siumai.png',
     },
     10: {
       catgId: 2,
@@ -119,7 +119,7 @@ export const state = {
       name: 'Peking Duck x2',
       price: 7,
       qty: 1,
-      img: 'src/img/menu/duck_x2.png',
+      img: 'duck_x2.png',
     },
     11: {
       catgId: 2,
@@ -127,7 +127,7 @@ export const state = {
       name: 'Peking Duck x4',
       price: 12,
       qty: 1,
-      img: 'src/img/menu/duck_x4.png',
+      img: 'duck_x4.png',
     },
     12: {
       catgId: 2,
@@ -135,7 +135,7 @@ export const state = {
       name: 'Peking Duck x6',
       price: 16,
       qty: 1,
-      img: 'src/img/menu/duck_x6.png',
+      img: 'duck_x6.png',
     },
     20: {
       catgId: 3,
@@ -143,7 +143,7 @@ export const state = {
       name: 'Water',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/water.png',
+      img: 'water.png',
     },
     21: {
       catgId: 3,
@@ -151,7 +151,7 @@ export const state = {
       name: 'Coke',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/coke.png',
+      img: 'coke.png',
     },
     22: {
       catgId: 3,
@@ -159,7 +159,7 @@ export const state = {
       name: 'Coke Zero',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/coke-zero.png',
+      img: 'coke-zero.png',
     },
     23: {
       catgId: 3,
@@ -167,7 +167,7 @@ export const state = {
       name: 'Fanta',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/fanta.png',
+      img: 'fanta.png',
     },
 
     24: {
@@ -176,7 +176,7 @@ export const state = {
       name: 'Sprite',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/sprite.png',
+      img: 'sprite.png',
     },
     25: {
       catgId: 3,
@@ -184,7 +184,7 @@ export const state = {
       name: 'Solo',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/solo.png',
+      img: 'solo.png',
     },
     26: {
       catgId: 4,
@@ -192,7 +192,7 @@ export const state = {
       name: 'Prawn Crackers',
       price: 3,
       qty: 1,
-      img: 'src/img/menu/crackers.png',
+      img: 'crackers.png',
     },
   },
 };

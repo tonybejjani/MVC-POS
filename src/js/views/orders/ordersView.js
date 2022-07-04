@@ -1,4 +1,7 @@
 /** @format */
+
+import dragula from '../../../../node_modules/dragula/dragula.js';
+
 class navbarView {
   #parentElement;
   #data;
@@ -33,48 +36,65 @@ class navbarView {
   //   });
   // }
 
-  eventHandlerDraggable() {
-    const movableEl = document.querySelector('.movable-element');
+  // eventHandlerDraggable() {
+  //   const movableEl = document.querySelector('.movable-element');
 
-    movableEl.addEventListener('mousedown', this._pickup.bind(this));
-    movableEl.addEventListener('touchstart', this._pickup.bind(this));
-    movableEl.addEventListener('mousemove', this._move.bind(this));
-    movableEl.addEventListener('touchmove', this._move.bind(this));
+  //   movableEl.addEventListener('mousedown', this._pickup.bind(this));
+  //   movableEl.addEventListener('touchstart', this._pickup.bind(this));
+  //   movableEl.addEventListener('mousemove', this._move.bind(this));
+  //   movableEl.addEventListener('touchmove', this._move.bind(this));
+  // }
+
+  // _pickup(e) {
+  //   e.preventDefault();
+  //   this.#moving = e.target;
+
+  //   let heightEl = this.#moving.clientHeight;
+  //   let widthEl = this.#moving.clientWidth;
+
+  //   // this.#moving.style.height = this.#moving.clientHeight;
+  //   // this.#moving.style.width = this.#moving.clientWidth;
+
+  //   this.#moving.style.height = String(heightEl + 'px');
+  //   this.#moving.style.width = String(widthEl + 'px');
+
+  //   this.#moving.style.position = 'fixed';
+  // }
+
+  // _move(e) {
+  //   e.preventDefault();
+  //   if (this.#moving) {
+  //     if (e.clientX) {
+  //       console.log(e.clientX);
+  //       // mousemove
+  //       this.#moving.style.left =
+  //         String(e.clientX - this.#moving.clientWidth / 2) + 'px';
+  //       this.#moving.style.top =
+  //         String(e.clientY - this.#moving.clientHeight / 2) + 'px';
+  //     } else {
+  //       // touchmove - assuming a single touchpoint
+  //       this.#moving.style.left =
+  //         String(e.changedTouches[0].clientX - this.#moving.clientWidth / 2) +
+  //         'px';
+  //       this.#moving.style.top =
+  //         String(e.changedTouches[0].clientY - this.#moving.clientHeight / 2) +
+  //         'px';
+  //     }
+  //   }
+  // }
+
+  makeDraggable() {
+    const containers = [
+      document.querySelector('.orders__prepare'),
+      document.querySelector('.orders__pending'),
+      document.querySelector('.orders__complete'),
+    ];
+
+    const drake = dragula(containers);
+
+    console.log(drake);
   }
 
-  _pickup(e) {
-    e.preventDefault();
-    this.#moving = e.target;
-
-    let heightEl = this.#moving.clientHeight;
-    let widthEl = this.#moving.clientWidth;
-
-    this.#moving.style.height = this.#moving.clientHeight;
-    this.#moving.style.width = this.#moving.clientWidth;
-
-    this.#moving.style.position = 'fixed';
-
-    // this.#moving.style.height = String(heightEl + 'px');
-    // this.#moving.style.width = String(widthEl + 'px');
-  }
-
-  _move(e) {
-    e.preventDefault();
-    if (this.#moving) {
-      if (e.clientX) {
-        console.log(e.clientX);
-        // mousemove
-        this.#moving.style.left = e.clientX - this.#moving.clientWidth / 2;
-        this.#moving.style.top = e.clientY - this.#moving.clientHeight / 2;
-      } else {
-        // touchmove - assuming a single touchpoint
-        this.#moving.style.left =
-          e.changedTouches[0].clientX - this.#moving.clientWidth / 2;
-        this.#moving.style.top =
-          e.changedTouches[0].clientY - this.#moving.clientHeight / 2;
-      }
-    }
-  }
   _generateMarkup() {
     let markup = [];
 
@@ -93,11 +113,14 @@ class navbarView {
 
 
                   <div class="orders__container">
-                    <div class="left-parent">
-                        <div class="movable-element"></div>
+                    <div class="orders__prepare">
+                        <div class="orders__item movable-element movable-element1">1</div>
+                        <div class="orders__item movable-element movable-element2">2</div>
+                        <div class="orders__item movable-element movable-element3">3</div>
                     </div>
           
-                    <div class="right-parent"></div>
+                    <div class="orders__pending"></div>
+                    <div class="orders__complete"></div>
                  </div>
                 `);
 

@@ -331,7 +331,7 @@ class menuSpecialModalView {
     )) {
       if (catgId === this.#specialBtnCatId && !special_deal)
         markup.push(`<div class="modal-menu-item" data-item-id="${key}">
-                          <img src="${img}">
+                          <img src="${img}" crossorigin>
                           <div class="modal-menu-item__name">${name}</div>
                           <div class="curr-order__item__qty">
                             <button type="button" class="curr-order__item__qty-decrease disabled" disabled>&#8722;</button>

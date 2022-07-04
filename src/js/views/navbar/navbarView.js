@@ -1,4 +1,6 @@
 /** @format */
+import logoImg from 'url:../../../../src/img/general/logo.png';
+
 class navbarView {
   #parentElement = document.body;
   #data;
@@ -36,7 +38,7 @@ class navbarView {
   _generateMarkup() {
     return `
     <div class="navbar">
-      <div class="navbar__logo"><img src="src/img/general/logo.png">
+      <div class="navbar__logo"><img src="${logoImg}" crossorigin>
       </div>
       <div class="navbar__links">
         <a class="navbar__link navbar__link-home navbar__link--active" href="#home"></a>

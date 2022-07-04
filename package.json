@@ -2,17 +2,16 @@
   "name": "pos",
   "version": "1.0.0",
   "description": "Point of Sale system",
+  "default": "index.html",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --dist-dir ./dist",
     "compile:sass": "node-sass src/sass/main.scss src/css/style.css -w"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tonybejjani/POS.git"
   },
-  
   "author": "Antoine Bejjani",
   "license": "ISC",
   "bugs": {
@@ -21,6 +20,7 @@
   "homepage": "https://github.com/tonybejjani/POS#readme",
   "dependencies": {
     "core-js": "^3.23.1",
+    "dragula": "^3.7.3",
     "parcel": "^2.6.2",
     "regenerator-runtime": "^0.13.9"
   },

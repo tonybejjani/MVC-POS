@@ -45,12 +45,12 @@ class orderSpecialBoxView {
                <div class="curr-order__item__remove" data-special-item-id="${
                  this.#data.specialEditId
                }">
-                <img src="${trash}#trash">
+                <img src="${trash}#trash" crossorigin>
                </div>
                <div class="curr-order__item__edit" data-special-item-id="${
                  this.#data.specialEditId
                }">
-                <img src="${edit}">
+                <img src="${edit}" crossorigin>
                </div>               
               </div>
             
