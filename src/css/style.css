@@ -146,7 +146,7 @@ ul {
         background-size: 2.4rem;
         border-radius: 8px; } }
     .navbar__link-cook {
-      background-image: url("../img/icon/navbar/yellow/cook.svg");
+      /*background-image: url("../img/icon/navbar/yellow/cook.svg");*/
       position: relative; }
       .navbar__link-cook-counter {
         display: flex;
