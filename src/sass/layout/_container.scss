@@ -7,6 +7,16 @@
   grid-template-rows: 100vh;
   grid-template-columns: 7.7% 92.3%;
 
+  &::-webkit-scrollbar {
+    width: 0.25em;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color-dark--1;
+  }
+
+  @include respond(tab-port) {
+    @include grid--tab;
+  }
   // @include respond (md-laptop) {
   //   grid-template-columns: 6.7% 93.3%;
   // }

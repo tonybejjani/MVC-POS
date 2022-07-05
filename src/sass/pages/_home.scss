@@ -2,6 +2,15 @@
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns: 62% 38%;
+
+  @include respond(tab-land) {
+    grid-template-columns: 50% 50%;
+  }
+
+  // @include respond(tab-port) {
+  //   grid-template-rows: 1fr 1fr;
+  //   grid-template-columns: 1fr;
+  // }
 }
 
 /////////////////////
@@ -19,18 +28,72 @@
   display: flex;
   flex-direction: column;
 
+  @include respond (md-laptop) {
+    padding: 3rem;
+  }
+
+  &-navbar {
+    display: flex;
+    width: 100%;
+    gap: 6rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #393c49;
+    
+
+    @include respond(tab-port) {
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 3rem;
+      row-gap: 2rem;
+    }
+     
+    
+    & li {
+      flex-shrink: 0;
+
+      @include respond(tab-port) {
+        flex-shrink: 0;
+      }
+
+    }
+
+    &__active {
+      border-bottom: 0.5rem solid $color-brand--1;
+      border-radius: 2px;
+    }
+
+    &__link {
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: 400;
+      cursor: pointer;
+      padding-bottom: 2rem;
+
+      @include respond (sm-desktop) { 
+        font-size: 1.8rem;
+        font-weight: 300;
+       }
+
+       @include respond(tab-port) {
+        font-size: 1.8rem;
+      }
+      
+    }
+
+  }
+
+
   .info {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   
-  
-    @include respond (sm-desktop) { 
-      
-    }
-  
-    &__title {
-      
+    @include respond(tab-port) {
+      flex-direction: row;
+      justify-content: center;
+
     }
   
     &__event {
@@ -57,42 +120,11 @@
     }
     
   }
-  @include respond (md-laptop) {
-    padding: 3rem;
-  }
-  &-navbar {
-    display: flex;
-    width: 100%;
-    gap: 6rem;
-    margin-bottom: 3rem;
-    margin-top: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #393c49;
-
-    &__active {
-      border-bottom: 0.5rem solid $color-brand--1;
-      border-radius: 2px;
-    }
-
-    &__link {
-      text-decoration: none;
-      font-size: 2rem;
-      font-weight: 400;
-      cursor: pointer;
-      padding-bottom: 2rem;
-
-      @include respond (sm-desktop) { 
-        font-size: 1.8rem;
-        font-weight: 300;
-       }
-    }
-
-  }
 }
 
 .menu-items {
   overflow: auto;
-  padding-top: 8rem;
+  padding-top: 5rem;
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
@@ -113,6 +145,12 @@
   @include respond (md-laptop) { 
     row-gap: 8rem;
     column-gap: 3rem;
+    align-content: baseline;
+  }
+
+  @include respond (tab-land) { 
+    row-gap: 4rem;
+    padding-top: 0;
   }
 }
 
@@ -136,16 +174,27 @@
     }
 
     @include respond (tab-land) { 
-     
+      width: 100%;
+      height: 11rem;
+ //     border-left: 3px solid $color-dark--3;
+      border-radius:13px;
     }
 
-    @include respond (tab-land-sm) { 
-      
-    }
 
-    
     &__price {
       font-size: 1.8rem;
+
+      @include respond (tab-land) { 
+        font-size: 2.4rem;
+        color: $color-light--2;
+        font-style: italic;
+      }
+
+
+      @include respond (tab-land-sm) { 
+        font-size: 2rem;
+        
+      }
     }
 
     &__image img {
@@ -164,6 +213,20 @@
       @include respond (md-laptop) { 
        right: 16%;
       }
+
+      @include respond (tab-land) { 
+        width: 9rem;
+        height: 9rem;
+        left: 2rem;
+        top: 0.9rem;
+       }
+
+       @include respond (tab-land-sm) {
+          width: 8rem;
+          height: 8rem;
+          top: 1.2rem;
+          left: 2rem;
+        }
     }
     &__details {
       height: 100%;
@@ -172,6 +235,21 @@
       justify-content: center;
       gap: 1rem;
       padding-top: 10rem;
+
+      @include respond (tab-land) { 
+        padding-top: 0rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        margin-left: 12rem;
+        gap: 0;
+      }
+
+
+      @include respond (tab-land-sm) { 
+        margin-left: 10rem;
+      }
+      
 
     }
 
@@ -183,12 +261,26 @@
       font-weight: 300;
       margin: 0 auto;
 
+      @include respond (tab-land) { 
+        margin: 0;
+        font-size: 2.4rem;
+      }
+
+      @include respond (tab-land-sm) {
+        font-size: 2rem;
+        
+      }
+
     }
 
     &__info {
       position: absolute;
       top: 10.5rem;
       right: 2.5rem;
+
+      @include respond (tab-land) { 
+        top: 2rem;
+      }
     }
 
     &__info img {
@@ -578,7 +670,7 @@
   display: grid;
   grid-template-columns: 61% 39%;
   row-gap: 1rem;
-  height: 15%;
+  height: 18%;
   
   @include respond (big-desktop) {
     grid-template-columns: 55% 45%;

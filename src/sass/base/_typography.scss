@@ -6,9 +6,16 @@ body {
   line-height: 1.6;
 }
 
+.heading--primary {
+  @include respond (tab-port) { 
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    color: $color-light--3;
+    
+  }
+}
 .heading--secondary {
   font-size: 2.4rem;
-
 
   @include respond (md-laptop) { 
       font-size: 1.7rem;
@@ -19,7 +26,11 @@ body {
  font-size: 1.9rem;
  font-weight: 400;
 
- @include respond (sm-desktop) { 
-    font-size: 2.2rem;
-}
+  @include respond (sm-desktop) { 
+      font-size: 1.9rem;
+  }
+
+  @include respond (tab-land) { 
+    font-size: 1.8rem;
+  }
 }
