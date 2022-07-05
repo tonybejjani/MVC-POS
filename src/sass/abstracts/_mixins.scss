@@ -33,7 +33,7 @@ ORDER: Base + typography > general layout + grid > page layout > components
     {@content}; //1560px
   }
 
-
+ 
   @if $breakpoint == lg-laptop {
     @media (max-width:90em)
     {@content}; //1440px
