@@ -16,6 +16,10 @@ ORDER: Base + typography > general layout + grid > page layout > components
 1em = 16px
 */
 
+@mixin grid--tab {
+  grid-template-rows: 7% 93%;
+  grid-template-columns: 1fr;
+}
 
 @mixin respond($breakpoint) {
 
@@ -44,8 +48,12 @@ ORDER: Base + typography > general layout + grid > page layout > components
     @media (max-width: 75em) {@content }; //1200px
   }
 
+  @if $breakpoint == tab-land-md {
+    @media (max-width: 71.87em) {@content }; //1150px
+  }
+
   @if $breakpoint == tab-land-sm {
-    @media (max-width: 65.62em) {@content }; //1200px
+    @media (max-width: 65.62em) {@content }; //1050px
   }
 
   @if $breakpoint == tab-port {
