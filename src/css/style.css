@@ -47,13 +47,13 @@ body {
   line-height: 1.6; }
 
 .heading--secondary {
-  font-size: 1.9rem; }
+  font-size: 2.4rem; }
   @media (max-width: 85.62em) {
     .heading--secondary {
       font-size: 1.7rem; } }
 
 .heading--tertiary {
-  font-size: 2.4rem;
+  font-size: 1.9rem;
   font-weight: 400; }
   @media (max-width: 97.5em) {
     .heading--tertiary {
@@ -293,8 +293,6 @@ ul {
     display: flex;
     flex-direction: column;
     gap: 0.5rem; }
-    .menu .info__title {
-      align-self: end; }
     .menu .info__event {
       color: #fff;
       font-size: 2.4rem;
@@ -506,18 +504,20 @@ ul {
     overflow: auto;
     height: 100%; }
   .curr-order__items-special-container {
-    border: 1px solid #abbbc2;
-    border-radius: 0.8rem;
-    padding: 3rem;
-    margin-bottom: 3rem; }
-    .curr-order__items-special-container h1 {
-      font-size: 2.4rem;
-      flex-grow: 1;
-      flex-shrink: 0; }
+    border-bottom: 2px dotted #fff;
+    border-top: 2px dotted #fff;
+    padding-top: 2rem;
+    margin-bottom: 2rem; }
     .curr-order__items-special-container__header {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
       padding-bottom: 3rem; }
+      .curr-order__items-special-container__header-heading {
+        font-size: 2.4rem;
+        flex-grow: 1;
+        flex-shrink: 0; }
+  .curr-order__items-details .curr-order__item:last-child {
+    border: none; }
   .curr-order__items-details .curr-order__item:last-child {
     border: none; }
 
@@ -529,6 +529,8 @@ ul {
   padding-bottom: 2rem;
   border-bottom: 1px solid #393c49;
   justify-content: space-between; }
+  .curr-order__item-special {
+    margin-left: 2rem; }
   .curr-order__item.special-grid {
     grid-template-columns: 1fr;
     row-gap: 1rem;

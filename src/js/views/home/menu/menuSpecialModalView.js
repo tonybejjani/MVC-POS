@@ -1,4 +1,9 @@
 /** @format */
+import xlbImg from 'url:../../../../img/menu/xlb.png';
+import hargowImg from 'url:../../../../img/menu/hargow.png';
+import bunsImg from 'url:../../../../img/menu/buns.png';
+import chickenImg from 'url:../../../../img/menu/chicken.png';
+import siumaiImg from 'url:../../../../img/menu/siumai.png';
 
 class menuSpecialModalView {
   #parentElement;
@@ -300,6 +305,24 @@ class menuSpecialModalView {
     }
   }
 
+  _loadImg(img) {
+    if (img)
+      switch (img) {
+        case 'mix.png':
+          return mixImg;
+        case 'xlb.png':
+          return xlbImg;
+        case 'hargow.png':
+          return hargowImg;
+        case 'buns.png':
+          return bunsImg;
+        case 'chicken.png':
+          return chickenImg;
+        case 'siumai.png':
+          return siumaiImg;
+      }
+  }
+
   _generateMarkup() {
     this.#specialBtnCatId = Number(
       document
@@ -321,9 +344,9 @@ class menuSpecialModalView {
 
     markup.push(`<div class="modal hidden" data-category-id="1">
                       <button class="close-modal">×</button>
-                      <h1 class="modal-menu__header">Select <span>${
+                      <h2 class="modal-menu__header">Select <span>${
                         this.#totalPcs
-                      }</span> pcs:</h1>
+                      }</span> pcs:</h2>
                       <div class="modal-menu-items">`);
 
     for (const [key, { catgId, name, img, special_deal }] of Object.entries(
@@ -331,7 +354,7 @@ class menuSpecialModalView {
     )) {
       if (catgId === this.#specialBtnCatId && !special_deal)
         markup.push(`<div class="modal-menu-item" data-item-id="${key}">
-                          <img src="${img}" crossorigin>
+                          <img src="${this._loadImg(img)}" crossorigin>
                           <div class="modal-menu-item__name">${name}</div>
                           <div class="curr-order__item__qty">
                             <button type="button" class="curr-order__item__qty-decrease disabled" disabled>&#8722;</button>

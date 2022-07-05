@@ -93,9 +93,9 @@ class menuCatView {
   _generateMarkup() {
     let markup = [];
 
-    markup.push(
-      `<h3 class="heading--tertiary menu-items__title">Choose Dishes</h3>`
-    );
+    // markup.push(
+    //   `<h3 class="heading--tertiary menu-items__title">Choose Dishes</h3>`
+    // );
     // for each category load corresponsding items markup
     for (const { id: categoryId, active } of Object.values(
       this.#data.menuCategories
@@ -122,7 +122,7 @@ class menuCatView {
                           )}" crossorigin></div>
                           <div class="menu-item__details">
                             <div class="menu-item__info"><img src="${infoIcon}" crossorigin></div>
-                            <h2 class="heading--secondary menu-item__title">${name}</h2>
+                            <h3 class="heading--tertiary menu-item__title">${name}</h3>
                             <div class="menu-item__price">$ ${price}</div>
                            <!-- <button  data-item-id="${key}">Select</button> -->
                           </div>

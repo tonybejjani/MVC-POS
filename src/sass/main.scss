@@ -13,7 +13,7 @@
 @import "components/list";
 @import "components/navbar";
 @import "components/modal";
-@import "components/draggable";
+@import "components/draggable"; 
 
 
 @import "layout/container";
@@ -21,8 +21,7 @@
 @import "pages/home";
 @import "pages/orders";
 
-@import "url:../../node_modules/dragula/dist/dragula";
-
+@import "../../node_modules/dragula/dist/dragula";
 
 // MIXIN
 .hidden {

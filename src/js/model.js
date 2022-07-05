@@ -11,7 +11,7 @@ export const state = {
     logo: 'src/img/general/LOGO.png',
     title: 'Yumcha Eat St.',
     date: 'Tuesday, 9 Nov 2022',
-    event: 'Aussie Night Markets - Castle Hill ',
+    title: 'Menu',
   },
 
   menuCategories: {

@@ -38,9 +38,9 @@ class orderSpecialBoxView {
     }">
               <div class="curr-order__items-special-container__header">
               
-                <h1>MIX ${this.#data.totalPcs} PCS FOR $ ${
-      this.#data.specialMixPrice
-    }</h1> 
+                <h3 class="curr-order__items-special-container__header-heading">MIX ${
+                  this.#data.totalPcs
+                } PCS FOR $ ${this.#data.specialMixPrice}</h3> 
               
                <div class="curr-order__item__remove" data-special-item-id="${
                  this.#data.specialEditId
