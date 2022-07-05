@@ -297,10 +297,13 @@ ul {
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns: 7.7% 92.3%; }
+<<<<<<< HEAD
   .container::-webkit-scrollbar {
     width: 0.25em; }
   .container::-webkit-scrollbar-track {
     background: #1f1d2b; }
+=======
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   @media (max-width: 56.25em) {
     .container {
       grid-template-rows: 7% 93%;
@@ -312,7 +315,11 @@ ul {
   grid-template-columns: 62% 38%; }
   @media (max-width: 75em) {
     .home {
+<<<<<<< HEAD
       grid-template-columns: 50% 50%; } }
+=======
+      grid-template-columns: 55% 45%; } }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
 
 .menu {
   padding: 5rem;
@@ -429,18 +436,26 @@ ul {
   @media (max-width: 75em) {
     .menu-item {
       width: 100%;
+<<<<<<< HEAD
       height: 11rem;
       border-radius: 13px; } }
+=======
+      height: 13rem; } }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   .menu-item__price {
     font-size: 1.8rem; }
     @media (max-width: 75em) {
       .menu-item__price {
+<<<<<<< HEAD
         font-size: 2.4rem;
         color: #abbbc2;
         font-style: italic; } }
     @media (max-width: 65.62em) {
       .menu-item__price {
         font-size: 2rem; } }
+=======
+        font-size: 2.4rem; } }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   .menu-item__image img {
     width: 15.2rem;
     height: 15.2rem;
@@ -457,6 +472,7 @@ ul {
         right: 16%; } }
     @media (max-width: 75em) {
       .menu-item__image img {
+<<<<<<< HEAD
         width: 9rem;
         height: 9rem;
         left: 2rem;
@@ -467,6 +483,12 @@ ul {
         height: 8rem;
         top: 1.2rem;
         left: 2rem; } }
+=======
+        width: 10rem;
+        height: 10rem;
+        left: 2rem;
+        top: 1.5rem; } }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   .menu-item__details {
     height: 100%;
     display: flex;
@@ -482,9 +504,12 @@ ul {
         justify-content: start;
         margin-left: 12rem;
         gap: 0; } }
+<<<<<<< HEAD
     @media (max-width: 65.62em) {
       .menu-item__details {
         margin-left: 10rem; } }
+=======
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   .menu-item__title {
     font-weight: 200;
     letter-spacing: 0.2px;
@@ -496,9 +521,12 @@ ul {
       .menu-item__title {
         margin: 0;
         font-size: 2.4rem; } }
+<<<<<<< HEAD
     @media (max-width: 65.62em) {
       .menu-item__title {
         font-size: 2rem; } }
+=======
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   .menu-item__info {
     position: absolute;
     top: 10.5rem;

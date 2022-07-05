@@ -4,6 +4,7 @@
   grid-template-columns: 62% 38%;
 
   @include respond(tab-land) {
+<<<<<<< HEAD
     grid-template-columns: 50% 50%;
   }
 
@@ -11,6 +12,10 @@
   //   grid-template-rows: 1fr 1fr;
   //   grid-template-columns: 1fr;
   // }
+=======
+    grid-template-columns: 55% 45%;
+  }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
 }
 
 /////////////////////
@@ -28,6 +33,39 @@
   display: flex;
   flex-direction: column;
 
+<<<<<<< HEAD
+=======
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+  
+    &__event {
+      color: $color-light--1;
+      font-size: 2.4rem;
+      font-weight: 400;
+
+      @include respond (sm-desktop) { 
+        font-size: 2.2rem;
+        font-weight: 300;
+      }
+    }
+  
+    &__date {
+      color: $color-light--2;
+      font-size: 2rem;
+      font-weight: 300;
+
+      @include respond (sm-desktop) { 
+        font-size: 1.8rem;
+        font-weight: 300;
+      }
+   
+    }
+    
+  }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
   @include respond (md-laptop) {
     padding: 3rem;
   }
@@ -175,17 +213,23 @@
 
     @include respond (tab-land) { 
       width: 100%;
+<<<<<<< HEAD
       height: 11rem;
  //     border-left: 3px solid $color-dark--3;
       border-radius:13px;
     }
 
+=======
+      height: 13rem;
+    }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
 
     &__price {
       font-size: 1.8rem;
 
       @include respond (tab-land) { 
         font-size: 2.4rem;
+<<<<<<< HEAD
         color: $color-light--2;
         font-style: italic;
       }
@@ -194,6 +238,8 @@
       @include respond (tab-land-sm) { 
         font-size: 2rem;
         
+=======
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
       }
     }
 
@@ -215,6 +261,7 @@
       }
 
       @include respond (tab-land) { 
+<<<<<<< HEAD
         width: 9rem;
         height: 9rem;
         left: 2rem;
@@ -227,6 +274,14 @@
           top: 1.2rem;
           left: 2rem;
         }
+=======
+        width: 10rem;
+        height: 10rem;
+        left: 2rem;
+        top: 1.5rem;
+
+       }
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
     }
     &__details {
       height: 100%;
@@ -245,12 +300,15 @@
         gap: 0;
       }
 
+<<<<<<< HEAD
 
       @include respond (tab-land-sm) { 
         margin-left: 10rem;
       }
       
 
+=======
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
     }
 
     &__title {
@@ -266,11 +324,14 @@
         font-size: 2.4rem;
       }
 
+<<<<<<< HEAD
       @include respond (tab-land-sm) {
         font-size: 2rem;
         
       }
 
+=======
+>>>>>>> 43d2e01723f78409114fcd6b2ebba2bb2681accc
     }
 
     &__info {
