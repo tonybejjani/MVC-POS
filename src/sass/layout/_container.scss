@@ -16,6 +16,7 @@
 
   @include respond(tab-port) {
     @include grid--tab;
+    overflow-y: hidden;
   }
   // @include respond (md-laptop) {
   //   grid-template-columns: 6.7% 93.3%;

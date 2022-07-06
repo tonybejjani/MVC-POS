@@ -113,6 +113,16 @@ export const state = {
       qty: 1,
       img: 'siumai.png',
     },
+
+    9: {
+      catgId: 1,
+      catgName: 'Yumcha',
+      name: 'Chicken Dim Sims',
+      price: 2,
+      qty: 1,
+      img: 'chicken.png',
+    },
+
     10: {
       catgId: 2,
       catgName: 'Peking Duck',
