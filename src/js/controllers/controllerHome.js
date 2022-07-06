@@ -35,6 +35,7 @@ class controllerHome {
       this._controlOrderSpecialMix.bind(this)
     );
     orderSidebarView.addHandlerPayMethod(this._controlPayMethod.bind(this));
+    orderSidebarView.addHandlertogglePanel();
   }
 
   _controlOrderItemForm(btn) {

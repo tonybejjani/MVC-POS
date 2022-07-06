@@ -77,9 +77,19 @@ class orderSidebarView {
     ).innerHTML = '';
   }
 
+  addHandlertogglePanel() {
+    const panelBtnEl = document.querySelector('.curr-order__toggle-btn');
+    const panelEl = document.querySelector('.curr-order');
+
+    panelBtnEl.addEventListener('click', function () {
+      panelEl.classList.toggle('curr-order__toggle-panel');
+    });
+  }
+
   _generateMarkup() {
     return `
     <div class="curr-order">
+      <div class="curr-order__toggle-btn">Check Out</div>
       <div class="curr-order__heading">
         <div class="curr-order__heading-client-info">
           <div><label>Order #</label><input type="text" placeholder="123" class="curr-order-number"></div>

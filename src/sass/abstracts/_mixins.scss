@@ -60,8 +60,20 @@ ORDER: Base + typography > general layout + grid > page layout > components
     @media (max-width: 56.25em) {@content }; //900px
   }
 
+  @if $breakpoint == tab-port-sm {
+    @media (max-width: 46.87em) {@content }; //750px
+  }
+
+  @if $breakpoint == tab-port-sm-h {
+    @media (max-height: 24.37em) {@content }; //750px
+  }
+
   @if $breakpoint == phone {
     @media (max-width: 37.5em) {@content }; //600px
+  }
+
+  @if $breakpoint == phone-sm {
+    @media (max-width: 28em) {@content }; //400px
   }
 
   @if $breakpoint == big-desktop {
