@@ -30,7 +30,7 @@ class menuCatView {
   }
 
   addHandlerRender(handler) {
-    const menuItemBtns = document.querySelectorAll('.menu-item__link');
+    const menuItemBtns = document.querySelectorAll('.menu-item__button');
 
     menuItemBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn));
@@ -49,6 +49,23 @@ class menuCatView {
     return item.querySelector('.curr-order__item__qty-num').textContent;
   }
 
+  setBtnEffect(btn) {
+    setTimeout(function () {
+      btn.innerHTML = '&#10004;';
+      btn.style.backgroundColor = '#fffb2b';
+      btn.style.color = '#000';
+      btn.style.fontSize = '3rem';
+      btn.disabled = true;
+    }, 100);
+
+    setTimeout(function () {
+      btn.innerHTML = 'Add';
+      btn.style.backgroundColor = '#1f1d2b';
+      btn.style.color = '#fffb2b';
+      btn.style.fontSize = '1.8rem';
+      btn.disabled = false;
+    }, 1000);
+  }
   _loadImg(img) {
     // console.log(`${img.replace('.png', 'Img')}`);
     // return `${img.replace('.png', '')}`;
@@ -113,9 +130,7 @@ class menuCatView {
         { catgId: productCatgId, name, price, qty, img, special_deal },
       ] of Object.entries(this.#data.menuItems)) {
         if (productCatgId === categoryId) {
-          markup.push(`<div class="menu-item ${
-            special_deal ? 'menu-item-special__link' : 'menu-item__link'
-          }" data-item-id="${key}">
+          markup.push(`<div class="menu-item" data-item-id="${key}">
          <!-- <div class="menu-item__image"><img src="/${img}" crossorigin></div> -->
                           <div class="menu-item__image"><img src="${this._loadImg(
                             img
@@ -124,7 +139,11 @@ class menuCatView {
                             <div class="menu-item__info"><img src="${infoIcon}" crossorigin></div>
                             <h3 class="heading--tertiary menu-item__title">${name}</h3>
                             <div class="menu-item__price">$ ${price}</div>
-                           <!-- <button  data-item-id="${key}">Select</button> -->
+                            <button class="${
+                              special_deal
+                                ? 'menu-item__button-special'
+                                : 'menu-item__button'
+                            }"  data-item-id="${key}">Add</button>
                           </div>
                       </div>`);
         }

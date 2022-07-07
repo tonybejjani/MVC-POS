@@ -42,10 +42,26 @@ class orderItemView {
       )}"] .itemQty`
     );
 
-    this.#itemQty.textContent = currItemLog.qty;
+    setTimeout(
+      this._setQtyEffectIn.bind(this, this.#itemQty, currItemLog),
+      200
+    );
+    setTimeout(this._setQtyEffectOut.bind(this, this.#itemQty), 400);
+
     this.#itemQty.parentElement.previousElementSibling.querySelector(
       '.totalPrice'
     ).textContent = currItemLog.totalPrice.toFixed(2);
+  }
+
+  _setQtyEffectIn(el, currItemLog) {
+    el.textContent = currItemLog.qty;
+    el.style.color = '#000';
+    el.style.backgroundColor = '#fffb2b';
+  }
+
+  _setQtyEffectOut(el) {
+    el.style.color = '#fff';
+    el.style.backgroundColor = '#393c49';
   }
 
   setBtnEl(btn) {

@@ -77,6 +77,11 @@ class orderSidebarView {
     ).innerHTML = '';
   }
 
+  togglePanelEvent() {
+    const panelBtnEl = document.querySelector('.curr-order__toggle-btn');
+    panelBtnEl.click();
+  }
+
   addHandlertogglePanel() {
     const panelBtnEl = document.querySelector('.curr-order__toggle-btn');
     const panelEl = document.querySelector('.curr-order');

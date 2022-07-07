@@ -39,11 +39,10 @@ class controllerHome {
   }
 
   _controlOrderItemForm(btn) {
-    // set btn El global in view
+    // set btnEl global in view
     orderItemView.setBtnEl(btn);
 
-    // The items selected individually from the menu (meaning not in a "special mix")
-    // are not special Items === false
+    // The items selected individually from the menu (meaning not in a "special mix") are not special Items === false
     const specialItem = false;
 
     // Retrieve data from state of item
@@ -96,6 +95,9 @@ class controllerHome {
 
     // Enable Submit Order Btn if state is not empty
     this._controlSubmitOrder();
+
+    // Set Btn special effect
+    menuItemsView.setBtnEffect(btn);
   }
 
   _controlPayMethod(btnClick, btns) {
@@ -164,6 +166,9 @@ class controllerHome {
 
     // increment order counter
     navbarView.setCounterVal(model.state.orders.length);
+
+    //if on mobile, close sidebar panel
+    orderSidebarView.togglePanelEvent();
   }
 
   _controlOrderSpecialMix(totalPcs, specialMixPrice) {
