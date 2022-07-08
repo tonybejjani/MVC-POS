@@ -94,7 +94,7 @@ class orderSidebarView {
   _generateMarkup() {
     return `
     <div class="curr-order">
-      <div class="curr-order__toggle-btn">Check Out</div>
+      <span class="curr-order__toggle-btn">Check Out</span>
       <div class="curr-order__heading">
         <div class="curr-order__heading-client-info">
           <div><label>Order #</label><input type="text" placeholder="123" class="curr-order-number"></div>

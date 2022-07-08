@@ -53,16 +53,18 @@ class orderSpecialItemView {
       this.#data.itemId
     }">
                 <div class="item-content__thumb special-content__thumb">
-                    <div class="thumb__image"><img src="${this._loadImg(
-                      this.#data.img
-                    )}" crossorigin></div>
-                    <div class="thumb__title special-thumb__title">
-                      <span>${this.#data.name}</span></div>
+                    <div class="thumb__image">
+                      <img src="${this._loadImg(this.#data.img)}">
                     </div>
-                    <div class="curr-order__item__qty">
-                      <span class="itemQty">${this.#data.qty}</span>
+                    <div class="thumb__title special-thumb__title">
+                      <span>${this.#data.name}</span>
                     </div>
                 </div>
+                <div class="curr-order__item__qty">
+                  <span class="itemQty">${this.#data.qty}</span>
+                </div>
+                    
+                
             </div>`;
   }
 }

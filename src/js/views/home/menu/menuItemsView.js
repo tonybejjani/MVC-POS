@@ -51,7 +51,7 @@ class menuCatView {
 
   setBtnEffect(btn) {
     setTimeout(function () {
-      btn.innerHTML = '&#10004;';
+      btn.innerHTML = '&#10003;';
       btn.style.backgroundColor = '#fffb2b';
       btn.style.color = '#000';
       btn.style.fontSize = '3rem';
@@ -131,14 +131,14 @@ class menuCatView {
       ] of Object.entries(this.#data.menuItems)) {
         if (productCatgId === categoryId) {
           markup.push(`<div class="menu-item" data-item-id="${key}">
-         <!-- <div class="menu-item__image"><img src="/${img}" crossorigin></div> -->
+         <!-- <div class="menu-item__image"><img src="/${img}"></div> -->
                           <div class="menu-item__image"><img src="${this._loadImg(
                             img
-                          )}" crossorigin></div>
+                          )}"></div>
                           <div class="menu-item__details">
-                            <div class="menu-item__info"><img src="${infoIcon}" crossorigin></div>
+                            <div class="menu-item__info"><img src="${infoIcon}"></div>
                             <h3 class="heading--tertiary menu-item__title">${name}</h3>
-                            <div class="menu-item__price">$ ${price}</div>
+                            <span class="menu-item__price">$ ${price}</span>
                             <button class="${
                               special_deal
                                 ? 'menu-item__button-special'

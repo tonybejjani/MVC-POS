@@ -92,7 +92,7 @@
 
       @include respond (sm-desktop) { 
         font-size: 1.8rem;
-        font-weight: 300;
+        font-weight: 500;
        }
 
        @include respond(tab-port) {
@@ -103,7 +103,6 @@
       @include respond(tab-port-sm) {
         font-size: 1.8rem;
       }
-      
     }
 
   }
@@ -618,12 +617,9 @@
     }
 
     &-details .curr-order__item:last-child {
-      border: none;
+      border-bottom: none;
     }
 
-    &-details .curr-order__item:last-child {
-      border: none;
-    }
 }
 
 // 3- CURRENT ORDER ITEM */
@@ -634,8 +630,12 @@
     margin-bottom: 3rem;
     align-items: center;
     padding-bottom: 2rem;
-    border-bottom: 1px solid $color-dark--3;
+    border-bottom: 1px solid $color-dark--3; 
     justify-content: space-between;
+
+    & + .curr-order__items-special-container {
+      margin-top: -2.9rem;
+    }
 
     &-special {
       margin-left: 2rem;

@@ -10,7 +10,7 @@ class navbarView {
 
   _generateMarkup() {
     return `
-    <div class="main"></div>`;
+    <main class="main"></main>`;
   }
 }
 

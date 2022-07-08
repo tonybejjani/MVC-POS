@@ -40,14 +40,14 @@ class navbarView {
     <div class="navbar">
       <div class="navbar__logo"><img src="${logoImg}" crossorigin>
       </div>
-      <div class="navbar__links">
+      <nav class="navbar__links">
         
         <a class="navbar__link navbar__link-home navbar__link--active" href="#home"></a>
         <a class="navbar__link navbar__link-cook " href="#orders"><span class="navbar__link-cook-counter hidden"></span></a>
         <a class="navbar__link navbar__link-dash " href="#dashboard"></a>
         <a class="navbar__link navbar__link-settings " href="#settings"></a>
         <a class="navbar__link navbar__link-logout " href="#logout"></a>
-      </div>
+      </nav>
     </div>`;
   }
 }
