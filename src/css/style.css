@@ -289,30 +289,33 @@ ul {
   height: 25%;
   width: 100%; }
 
-.content {
-  height: 100vh;
+.container {
+  width: 120rem;
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
-  background-color: #252836;
+  background-image: linear-gradient(to bottom right, #f6f7f9, #c9cdd3);
+  grid-template-rows: 83.6rem;
+  grid-template-columns: 7.7% 92.3%;
+  margin: 4rem auto;
   display: grid;
-  grid-template-rows: 100vh;
-  grid-template-columns: 7.7% 92.3%; }
-  .content::-webkit-scrollbar {
+  box-shadow: 0 2rem 6rem #0000004d;
+  max-height: 83.4rem; }
+  .container::-webkit-scrollbar {
     width: 0.25em; }
-  .content::-webkit-scrollbar-track {
+  .container::-webkit-scrollbar-track {
     background: #1f1d2b; }
   @media (max-width: 56.25em) {
-    .content {
+    .container {
       grid-template-rows: 7% 93%;
       grid-template-columns: 1fr;
       overflow-y: hidden; } }
   @media (max-width: 46.87em) {
-    .content {
+    .container {
       grid-template-rows: 8% 92%; } }
 
 .home {
   display: grid;
-  grid-template-rows: 100vh;
+  grid-template-rows: 83.3rem;
   grid-template-columns: 62% 38%; }
   @media (max-width: 75em) {
     .home {

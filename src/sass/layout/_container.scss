@@ -1,11 +1,14 @@
-.content {
-  height: 100vh;
+.container {
+  width: 120rem;
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
-  background-color: $color-dark--2;
-  display: grid;
-  grid-template-rows: 100vh;
+  background-image: linear-gradient(to bottom right, #f6f7f9, #c9cdd3);
+  grid-template-rows: 83.6rem;
   grid-template-columns: 7.7% 92.3%;
+  margin: 4rem auto;
+  display: grid;
+  box-shadow: 0 2rem 6rem #0000004d;
+  max-height: 83.4rem;
 
   &::-webkit-scrollbar {
     width: 0.25em;
@@ -28,3 +31,4 @@
   //   grid-template-columns: 6.7% 93.3%;
   // }
 }
+

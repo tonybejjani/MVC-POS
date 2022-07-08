@@ -1,6 +1,6 @@
 .home {
   display: grid;
-  grid-template-rows: 100vh;
+  grid-template-rows: 83.3rem;
   grid-template-columns: 62% 38%;
 
   @include respond(tab-land) {
