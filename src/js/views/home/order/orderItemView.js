@@ -24,20 +24,22 @@ class orderItemView {
   #btn;
 
   render(data) {
-    this.#parentElement = document.querySelector('.curr-order__items-details');
+    this.#parentElement = document.querySelector(
+      '.menu-sidebar__items-details'
+    );
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
   addHandlerRender(handler) {
-    const deleteBtn = document.querySelector('.curr-order__item__remove');
+    const deleteBtn = document.querySelector('.menu-sidebar__item__remove');
     deleteBtn.addEventListener('click', handler);
   }
 
   updateItemTotalPrice(itemId, currItemLog) {
     this.#itemQty = document.querySelector(
-      `.curr-order__item.curr-order__item-normal[data-item-id="${Number(
+      `.menu-sidebar__item.menu-sidebar__item-normal[data-item-id="${Number(
         itemId
       )}"] .itemQty`
     );
@@ -74,7 +76,7 @@ class orderItemView {
 
   removeItem(itemId) {
     const orderItem = document.querySelector(
-      `.curr-order__item.curr-order__item-normal[data-item-id="${Number(
+      `.menu-sidebar__item.menu-sidebar__item-normal[data-item-id="${Number(
         itemId
       )}"]`
     );
@@ -123,7 +125,7 @@ class orderItemView {
       }
   }
   _generateMarkup() {
-    return `<div class="curr-order__item curr-order__item-normal" data-item-id="${
+    return `<div class="menu-sidebar__item menu-sidebar__item-normal" data-item-id="${
       this.#data.itemId
     }">
                 <div class="item-content__thumb">
@@ -140,15 +142,15 @@ class orderItemView {
                 </div>
         
               
-                <div class="curr-order__item__total">
+                <div class="menu-sidebar__item__total">
                   <span class="item__currency">$ </span> 
                   <span class="totalPrice">${this.#data.price.toFixed(2)}</span>
                 </div>
 
-                <div class="curr-order__item__qty">
+                <div class="menu-sidebar__item__qty">
                   <span class="itemQty">${this.#data.qty}</span>
                 </div>
-              <div class="curr-order__item__remove"> <img src="${trash}#trash" crossorigin></div>
+              <div class="menu-sidebar__item__remove"> <img src="${trash}#trash" crossorigin></div>
                     
               
             </div>`;

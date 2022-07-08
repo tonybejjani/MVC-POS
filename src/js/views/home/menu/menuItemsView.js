@@ -42,11 +42,11 @@ class menuCatView {
   }
 
   getMenuItem(item) {
-    return item.querySelector('.curr-order__item__qty-num');
+    return item.querySelector('.menu-sidebar__item__qty-num');
   }
 
   getMenuItemText(item) {
-    return item.querySelector('.curr-order__item__qty-num').textContent;
+    return item.querySelector('.menu-sidebar__item__qty-num').textContent;
   }
 
   setBtnEffect(btn) {

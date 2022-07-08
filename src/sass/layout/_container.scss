@@ -1,14 +1,13 @@
 .container {
-  width: 120rem;
+  max-width: 120rem;
+  margin:  4rem auto;
+  height: 83.4rem;
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
-  background-image: linear-gradient(to bottom right, #f6f7f9, #c9cdd3);
-  grid-template-rows: 83.6rem;
+  background-color: #fff;
+  grid-template-rows: 100%;
   grid-template-columns: 7.7% 92.3%;
-  margin: 4rem auto;
   display: grid;
-  box-shadow: 0 2rem 6rem #0000004d;
-  max-height: 83.4rem;
 
   &::-webkit-scrollbar {
     width: 0.25em;
@@ -26,9 +25,9 @@
     grid-template-rows: 8% 92%;
   }
 
-
-  // @include respond (md-laptop) {
-  //   grid-template-columns: 6.7% 93.3%;
-  // }
 }
 
+.main {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}

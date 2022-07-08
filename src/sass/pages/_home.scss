@@ -1,6 +1,6 @@
 .home {
   display: grid;
-  grid-template-rows: 83.3rem;
+  grid-template-rows: 100%;
   grid-template-columns: 62% 38%;
 
   @include respond(tab-land) {
@@ -27,10 +27,11 @@
 /// MENU 
 
 .menu {
-  padding: 5rem;
-  background-color: $color-dark--2;
+  padding: 2.4rem 2.4rem 2.4rem 3.9rem;
+  margin-left: -1.5rem;
+  background-image: linear-gradient(164deg,#2f323f, #201e2c);
   overflow: hidden;
-  height: 100%; 
+  height: 83.4rem; 
   display: flex;
   flex-direction: column;
 
@@ -45,10 +46,10 @@
   &-navbar {
     display: flex;
     width: 100%;
-    gap: 6rem;
+    gap: 4.5rem;
     margin-bottom: 3rem;
     margin-top: 3rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid #393c49;
     
 
@@ -79,16 +80,18 @@
     }
 
     &__active {
-      border-bottom: 0.5rem solid $color-brand--1;
+      border-bottom: 0.3rem solid $color-brand--1;
       border-radius: 2px;
+      color: $color-brand--1;
     }
 
     &__link {
       text-decoration: none;
-      font-size: 2rem;
-      font-weight: 400;
+      font-size: 1.6rem;
+      font-weight: 600;
       cursor: pointer;
-      padding-bottom: 2rem;
+      padding-bottom: 1rem;
+      letter-spacing: 0.2px;
 
       @include respond (sm-desktop) { 
         font-size: 1.8rem;
@@ -130,9 +133,9 @@
     }
   
     &__date {
-      color: $color-light--2;
-      font-size: 2rem;
-      font-weight: 300;
+      color: $color-light--4;
+      font-size: 1.6rem;
+      font-weight: 400;
 
       @include respond (sm-desktop) { 
         font-size: 1.8rem;
@@ -150,7 +153,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
-  gap: 8rem;
+  column-gap: 2.8rem;
+  row-gap: 6.4rem;
   justify-content: flex-start;
 
   @include respond (sm-desktop) { 
@@ -179,10 +183,9 @@
 .menu-item {
     background-color: $color-dark--1;
     position: relative;
-    border-bottom: 2px solid $color-dark--0;
-    border-radius: 1rem;
-    height: 25rem;
-    width: 24rem;
+    border-radius: 1.6rem;
+    height: 22.6rem;
+    width: 19.2rem;
     text-align: center;
     cursor: pointer;
 
@@ -203,11 +206,10 @@
     }
 
     &__image img {
-      width: 15.2rem;
-      height: 15.2rem;
+      width: 13.2rem;
       position: absolute;
-      top: -21%;
-      right: 19%;
+      top: -19%;
+      right: 16%;
 
       @include respond (sm-desktop) { 
         width: 14.2rem;
@@ -238,8 +240,7 @@
       display: flex;
       flex-direction: column;
       justify-content: end;
-      gap: 1rem;
-      padding-top: 10rem;
+      gap: 0.5rem;
 
       @include respond (tab-land) { 
         padding-top: 0rem;
@@ -260,11 +261,11 @@
     }
 
     &__title {
-      font-weight: 200;
+     
       letter-spacing: 0.2px;
       padding: 0 2rem;
       line-height: 1.6;
-      font-weight: 300;
+
       margin: 0 auto;
 
       @include respond (tab-land) { 
@@ -278,7 +279,10 @@
     }
 
     &__price {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
+      font-weight: 400;
+      padding-bottom: 1rem;
+      color: $color-light--2; 
 
       @include respond (tab-land) { 
         font-size: 2rem;
@@ -291,8 +295,8 @@
 
     &__info {
       position: absolute;
-      top: 9.5rem;
-      right: 2.5rem;
+      top: 8rem;
+      right: 2.4rem;
 
       @include respond (tab-land) { 
         top: 2rem;
@@ -301,7 +305,7 @@
     }
 
     &__info img {
-      width: 2.5rem;
+      width: 2rem;
       cursor: pointer;
     }
     
@@ -309,14 +313,15 @@
     &__button-special {
       height: 5rem;
       color: $color-brand--1;
-      letter-spacing: .2px;
+      letter-spacing: .5px;
       background: none;
-      border: 1px $color-light--2;
+      border: 0.2px $color-light--2;
       border-style: solid;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 600;
       flex-shrink: 0;
       text-transform: uppercase;
+      border-radius: 1.2rem;
 
       @include respond (tab-land) {
         width: 10rem;
@@ -330,26 +335,32 @@
         margin-right: 2rem;
         transition: all 0.2s ease-out;
       }
-    }
-  
-    &__button:hover,
-    &__button-special:hover {
-      background: $color-brand--1;
-      color: $color-dark--1;
-      border-color: $color-brand--1;
-      cursor: pointer;
-    }
-  
-    &__button:active,
-    &__button-special:active {
-      border: 1px $color-dark--1;
-      border-style: solid;
-    }
 
-    &__button:visited,
-    &__button-special:visited {
-      background: none;
+      &:hover,
+      &:hover,
+      &:focus,
+      &:focus {
+        background: $color-brand--1;
+        color: $color-dark--1;
+        border-color: $color-brand--1;
+        cursor: pointer;
+      }
+    
+      &:active,
+      &:active {
+        border: 1px $color-dark--1;
+        border-style: solid;
+      }
+  
+      &:visited,
+      &:visited {
+        background: none;
+      }
+
+      
     }
+  
+   
 
 
 }
@@ -381,18 +392,18 @@
       font-size: 2.4rem;
     }
 
-    .curr-order__item__qty-num {
+    .menu-sidebar__item__qty-num {
       color: $color-brand--1;
     } 
     
-    .curr-order__item__qty {
+    .menu-sidebar__item__qty {
       justify-content: end;
       padding-right: 1.3rem;
       margin-bottom: 4rem;
       gap: 2rem;
     }
     
-    .curr-order__item__qty p {
+    .menu-sidebar__item__qty p {
       align-self: center;
       font-size: 2.4rem;
       font-style: italic;
@@ -426,13 +437,13 @@
     flex-grow: 1;
   }
 
-  .curr-order__item__qty {
+  .menu-sidebar__item__qty {
     justify-self: end;
     display: flex;
     gap: 2rem;
   }
 
-  .curr-order__item__qty button {
+  .menu-sidebar__item__qty button {
     width: 5rem;
     font-weight: 300;
     font-size: 4rem;
@@ -446,13 +457,15 @@
 // CURRENT ORDER
 
 // 1- CURRENT ORDER HEADING */
-.curr-order {
+.menu-sidebar {
   background-color: $color-dark--1;
   padding: 3rem;
   display: flex;
   flex-direction: column;
   border-left: 1px solid $color-dark--0;
   gap: 2rem;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
 
 
   @include respond (md-laptop) {
@@ -467,7 +480,7 @@
     height: 100vh;
     transition: all 0.3s ease-out;
 
-    &.curr-order__toggle-panel {
+    &.menu-sidebar__toggle-panel {
       right: 0;
       
     }
@@ -477,7 +490,7 @@
     width: 42rem;
     right: -42rem;
   
-    &.curr-order__toggle-panel {
+    &.menu-sidebar__toggle-panel {
       right: 0;
       
     }
@@ -489,7 +502,7 @@
     gap: 1rem;
   }
 
-  & .curr-order__toggle-btn {
+  & .menu-sidebar__toggle-btn {
     display: none;
 
     @include respond (tab-port-sm) {
@@ -570,7 +583,7 @@
 }
 
 // 2- CURRENT ORDER ITEMS */
-.curr-order__items {
+.menu-sidebar__items {
 
     display: flex;
     flex-direction: column;
@@ -587,7 +600,7 @@
     }
 
     &-container {
-      height: 58vh;
+      height: 48vh;
       border-bottom: 1px solid $color-dark--3;
     }
   
@@ -616,14 +629,14 @@
       }  
     }
 
-    &-details .curr-order__item:last-child {
+    &-details .menu-sidebar__item:last-child {
       border-bottom: none;
     }
 
 }
 
 // 3- CURRENT ORDER ITEM */
-.curr-order__item {
+.menu-sidebar__item {
 
     display: flex;
     gap: 2rem;
@@ -633,7 +646,7 @@
     border-bottom: 1px solid $color-dark--3; 
     justify-content: space-between;
 
-    & + .curr-order__items-special-container {
+    & + .menu-sidebar__items-special-container {
       margin-top: -2.9rem;
     }
 
@@ -660,7 +673,7 @@
     
     }
     
-    &.special-grid .curr-order__item__qty {
+    &.special-grid .menu-sidebar__item__qty {
       grid-column-start: 1;
       grid-column-end: 3;
       grid-row-start: 1;
@@ -774,7 +787,7 @@
 }
 
 // 4- CURRENT ORDER TRANSACTION
-.curr-order__transaction {
+.menu-sidebar__transaction {
 
   display: grid;
   grid-template-columns: 61% 39%;
@@ -877,11 +890,11 @@
 
     }
 
-    &__credit.curr-order__transaction-pay-btn--active {
+    &__credit.menu-sidebar__transaction-pay-btn--active {
       background-image: url('url:../img/icon/subtract--light.svg');
     }
 
-    &__cash.curr-order__transaction-pay-btn--active {
+    &__cash.menu-sidebar__transaction-pay-btn--active {
       background-image: url('url:../img/icon/wallet--light.svg');
     }
 
@@ -917,7 +930,7 @@
 }
 
 // 5- CURRENT ORDER FOOTER
-.curr-order__footer {
+.menu-sidebar__footer {
   &-submit-btn {
     height: 6rem;
     padding: 0rem 1rem;

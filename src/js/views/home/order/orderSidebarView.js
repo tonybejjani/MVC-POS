@@ -14,7 +14,7 @@ class orderSidebarView {
 
   addHandlerPayMethod(handler) {
     const payBtns = document.querySelectorAll(
-      '.curr-order__transaction-pay-btn'
+      '.menu-sidebar__transaction-pay-btn'
     );
     payBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn, payBtns));
@@ -23,39 +23,39 @@ class orderSidebarView {
 
   updateOrderPrice(total) {
     const totalEl = document.querySelector(
-      '.curr-order__transaction-total-price span'
+      '.menu-sidebar__transaction-total-price span'
     );
     totalEl.textContent = Number(total).toFixed(2);
   }
 
   getSubmitBtnEl() {
-    return document.querySelector('.curr-order__footer-submit-btn');
+    return document.querySelector('.menu-sidebar__footer-submit-btn');
   }
 
   disablePayMethod() {
     const payMethodBtn = document.querySelectorAll(
-      '.curr-order__transaction-pay-btn'
+      '.menu-sidebar__transaction-pay-btn'
     );
 
     payMethodBtn.forEach((btn) => {
-      btn.classList.remove('curr-order__transaction-pay-btn--active');
+      btn.classList.remove('menu-sidebar__transaction-pay-btn--active');
     });
   }
 
   removePayMethod() {
     const payMethodBtn = document.querySelectorAll(
-      '.curr-order__transaction-pay-btn'
+      '.menu-sidebar__transaction-pay-btn'
     );
     this.#btnPayIsClicked = false;
 
     payMethodBtn.forEach((btn) => {
-      btn.classList.remove('curr-order__transaction-pay-btn--active');
+      btn.classList.remove('menu-sidebar__transaction-pay-btn--active');
     });
   }
 
   triggerPayMethod() {
     const payMethodBtn = document.querySelector(
-      '.curr-order__transaction-pay__credit'
+      '.menu-sidebar__transaction-pay__credit'
     );
 
     payMethodBtn.click();
@@ -73,60 +73,60 @@ class orderSidebarView {
 
   clearOrders() {
     document.querySelector(
-      '.curr-order__items .curr-order__items-details'
+      '.menu-sidebar__items .menu-sidebar__items-details'
     ).innerHTML = '';
   }
 
   togglePanelEvent() {
-    const panelBtnEl = document.querySelector('.curr-order__toggle-btn');
+    const panelBtnEl = document.querySelector('.menu-sidebar__toggle-btn');
     panelBtnEl.click();
   }
 
   addHandlertogglePanel() {
-    const panelBtnEl = document.querySelector('.curr-order__toggle-btn');
-    const panelEl = document.querySelector('.curr-order');
+    const panelBtnEl = document.querySelector('.menu-sidebar__toggle-btn');
+    const panelEl = document.querySelector('.menu-sidebar');
 
     panelBtnEl.addEventListener('click', function () {
-      panelEl.classList.toggle('curr-order__toggle-panel');
+      panelEl.classList.toggle('menu-sidebar__toggle-panel');
     });
   }
 
   _generateMarkup() {
     return `
-    <div class="curr-order">
-      <span class="curr-order__toggle-btn">Check Out</span>
-      <div class="curr-order__heading">
-        <div class="curr-order__heading-client-info">
-          <div><label>Order #</label><input type="text" placeholder="123" class="curr-order-number"></div>
+    <div class="menu-sidebar">
+      <span class="menu-sidebar__toggle-btn">Check Out</span>
+      <div class="menu-sidebar__heading">
+        <div class="menu-sidebar__heading-client-info">
+          <div><label>Order #</label><input type="text" placeholder="123" class="menu-sidebar-number"></div>
         </div>
-        <!--<div class="curr-order__heading-tab">
-          <p class="curr-order__heading-tab-item">Item</p>
-          <p class="curr-order__heading-tab-price">Price</p>
-          <p class="curr-order__heading-tab-qty">Qty</p>
+        <!--<div class="menu-sidebar__heading-tab">
+          <p class="menu-sidebar__heading-tab-item">Item</p>
+          <p class="menu-sidebar__heading-tab-price">Price</p>
+          <p class="menu-sidebar__heading-tab-qty">Qty</p>
         </div>-->
       </div>
-      <div class="curr-order__items">
-        <div class="curr-order__items-container">
-          <div class="curr-order__items-details"></div>
+      <div class="menu-sidebar__items">
+        <div class="menu-sidebar__items-container">
+          <div class="menu-sidebar__items-details"></div>
         </div>
       </div>   
-      <div class="curr-order__transaction">
-            <div class="curr-order__transaction-total">
-            <p class="curr-order__transaction-total-title">Sub total</p>
-            <p class="curr-order__transaction-total-price">$ <span>0.00</span></p>
+      <div class="menu-sidebar__transaction">
+            <div class="menu-sidebar__transaction-total">
+            <p class="menu-sidebar__transaction-total-title">Sub total</p>
+            <p class="menu-sidebar__transaction-total-price">$ <span>0.00</span></p>
           </div>
-          <div class="curr-order__transaction-note">
+          <div class="menu-sidebar__transaction-note">
             <input type="text" placeholder=" Order Note...">
           </div>
-          <div class="curr-order__transaction-pay">
-            <button type="button" class="curr-order__transaction-pay-btn curr-order__transaction-pay__credit" >Credit Card</button>
-            <button type="button" class="curr-order__transaction-pay-btn curr-order__transaction-pay__cash " >Cash</button>
+          <div class="menu-sidebar__transaction-pay">
+            <button type="button" class="menu-sidebar__transaction-pay-btn menu-sidebar__transaction-pay__credit" >Credit Card</button>
+            <button type="button" class="menu-sidebar__transaction-pay-btn menu-sidebar__transaction-pay__cash " >Cash</button>
           </div>
         </div>
        
-        <div class="curr-order__footer">
-          <button type="button" class="curr-order__footer-save-btn hidden">Save Order</button>
-          <button type="button" class="curr-order__footer-submit-btn disabled" >Submit Order</button>
+        <div class="menu-sidebar__footer">
+          <button type="button" class="menu-sidebar__footer-save-btn hidden">Save Order</button>
+          <button type="button" class="menu-sidebar__footer-submit-btn disabled" >Submit Order</button>
         </div>   
     </div> `;
   }

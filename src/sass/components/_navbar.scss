@@ -1,26 +1,19 @@
 /* NAVBAR */
 .navbar {
   background-color: $color-dark--1;
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding: 4rem 0;
   z-index: 0;
 
-
   @include respond(tab-land) {
     flex-direction: row;
     border-radius:0%;
   }
 
-  &__logo  {
-    // background-image: url('../img/general/logo.png');
-    // background-size:10.4rem;
-    // background-repeat: no-repeat;
-    // padding: 5.2rem;
-    // align-self: center;
+  &__logo  { 
     
     align-self: center;
 
@@ -29,7 +22,7 @@
     }
     
     img {
-      width: 10rem;
+      width: 7rem;
       
       @include respond (lg-laptop) { 
         width: 9rem;
@@ -62,10 +55,10 @@
 
   &__link {
     display: block;
-    padding: 3.2rem;
-    border-radius: 14px;
+    padding: 2.6rem;
+    border-radius: 8px;
     background-repeat: no-repeat;
-    background-size: 2.8rem;
+    background-size: 2.4rem;
     background-position: center;
     align-self: center;
 
@@ -133,7 +126,7 @@
     &--active {
       background-color: $color-brand--1;
       box-shadow: 0px 0px 23px -8px $color-brand--1;
-      border-radius: 14px;
+      border-radius: 8px;
       position: relative;
 
       @include respond (lg-laptop) { 
@@ -148,10 +141,10 @@
       &::before {
         content: "";
         background-color: $color-dark--3;
-        padding: 4.4rem;
+        padding: 3.4rem;
         position: absolute; 
         transform: translate(-50%, -50%);
-        border-radius: 14px;
+        border-radius: 8px;
         z-index: -1;
 
         @include respond (lg-laptop) { 

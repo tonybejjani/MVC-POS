@@ -8,10 +8,9 @@ export const state = {
   orders: [],
   currentOrderLog: {},
   info: {
-    logo: 'src/img/general/LOGO.png',
+    logo: 'src/img/general/LOGO-01.png',
     title: 'Yumcha Eat St.',
     date: 'Tuesday, 9 Nov 2022',
-    title: 'Choose Dishes',
   },
 
   menuCategories: {

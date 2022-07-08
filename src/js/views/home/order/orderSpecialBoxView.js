@@ -7,7 +7,9 @@ class orderSpecialBoxView {
   #data;
 
   render(data) {
-    this.#parentElement = document.querySelector('.curr-order__items-details');
+    this.#parentElement = document.querySelector(
+      '.menu-sidebar__items-details'
+    );
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
@@ -15,7 +17,7 @@ class orderSpecialBoxView {
 
   checkSpecialEditId(totalPcs, specialMixPrice, specialEditId) {
     const specialContainerItems = document.querySelectorAll(
-      `.curr-order__items-special-container[data-special-item-id='${specialEditId}'] .curr-order__item`
+      `.menu-sidebar__items-special-container[data-special-item-id='${specialEditId}'] .menu-sidebar__item`
     );
 
     specialEditId
@@ -33,21 +35,21 @@ class orderSpecialBoxView {
   }
 
   _generateMarkup() {
-    return `<div class="curr-order__items-special-container" data-special-item-id="${
+    return `<div class="menu-sidebar__items-special-container" data-special-item-id="${
       this.#data.specialEditId
     }">
-              <div class="curr-order__items-special-container__header">
+              <div class="menu-sidebar__items-special-container__header">
               
-                <h3 class="curr-order__items-special-container__header-heading">MIX ${
+                <h3 class="menu-sidebar__items-special-container__header-heading">MIX ${
                   this.#data.totalPcs
                 } PCS FOR $ ${this.#data.specialMixPrice}</h3> 
               
-               <div class="curr-order__item__remove" data-special-item-id="${
+               <div class="menu-sidebar__item__remove" data-special-item-id="${
                  this.#data.specialEditId
                }">
                 <img src="${trash}#trash" crossorigin>
                </div>
-               <div class="curr-order__item__edit" data-special-item-id="${
+               <div class="menu-sidebar__item__edit" data-special-item-id="${
                  this.#data.specialEditId
                }">
                 <img src="${edit}" crossorigin>
