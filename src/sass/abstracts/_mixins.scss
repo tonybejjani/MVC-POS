@@ -23,26 +23,26 @@ ORDER: Base + typography > general layout + grid > page layout > components
 
 @mixin respond($breakpoint) {
 
-  @if $breakpoint == med-desktop {
-    @media (max-width:112.5em)
-    {@content}; //1800px
-  }
+  // @if $breakpoint == med-desktop {
+  //   @media (max-width:112.5em)
+  //   {@content}; //1800px
+  // }
 
-  @if $breakpoint == sm-desktop {
-    @media (max-width:97.5em)
-    {@content}; //1560px
-  }
+  // @if $breakpoint == sm-desktop {
+  //   @media (max-width:97.5em)
+  //   {@content}; //1560px
+  // }
 
  
-  @if $breakpoint == lg-laptop {
-    @media (max-width:90em)
-    {@content}; //1440px
-  }
+  // @if $breakpoint == lg-laptop {
+  //   @media (max-width:90em)
+  //   {@content}; //1440px
+  // }
 
-  @if $breakpoint == md-laptop {
-    @media (max-width:85.62em)
-    {@content}; //1370px
-  }
+  // @if $breakpoint == md-laptop {
+  //   @media (max-width:85.62em)
+  //   {@content}; //1370px
+  // }
 
   @if $breakpoint == tab-land {
     @media (max-width: 75em) {@content }; //1200px
@@ -76,8 +76,8 @@ ORDER: Base + typography > general layout + grid > page layout > components
     @media (max-width: 28em) {@content }; //400px
   }
 
-  @if $breakpoint == big-desktop {
-    @media (min-width: 112.5em) {@content }; //1800px
-  }
+  // @if $breakpoint == big-desktop {
+  //   @media (min-width: 112.5em) {@content }; //1800px
+  // }
 
 }

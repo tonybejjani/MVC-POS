@@ -1,9 +1,9 @@
 
 button {
-  background: $color-brand--1;
+  background-color: $color-brand--1;
   border: none;
   border-radius: 1rem;
-  transition: all 0.2s;
+  transition: background-color 0.2s;
   font-size: 1.6rem;
   font-weight: 600;
   font-family: 'barlow', sans-serif;

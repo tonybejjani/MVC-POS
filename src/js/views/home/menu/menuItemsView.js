@@ -51,10 +51,9 @@ class menuCatView {
 
   setBtnEffect(btn) {
     setTimeout(function () {
-      btn.innerHTML = '&#10003;';
+      btn.innerHTML = 'Added';
       btn.style.backgroundColor = '#fffb2b';
       btn.style.color = '#000';
-      btn.style.fontSize = '3rem';
       btn.disabled = true;
     }, 100);
 
@@ -62,9 +61,8 @@ class menuCatView {
       btn.innerHTML = 'Add';
       btn.style.backgroundColor = '#1f1d2b';
       btn.style.color = '#fffb2b';
-      btn.style.fontSize = '1.8rem';
       btn.disabled = false;
-    }, 1000);
+    }, 800);
   }
   _loadImg(img) {
     // console.log(`${img.replace('.png', 'Img')}`);
