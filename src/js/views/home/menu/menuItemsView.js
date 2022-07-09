@@ -62,7 +62,7 @@ class menuCatView {
       btn.style.backgroundColor = '#1f1d2b';
       btn.style.color = '#fffb2b';
       btn.disabled = false;
-    }, 800);
+    }, 600);
   }
   _loadImg(img) {
     // console.log(`${img.replace('.png', 'Img')}`);

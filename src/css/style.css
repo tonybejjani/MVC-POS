@@ -101,18 +101,19 @@ ul {
 
 /* NAVBAR */
 .navbar {
+  min-height: 83.4rem;
   background-color: #1f1d2b;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 4rem 0;
+  justify-content: space-around;
   z-index: 0; }
   @media (max-width: 75em) {
     .navbar {
       flex-direction: row;
       border-radius: 0%; } }
   .navbar__logo {
+    height: 5%;
     align-self: center; }
     @media (max-width: 75em) {
       .navbar__logo {
@@ -123,71 +124,58 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 100%;
+    height: 80%;
     width: 100%; }
     @media (max-width: 56.25em) {
       .navbar__links {
         flex-direction: row; } }
   .navbar__link {
-    display: block;
-    padding: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
-    background-repeat: no-repeat;
-    background-size: 2.4rem;
-    background-position: center;
-    align-self: center; }
+    align-self: center;
+    padding: 1.5rem; }
+    .navbar__link-icon {
+      fill: #FFFB2B;
+      width: 2.4rem;
+      height: 2.4rem; }
     @media (max-width: 56.25em) {
       .navbar__link {
         display: flex;
         flex-direction: row; } }
-    .navbar__link-cook {
-      background-image: url("url:../img/icon/navbar/yellow/cook.svg");
+    .navbar__link-notification {
       position: relative; }
-      .navbar__link-cook-counter {
+      .navbar__link-notification-counter {
         display: flex;
         justify-content: center;
         align-items: center;
         position: absolute;
-        top: -20%;
-        right: -25%;
-        height: 3rem;
-        width: 3rem;
+        top: -7%;
+        right: -4%;
+        height: 2.5rem;
+        width: 2.5rem;
         border-radius: 50%;
         background-color: red;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: 600;
         color: #fff; }
-    .navbar__link-dash {
-      background-image: url("url:../img/icon/navbar/yellow/dashboard.svg"); }
-    .navbar__link-settings {
-      background-image: url("url:../img/icon/navbar/yellow/settings.svg"); }
-    .navbar__link-home {
-      background-image: url("url:../img/icon/navbar/yellow/home.svg"); }
-    .navbar__link-logout {
-      background-image: url("url:../img/icon/navbar/yellow/logout.svg"); }
     .navbar__link--active {
       background-color: #FFFB2B;
       box-shadow: 0px 0px 23px -8px #FFFB2B;
       border-radius: 8px;
-      position: relative; }
+      position: relative;
+      fill: #252836; }
       .navbar__link--active::before {
         content: "";
         background-color: #393c49;
         padding: 3.4rem;
         position: absolute;
-        transform: translate(-50%, -50%);
+        transform: translate(0%, 0%);
         border-radius: 8px;
         z-index: -1; }
-      .navbar__link--active.navbar__link-cook {
-        background-image: url("url:../img/icon/navbar/dark/cook.svg"); }
-      .navbar__link--active.navbar__link-dash {
-        background-image: url("url:../img/icon/navbar/dark/dashboard.svg"); }
-      .navbar__link--active.navbar__link-settings {
-        background-image: url("url:../img/icon/navbar/dark/settings.svg"); }
-      .navbar__link--active.navbar__link-home {
-        background-image: url("url:../img/icon/navbar/dark/home.svg"); }
-      .navbar__link--active.navbar__link-logout {
-        background-image: url("url:../img/icon/navbar/dark/logout.svg"); }
+      .navbar__link--active .navbar__link-icon {
+        fill: #393c49; }
 
 .modal.hidden,
 .overlay.hidden {
@@ -249,7 +237,7 @@ ul {
 
 .container {
   max-width: 120rem;
-  margin: 6rem auto;
+  margin: 5rem auto;
   max-height: 83.4rem;
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
@@ -257,7 +245,7 @@ ul {
   grid-template-rows: 100%;
   grid-template-columns: 7.7% 92.3%;
   display: grid;
-  box-shadow: 2rem 2rem 6rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0rem 2rem 6rem 0.5rem #0000004d;
   border-radius: 1.6rem; }
   .container::-webkit-scrollbar {
     width: 0.25em; }
@@ -671,10 +659,11 @@ ul {
     justify-self: end; }
   .menu-sidebar__item__qty span {
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding: 0.9rem 1.8rem;
     width: 4.4rem;
-    background-color: #393c49;
+    background-color: #252836;
+    border: 1px solid #393c49;
     border-radius: 0.8rem;
     transition: all 0.4s; }
   .menu-sidebar__item__total {

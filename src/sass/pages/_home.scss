@@ -672,11 +672,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
       height: 100%;
-  
-
-    
     }
     
     &.special-grid .menu-sidebar__item__qty {
@@ -690,12 +686,14 @@
     
     &__qty span {
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       padding: 0.9rem 1.8rem;
       width: 4.4rem;
-      background-color: $color-dark--3;
+      background-color: $color-dark--2;
+      border: 1px solid $color-dark--3;
       border-radius: 0.8rem;
       transition: all 0.4s;
+
 
       @include respond (md-laptop) {
         width: 4.4rem;

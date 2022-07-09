@@ -1,6 +1,6 @@
 /** @format */
 import logoImg from 'url:../../../../src/img/general/logo.png';
-
+import sprite from '../../../img/icon/sprite.svg';
 class navbarView {
   #parentElement = document.body;
   #data;
@@ -31,22 +31,45 @@ class navbarView {
   }
 
   setCounterVal(count) {
-    const counterEl = document.querySelector('.navbar__link-cook-counter');
+    const counterEl = document.querySelector(
+      '.navbar__link-notification-counter'
+    );
     counterEl.classList.remove('hidden');
     counterEl.textContent = String(count);
   }
   _generateMarkup() {
     return `
     <div class="navbar">
-      <div class="navbar__logo"><img src="${logoImg}" crossorigin>
+      <div class="navbar__logo"><img src="${logoImg}">
       </div>
       <nav class="navbar__links">
         
-        <a class="navbar__link navbar__link-home navbar__link--active" href="#home"></a>
-        <a class="navbar__link navbar__link-cook " href="#orders"><span class="navbar__link-cook-counter hidden"></span></a>
-        <a class="navbar__link navbar__link-dash " href="#dashboard"></a>
-        <a class="navbar__link navbar__link-settings " href="#settings"></a>
-        <a class="navbar__link navbar__link-logout " href="#logout"></a>
+        <a class="navbar__link navbar__link-home navbar__link--active" href="#home">
+          <svg class="navbar__link-icon"> 
+            <use xlink:href="${sprite + '#icon-Home'}"></use>
+          </svg>
+        </a>
+        <a class="navbar__link navbar__link-notification " href="#orders"><span class="navbar__link-notification-counter hidden"></span>
+          <svg class="navbar__link-icon"> 
+            <use xlink:href="${sprite + '#icon-Notification'}"></use>
+          </svg>
+        </a>
+        <a class="navbar__link navbar__link-dash " href="#dashboard">
+          <svg class="navbar__link-icon"> 
+            <use xlink:href="${sprite + '#icon-Dashboard'}"></use>
+          </svg>
+        </a>
+        <a class="navbar__link navbar__link-settings " href="#settings">
+          <svg class="navbar__link-icon"> 
+            <use xlink:href="${sprite + '#icon-Setting'}"></use>
+          </svg>
+      </a>
+        <a class="navbar__link navbar__link-logout " href="#logout">
+          <svg class="navbar__link-icon"> 
+            <use xlink:href="${sprite + '#icon-Log-Out'}"></use>
+          </svg>
+        </a>
+
       </nav>
     </div>`;
   }

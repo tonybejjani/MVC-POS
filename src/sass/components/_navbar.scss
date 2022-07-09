@@ -1,11 +1,11 @@
 /* NAVBAR */
 .navbar {
+  min-height: 83.4rem;
   background-color: $color-dark--1;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 4rem 0;
+  justify-content: space-around;
   z-index: 0;
 
   @include respond(tab-land) {
@@ -14,7 +14,7 @@
   }
 
   &__logo  { 
-    
+    height: 5%;
     align-self: center;
 
     @include respond (tab-land) {
@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 100%;
+    height: 80%;
     width: 100%;
    
 
@@ -54,36 +54,27 @@
   }
 
   &__link {
-    display: block;
-    padding: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
-    background-repeat: no-repeat;
-    background-size: 2.4rem;
-    background-position: center;
     align-self: center;
+    padding: 1.5rem;
 
-
+      &-icon  {
+        fill: $color-brand--1;
+        width: 2.4rem;
+        height: 2.4rem;
+      }
     //transition: background-color 0.2s;
     @include respond(tab-port) {
       display: flex;
       flex-direction: row;
     }
 
-    @include respond (lg-laptop) {
-      padding: 2.8rem; 
-      background-size: 2.6rem;
-      border-radius: 9px;
-    }
-
-    @include respond (md-laptop) {
-      padding: 2.4rem; 
-      background-size: 2.4rem;
-      border-radius: 8px;
-    }
-
-    //.navbar__link
-    &-cook {
-      background-image: url('url:../img/icon/navbar/yellow/cook.svg');
+    //.navbar__link 
+    &-notification {
+      //background-image: url('url:../img/icon/navbar/yellow/cook.svg');
       position: relative;
 
       &-counter {
@@ -91,35 +82,19 @@
         justify-content: center;
         align-items: center;
         position: absolute;
-        top: -20%;
-        right: -25%;
-        height: 3rem;
-        width: 3rem;
+        top: -7%;
+        right: -4%;
+        height: 2.5rem;
+        width: 2.5rem;
 
         border-radius: 50%;  
         background-color: $color-counter;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: 600;
         color: $color-light--1;
       
 
       }
-    }
-
-    &-dash {
-      background-image: url('url:../img/icon/navbar/yellow/dashboard.svg');
-    }
-
-    &-settings {
-      background-image: url('url:../img/icon/navbar/yellow/settings.svg');
-    }
-
-    &-home {
-      background-image: url('url:../img/icon/navbar/yellow/home.svg');
-    }
-
-    &-logout {
-      background-image: url('url:../img/icon/navbar/yellow/logout.svg');
     }
 
     //.navbar__link
@@ -128,6 +103,9 @@
       box-shadow: 0px 0px 23px -8px $color-brand--1;
       border-radius: 8px;
       position: relative;
+      fill: $color-dark--2;
+
+      
 
       @include respond (lg-laptop) { 
         box-shadow: 0px 0px 36px -8px;
@@ -143,7 +121,7 @@
         background-color: $color-dark--3;
         padding: 3.4rem;
         position: absolute; 
-        transform: translate(-50%, -50%);
+        transform: translate(0%, 0%);
         border-radius: 8px;
         z-index: -1;
 
@@ -158,26 +136,10 @@
         }
       }
 
-      //.navbar__link--active
-      &.navbar__link-cook {
-        background-image: url('url:../img/icon/navbar/dark/cook.svg');
+      & .navbar__link-icon {
+        fill: $color-dark--3;
       }
-      
-      &.navbar__link-dash {
-        background-image: url('url:../img/icon/navbar/dark/dashboard.svg');
-      }
-      
-      &.navbar__link-settings {
-        background-image: url('url:../img/icon/navbar/dark/settings.svg');
-      }
-      
-      &.navbar__link-home {
-        background-image: url('url:../img/icon/navbar/dark/home.svg');
-      }
-      
-      &.navbar__link-logout {
-        background-image: url('url:../img/icon/navbar/dark/logout.svg');
-      }
+
 
     }
   }
