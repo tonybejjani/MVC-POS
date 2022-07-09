@@ -1,5 +1,5 @@
 /** @format */
-import infoIcon from 'url:../../../../img/icon/info-icon.png';
+import sprite from 'url:../../../../img/icon/sprite.svg';
 import mixImg from 'url:../../../../img/menu/mix.png';
 import xlbImg from 'url:../../../../img/menu/xlb.png';
 import hargowImg from 'url:../../../../img/menu/hargow.png';
@@ -134,7 +134,11 @@ class menuCatView {
                             img
                           )}"></div>
                           <div class="menu-item__details">
-                            <div class="menu-item__info"><img src="${infoIcon}"></div>
+                            <div class="menu-item__info">
+                            <svg class="menu-item__info-icon">
+                              <use xlink:href="${sprite + '#icon-Info'}"></use>
+                            </svg>
+                            </div>
                             <h3 class="heading--tertiary menu-item__title">${name}</h3>
                             <span class="menu-item__price">$ ${price}</span>
                             <button class="${

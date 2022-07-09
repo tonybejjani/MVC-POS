@@ -354,7 +354,7 @@ class menuSpecialModalView {
     )) {
       if (catgId === this.#specialBtnCatId && !special_deal)
         markup.push(`<div class="modal-menu-item" data-item-id="${key}">
-                          <img src="${this._loadImg(img)}" crossorigin>
+                          <img src="${this._loadImg(img)}">
                           <div class="modal-menu-item__name">${name}</div>
                           <div class="menu-sidebar__item__qty">
                             <button type="button" class="menu-sidebar__item__qty-decrease disabled" disabled>&#8722;</button>
@@ -366,8 +366,9 @@ class menuSpecialModalView {
     markup.push(`</div>
                     <div class="modal-menu__footer ">
                       <div class="menu-sidebar__item__qty">
+                        <p class="menu-sidebar__item__qty-pcs">Total</p>
                         <span class="total-qty menu-sidebar__item__qty-num">0</span>
-                        <p class="menu-sidebar__item__qty-pcs">pcs</p>
+                        
                       </div>
                         <button class="btnAdd disabled" disabled>Add</button>
                         <button class="btnSave disabled hidden" disabled data-special-item-id="" >Save</button>

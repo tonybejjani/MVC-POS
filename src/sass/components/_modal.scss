@@ -9,10 +9,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 40%;
+  height: 70%;
+  min-width: 40rem;
+  margin: 0 auto;
+  justify-content: space-around;
 
   background-color: $color-dark--1;
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba($color-dark--0,0.3);
   z-index: 10;
@@ -34,13 +37,14 @@
 }
 
 .close-modal {
-  height: 5rem;
-  width: 5rem;
+  flex: 0 0 3rem;
+  height: 2rem;
   font-size: 5rem;
-  text-align: center;
   color:   $color-light--1;
   background: none;
-  align-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 
   &:hover {
     background: none;
