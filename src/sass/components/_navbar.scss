@@ -1,6 +1,6 @@
 /* NAVBAR */
 .navbar {
-  min-height: 83.4rem;
+  height: 83.4rem;
   background-color: $color-dark--1;
   border-radius: 16px;
   display: flex;
@@ -9,8 +9,9 @@
   z-index: 0;
 
   @include respond(tab-land) { 
+    height: 100%;
     flex-direction: row;
-    border-radius:0%;
+    align-items: center;
   }
 
   &__logo  { 
@@ -23,18 +24,6 @@
     
     img {
       width: 7rem;
-      
-      @include respond (lg-laptop) { 
-        width: 9rem;
-        // background-size: 5.2rem;
-      }
-
-      @include respond (md-laptop) { 
-        width: 8rem;
-        // background-size: 5.2rem;
-      }
-
-
     }
 
   }
@@ -47,8 +36,9 @@
     width: 100%;
    
 
-    @include respond(tab-port) {
+    @include respond(tab-land) {
       flex-direction: row;
+      width: 80%;
     }
 
   }
@@ -65,11 +55,19 @@
         fill: $color-brand--1;
         width: 2.4rem;
         height: 2.4rem;
+
+        @include respond(tab-land-sm) {
+          width: 2.2rem;
+          height: 2.2rem;
+        }
       }
     //transition: background-color 0.2s;
-    @include respond(tab-port) {
-      display: flex;
-      flex-direction: row;
+    @include respond(tab-land) {
+      padding: 1.25rem;
+    }
+
+    @include respond(tab-land-sm) {
+      padding: 1rem;
     }
 
     //.navbar__link 
@@ -105,17 +103,7 @@
       position: relative;
       fill: $color-dark--2;
 
-      
 
-      @include respond (lg-laptop) { 
-        box-shadow: 0px 0px 36px -8px;
-        border-radius: 8px;
-      }
-
-      @include respond (md-laptop) { 
-        box-shadow: 0px 0px 36px -8px;
-        border-radius: 8px;
-      }
       &::before {
         content: "";
         background-color: $color-dark--3;
@@ -125,21 +113,19 @@
         border-radius: 8px;
         z-index: -1;
 
-        @include respond (lg-laptop) { 
-          padding: 4rem;
-          border-radius: 8px;
+        @include respond(tab-land) {
+          padding: 3rem;
         }
 
-        @include respond (md-laptop) { 
-          padding: 3.2rem;
-          border-radius: 8px;
+        @include respond(tab-land-sm) {
+          padding: 2.8rem;
         }
+
       }
 
       & .navbar__link-icon {
         fill: $color-dark--3;
       }
-
 
     }
   }

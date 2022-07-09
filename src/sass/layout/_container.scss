@@ -19,15 +19,14 @@
     background: $color-dark--1;
   }
 
-  @include respond(tab-port) {
+  @include respond(tab-land) {
     @include grid--tab;
     overflow-y: hidden;
-  }
-
-  @include respond(tab-port-sm) {
+    margin: 0 auto;
+    height: 100vh;
+    background-color: $color-dark--2;
     grid-template-rows: 8% 92%;
   }
-
 }
 
 .main {
