@@ -8,10 +8,15 @@
   justify-content: space-around;
   z-index: 0;
 
+  @include respond(laptop) {
+    max-height: 100vh;
+  }
+
   @include respond(tab-land) { 
     height: 100%;
     flex-direction: row;
     align-items: center;
+    border-radius: 0px;
   }
 
   &__logo  { 

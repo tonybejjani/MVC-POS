@@ -1,6 +1,6 @@
 .container {
   max-width: 120rem;
-  margin:  5rem auto;
+  margin:  7rem auto;
   max-height: 83.4rem;
   overscroll-behavior-y: none;
   overscroll-behavior-x: none;
@@ -19,13 +19,28 @@
     background: $color-dark--1;
   }
 
+  @include respond(laptop) {
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100vh;
+  }
+  
   @include respond(tab-land) {
     @include grid--tab;
     overflow-y: hidden;
     margin: 0 auto;
     height: 100vh;
     background-color: $color-dark--2;
-    grid-template-rows: 8% 92%;
+    grid-template-rows: 10% 90%;
+
+    @include respond(tab-land-Lh) {
+      grid-template-rows: 6% 94%;
+    }
+  }
+
+  @include respond(phone) {
+    grid-template-rows: 7% 93%;
+
   }
 }
 
