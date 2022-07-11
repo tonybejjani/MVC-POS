@@ -4,13 +4,15 @@
   grid-template-columns: 62% 38%;
   height: 83.4rem;
 
-  @include respond(laptop) {
-    max-height: 100%;
-  }
 
+  @include respond(laptop) {
+    @include respond(tab-height-sh) {
+      height: 100%;
+    }
+  }
   @include respond(tab-land) {
     grid-template-columns: 50% 50%;
-    height: 93%;
+    height: 100%;
     padding: 2rem;
   }
 
@@ -154,6 +156,12 @@
   row-gap: 7.4rem;
   justify-content: flex-start;
 
+  @include respond(laptop) {
+    @include respond(tab-height-sh) {
+      height: 100vh;
+    }
+  }
+
   @include respond (tab-land) { 
     row-gap: 2rem;
     padding-top: 0;
@@ -180,7 +188,7 @@
  //     border-left: 3px solid $color-dark--3;
       border-radius:13px;
 
-      @include respond (tab-land-h) {
+      @include respond (tab-height-xs) {
         height: 10rem;
       }
     }
@@ -211,7 +219,7 @@
         left: 2rem;
         top: 0.9rem;
 
-        @include respond (tab-land-h) {
+        @include respond (tab-xs) {
 
         }
       }
@@ -466,17 +474,16 @@
     margin-top: 3rem;
     margin-bottom: 2rem;
     border: none;
-    max-height: 80vh;
+    max-height: 100%;
 
-    @include respond (tab-land-mh) {
+    @include respond (tab-height-mh) {
 
-      max-height: 88vh;
 
     }
 
-    @include respond (tab-land-sh) {
+    @include respond (tab-height-sh) {
 
-      max-height: 86vh;
+    
 
     }
 
@@ -487,7 +494,6 @@
     position: absolute;
     top: 0;
     right: -50rem;
-    height: 86vh;
     transition: all 0.3s ease-out;
 
     &.menu-sidebar__toggle-panel {
@@ -506,8 +512,8 @@
     }
   }
 
-  @include respond(tab-port-sm-h) {
-    height: 100vh;
+  @include respond(tab-height-xxxxs) {
+    height: 100%;
     padding-top: 0;
     gap: 1rem;
   }
@@ -543,11 +549,11 @@
   @include respond (tab-land) {
     height: 12%;
 
-    @include respond (tab-land-Lh) {
+    @include respond (tab-height-lh) {
       height: 6%;
     }
 
-    @include respond (tab-land-mh) {
+    @include respond (tab-height-mh) {
       height: 9%;
     }
   }
@@ -624,18 +630,28 @@
     justify-content: space-between;
     height: 60%;
 
+    @include respond(laptop) {
+      @include respond(tab-height-xxs) {
+        height: 57%;
+      }
+
+      @include respond(tab-height-xxxs) {
+        height: 53%;
+      }
+    }
+
     @include respond(tab-land) {
       height: 57%;
 
-      @include respond (tab-land-Lh) {
+      @include respond (tab-height-lh) {
         height: 72%;
       }
 
-      @include respond (tab-land-mh) {
+      @include respond (tab-height-mh) {
         height: 63%;
       }
 
-      @include respond (tab-land-sh) {
+      @include respond (tab-height-sh) {
 
         height: 48%;
   
@@ -844,16 +860,16 @@
   
   @include respond (tab-land) {
 
-    @include respond(tab-land-Lh) {
+    @include respond(tab-height-lh) {
       height: 13%;
       grid-template-columns: 60% 40%;
     }
 
-    @include respond (tab-land-mh) {
+    @include respond (tab-height-mh) {
       height: 17%;
     }
 
-    @include respond (tab-land-sh) {
+    @include respond (tab-height-sh) {
       height: 25%;
     }
   }
@@ -1013,7 +1029,7 @@
   @include respond (tab-land) {
   
 
-    @include respond(tab-land-Lh) {
+    @include respond(tab-height-lh) {
       
     }
   }

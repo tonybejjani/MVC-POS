@@ -31,19 +31,19 @@
     @include grid--tab;
     overflow-y: hidden;
     margin: 0 auto;
-    height: 100vh;
+    height: 100%;
     background-color: $color-dark--2;
     grid-template-rows: 10% 90%;
 
-    @include respond(tab-land-Lh) {
+    @include respond(tab-height-lh) {
       grid-template-rows: 6% 94%;
     }
 
-    @include respond (tab-land-mh) {
+    @include respond (tab-height-mh) {
       grid-template-rows: 8% 92%;
     }
 
-    @include respond (tab-land-sh) {
+    @include respond (tab-height-sh) {
       grid-template-rows: 10% 90%;    
     }
   }

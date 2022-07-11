@@ -287,7 +287,7 @@ ul {
       grid-template-columns: 1fr;
       overflow-y: hidden;
       margin: 0 auto;
-      height: 100vh;
+      height: 100%;
       background-color: #252836;
       grid-template-rows: 10% 90%; } }
   @media (max-width: 75em) and (max-height: 112.5em) {
@@ -312,13 +312,14 @@ ul {
   grid-template-rows: 100%;
   grid-template-columns: 62% 38%;
   height: 83.4rem; }
-  @media (max-width: 87.5em) {
-    .home {
-      max-height: 100%; } }
+
+@media (max-width: 87.5em) and (max-height: 56.25em) {
+  .home {
+    height: 100%; } }
   @media (max-width: 75em) {
     .home {
       grid-template-columns: 50% 50%;
-      height: 93%;
+      height: 100%;
       padding: 2rem; } }
   @media (max-width: 46.87em) {
     .home {
@@ -407,6 +408,10 @@ ul {
   column-gap: 2.8rem;
   row-gap: 7.4rem;
   justify-content: flex-start; }
+
+@media (max-width: 87.5em) and (max-height: 56.25em) {
+  .menu-items {
+    height: 100vh; } }
   @media (max-width: 75em) {
     .menu-items {
       row-gap: 2rem;
@@ -618,20 +623,13 @@ ul {
       margin-top: 3rem;
       margin-bottom: 2rem;
       border: none;
-      max-height: 80vh; } }
-  @media (max-width: 75em) and (max-height: 75em) {
-    .menu-sidebar {
-      max-height: 88vh; } }
-  @media (max-width: 75em) and (max-height: 56.25em) {
-    .menu-sidebar {
-      max-height: 86vh; } }
+      max-height: 100%; } }
   @media (max-width: 46.87em) {
     .menu-sidebar {
       width: 50rem;
       position: absolute;
       top: 0;
       right: -50rem;
-      height: 86vh;
       transition: all 0.3s ease-out; }
       .menu-sidebar.menu-sidebar__toggle-panel {
         right: 0; } }
@@ -643,7 +641,7 @@ ul {
         right: 0; } }
   @media (max-height: 24.37em) {
     .menu-sidebar {
-      height: 100vh;
+      height: 100%;
       padding-top: 0;
       gap: 1rem; } }
   .menu-sidebar .menu-sidebar__toggle-btn {
@@ -698,6 +696,18 @@ ul {
   flex-direction: column;
   justify-content: space-between;
   height: 60%; }
+
+@media (max-width: 87.5em) and (max-height: 46.87em) {
+  .menu-sidebar__items {
+    height: 57%; } }
+
+@media (max-width: 87.5em) and (max-height: 24.37em) {
+  .menu-sidebar__items {
+    height: 57%; } }
+
+@media (max-width: 87.5em) and (max-height: 37.5em) {
+  .menu-sidebar__items {
+    height: 53%; } }
   @media (max-width: 75em) {
     .menu-sidebar__items {
       height: 57%; } }

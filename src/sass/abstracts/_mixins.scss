@@ -24,7 +24,7 @@ ORDER: Base + typography > general layout + grid > page layout > components
 @mixin respond($breakpoint) {
 
   /////////////////////////
-  /// WIDTH
+  /// VIEWPORT WIDTH
   @if $breakpoint == laptop {
     @media (max-width: 87.5em) {@content }; //1400px
   }
@@ -59,25 +59,38 @@ ORDER: Base + typography > general layout + grid > page layout > components
 
 
   //////////////////////////
-  /// HEIGHT
-  /// 
-  @if $breakpoint == tab-land-h {
+  /// VIEWPORT HEIGHT
+  
+  @if $breakpoint == tab-height-xxxxs {
+    @media (max-height: 24.37em) {@content }; //390px
+  }
+
+  @if $breakpoint == tab-height-xxxs {
+    @media (max-height: 37.5em) {@content }; //600px
+  }
+
+
+  @if $breakpoint == tab-height-xxs {
+    @media (max-height: 46.87em) {@content }; //750px
+  }
+
+  @if $breakpoint == tab-height-xs {
     @media (max-height: 50em) {@content }; //max-height: 800px
   }
 
-  @if $breakpoint == tab-land-sh {
+  @if $breakpoint == tab-height-sh {
     @media (max-height: 56.25em) {@content }; //max-height: 900px
   }
 
-  @if $breakpoint == tab-land-mh {
+  @if $breakpoint == tab-height-mh {
     @media (max-height: 75em) {@content }; //max-height: 1200px
   }
 
-  @if $breakpoint == tab-land-Lh {
+  @if $breakpoint == tab-height-lh {
     @media (max-height: 112.5em) {@content }; //max-height: 1400px
   }
 
-  @if $breakpoint == tab-port-sm-h {
+  @if $breakpoint == tab-height-xxs {
     @media (max-height: 24.37em) {@content }; //750px
   }
 
