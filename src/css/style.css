@@ -394,6 +394,18 @@ ul {
       color: #fff;
       font-size: 2.4rem;
       font-weight: 400; }
+    .menu .info__search {
+      display: flex;
+      align-items: center; }
+      .menu .info__search-btn {
+        background-color: #252836;
+        width: 2.4rem;
+        height: 2.4rem; }
+      .menu .info__search-icon {
+        width: 2.4rem;
+        height: 2.4rem; }
+      .menu .info__search-text {
+        border: 1px solid #393c49; }
     .menu .info__date {
       color: #E0E6E9;
       font-size: 1.6rem;
@@ -941,6 +953,7 @@ ul {
     display: none; }
 
 .orders {
+  height: 100vh;
   padding: 4rem; }
 
 .gu-mirror {

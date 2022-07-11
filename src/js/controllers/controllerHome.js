@@ -25,6 +25,7 @@ class controllerHome {
     menuTempView.render();
     orderSidebarView.render();
     menuInfoView.render(model.state.info);
+    menuInfoView.addHandlerSearch(this._controlMenuSearch.bind(this));
     menuCatView.render(model.state.menuCategories);
     menuItemsView.render(model.state);
     menuCatView.activateMenuCat();
@@ -36,6 +37,25 @@ class controllerHome {
     );
     orderSidebarView.addHandlerPayMethod(this._controlPayMethod.bind(this));
     orderSidebarView.addHandlertogglePanel();
+  }
+
+  _controlMenuSearch(text) {
+    //filter data with text search and pack results
+    let result = [];
+
+    for (const [k, data] of Object.entries(model.state.menuItems)) {
+      if (
+        data.name
+          .split(' ')
+          .map((el) => el.toLowerCase())
+          .includes(text)
+      ) {
+        result.push({ id: k, data });
+        console.log(result);
+      }
+    }
+
+    //build the view
   }
 
   _controlOrderItemForm(btn) {

@@ -135,6 +135,33 @@
       font-weight: 400;
 
     }
+
+    &__search {
+      display: flex;
+      align-items: center;
+
+      &-btn {
+        background-color: $color-dark--2;
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+
+      &-icon {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+
+      &-text {
+        border: 1px solid $color-dark--3;
+
+      }
+
+    }
+    
+
+    
+
+    
   
     &__date {
       color: $color-light--4;
