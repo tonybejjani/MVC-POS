@@ -116,7 +116,7 @@ class orderSidebarView {
             <p class="menu-sidebar__transaction-total-price">$ <span>0.00</span></p>
           </div>
           <div class="menu-sidebar__transaction-note">
-            <input type="text" placeholder=" Order Note...">
+            <textarea  rows="1" placeholder=" Order Note..."></textarea>
           </div>
           <div class="menu-sidebar__transaction-pay">
             <button type="button" class="menu-sidebar__transaction-pay-btn menu-sidebar__transaction-pay__credit" >Credit Card</button>

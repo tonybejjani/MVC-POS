@@ -21,8 +21,10 @@
 
   @include respond(laptop) {
     margin: 0 auto;
+    width: 100%;
     max-width: 100%;
-    max-height: 100vh;
+    max-height: 100%;
+    position: fixed;
   }
   
   @include respond(tab-land) {
@@ -35,6 +37,14 @@
 
     @include respond(tab-land-Lh) {
       grid-template-rows: 6% 94%;
+    }
+
+    @include respond (tab-land-mh) {
+      grid-template-rows: 8% 92%;
+    }
+
+    @include respond (tab-land-sh) {
+      grid-template-rows: 10% 90%;    
     }
   }
 

@@ -101,7 +101,7 @@ ul {
 
 /* NAVBAR */
 .navbar {
-  height: 83.4rem;
+  max-height: 100%;
   background-color: #1f1d2b;
   border-radius: 16px;
   display: flex;
@@ -110,7 +110,7 @@ ul {
   z-index: 0; }
   @media (max-width: 87.5em) {
     .navbar {
-      max-height: 100vh; } }
+      max-height: 100%; } }
   @media (max-width: 75em) {
     .navbar {
       height: 100%;
@@ -277,8 +277,10 @@ ul {
   @media (max-width: 87.5em) {
     .container {
       margin: 0 auto;
+      width: 100%;
       max-width: 100%;
-      max-height: 100vh; } }
+      max-height: 100%;
+      position: fixed; } }
   @media (max-width: 75em) {
     .container {
       grid-template-rows: 7% 93%;
@@ -291,6 +293,12 @@ ul {
   @media (max-width: 75em) and (max-height: 112.5em) {
     .container {
       grid-template-rows: 6% 94%; } }
+  @media (max-width: 75em) and (max-height: 75em) {
+    .container {
+      grid-template-rows: 8% 92%; } }
+  @media (max-width: 75em) and (max-height: 56.25em) {
+    .container {
+      grid-template-rows: 10% 90%; } }
   @media (max-width: 37.5em) {
     .container {
       grid-template-rows: 7% 93%; } }
@@ -306,15 +314,12 @@ ul {
   height: 83.4rem; }
   @media (max-width: 87.5em) {
     .home {
-      max-height: 100vh; } }
+      max-height: 100%; } }
   @media (max-width: 75em) {
     .home {
       grid-template-columns: 50% 50%;
-      height: 93vh;
-      padding-bottom: 6rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-top: 2rem; } }
+      height: 93%;
+      padding: 2rem; } }
   @media (max-width: 46.87em) {
     .home {
       position: relative;
@@ -610,9 +615,16 @@ ul {
   @media (max-width: 75em) {
     .menu-sidebar {
       border-radius: 16px;
-      margin-top: 2rem;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
       border: none;
       max-height: 80vh; } }
+  @media (max-width: 75em) and (max-height: 75em) {
+    .menu-sidebar {
+      max-height: 88vh; } }
+  @media (max-width: 75em) and (max-height: 56.25em) {
+    .menu-sidebar {
+      max-height: 86vh; } }
   @media (max-width: 46.87em) {
     .menu-sidebar {
       width: 50rem;
@@ -694,7 +706,10 @@ ul {
       height: 72%; } }
   @media (max-width: 75em) and (max-height: 75em) {
     .menu-sidebar__items {
-      height: 60%; } }
+      height: 63%; } }
+  @media (max-width: 75em) and (max-height: 56.25em) {
+    .menu-sidebar__items {
+      height: 48%; } }
   .menu-sidebar__items-container {
     height: 100%;
     border-bottom: 1px solid #393c49; }
@@ -811,12 +826,19 @@ ul {
 
 @media (max-width: 75em) and (max-height: 112.5em) {
   .menu-sidebar__transaction {
-    height: 15%;
+    height: 13%;
     grid-template-columns: 60% 40%; } }
 
 @media (max-width: 75em) and (max-height: 75em) {
   .menu-sidebar__transaction {
-    height: 20%; } }
+    height: 17%; } }
+
+@media (max-width: 75em) and (max-height: 56.25em) {
+  .menu-sidebar__transaction {
+    height: 25%; } }
+  @media (max-width: 65.62em) {
+    .menu-sidebar__transaction {
+      grid-template-columns: 50% 50%; } }
   .menu-sidebar__transaction-total {
     display: flex;
     justify-content: space-between;
@@ -836,9 +858,9 @@ ul {
     gap: 1rem;
     grid-row-start: 2; }
     .menu-sidebar__transaction-pay button {
+      flex: 0 1 11rem;
       background-color: #1f1d2b;
       color: #abbbc2;
-      width: 11rem;
       border: 1px solid #abbbc2;
       border-radius: 8px;
       font-size: 1.4rem;
@@ -884,15 +906,20 @@ ul {
     grid-row-start: 2;
     padding-right: 1rem;
     width: 100%; }
-  .menu-sidebar__transaction-note input {
+  .menu-sidebar__transaction-note textarea {
     width: 100%;
     padding: 1rem;
     height: 100%;
     font-family: inherit;
     font-size: 1.4rem;
+    background-color: #1f1d2b;
     color: #abbbc2;
-    letter-spacing: 0.2px; }
-    .menu-sidebar__transaction-note input :focus {
+    letter-spacing: 0.2px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 1px solid #abbbc2;
+    border-radius: 10px; }
+    .menu-sidebar__transaction-note textarea :focus {
       outline: none; }
 
 .menu-sidebar__footer {

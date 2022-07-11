@@ -5,16 +5,13 @@
   height: 83.4rem;
 
   @include respond(laptop) {
-    max-height: 100vh;
+    max-height: 100%;
   }
 
   @include respond(tab-land) {
     grid-template-columns: 50% 50%;
-    height: 93vh;
-    padding-bottom: 6rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 2rem;
+    height: 93%;
+    padding: 2rem;
   }
 
   @include respond(tab-port-sm) {
@@ -466,11 +463,22 @@
 
   @include respond (tab-land) {
     border-radius: 16px;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     border: none;
     max-height: 80vh;
 
+    @include respond (tab-land-mh) {
 
+      max-height: 88vh;
+
+    }
+
+    @include respond (tab-land-sh) {
+
+      max-height: 86vh;
+
+    }
 
   }
 
@@ -623,10 +631,15 @@
         height: 72%;
       }
 
+      @include respond (tab-land-mh) {
+        height: 63%;
+      }
 
-    @include respond (tab-land-mh) {
-      height: 60%;
-    }
+      @include respond (tab-land-sh) {
+
+        height: 48%;
+  
+      }
     }
 
 
@@ -832,14 +845,23 @@
   @include respond (tab-land) {
 
     @include respond(tab-land-Lh) {
-      height: 15%;
+      height: 13%;
       grid-template-columns: 60% 40%;
     }
 
     @include respond (tab-land-mh) {
-      height: 20%;
+      height: 17%;
+    }
+
+    @include respond (tab-land-sh) {
+      height: 25%;
     }
   }
+
+  @include respond (tab-land-sm) {
+    grid-template-columns: 50% 50%;
+  }
+
 
   // smh = small height
 
@@ -886,9 +908,9 @@
     // }
 
     button {
+      flex: 0 1 11rem;
       background-color: $color-dark--1;
       color: $color-light--2;
-      width: 11rem;
       border: 1px solid $color-light--2;
       border-radius: 8px; 
       font-size: 1.4rem;
@@ -961,22 +983,25 @@
 
   }
   
-  &-note input {
+  &-note textarea {
     width: 100%;
     padding: 1rem;
     height: 100%;
     font-family: inherit;
     font-size: 1.4rem;
+    background-color: $color-dark--1;
     color: #abbbc2;
     letter-spacing: 0.2px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 1px solid $color-light--2;
+    border-radius: 10px;
+
+
 
     :focus {
       outline: none;
     }
-
-    // ::-webkit-input-placeholder {
-      
-    // }
   }
 }
 
