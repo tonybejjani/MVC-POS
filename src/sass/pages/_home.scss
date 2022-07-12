@@ -45,7 +45,7 @@
     height: 95%;
   }
 
-  &-navbar {
+  &-tabs {
     display: flex;
     width: 100%;
     gap: 4.5rem;
@@ -94,7 +94,7 @@
       font-size: 1.6rem;
       font-weight: 600;
       cursor: pointer;
-      padding-bottom: 1rem;
+      padding-bottom: 1.3rem;
       letter-spacing: 0.2px;
 
        @include respond(tab-port) {
@@ -115,10 +115,11 @@
 
 
   .info {
-    display: flex;
+    display: grid;
     flex-direction: column;
-    gap: 0.5rem;
-  
+    grid-template-rows: repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
+    
     @include respond (tab-land) {
       align-items: center;
       display: none;
@@ -139,20 +140,48 @@
     &__search {
       display: flex;
       align-items: center;
+      justify-self: end;
+      grid-row: span 2;
+      margin-bottom: 2rem;
 
       &-btn {
         background-color: $color-dark--2;
         width: 2.4rem;
         height: 2.4rem;
+        order: -1;
+       // position: relative;
+        z-index: 1;
+       // margin-left: 4rem;
       }
 
       &-icon {
-        width: 2.4rem;
-        height: 2.4rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: #fff;
+       // margin-left: 4rem;
       }
 
       &-text {
         border: 1px solid $color-dark--3;
+        font-family: inherit; 
+        color: $color-light--2;
+        background-color: $color-dark--2;
+        order: 1;
+        padding-left: 4rem;
+        margin-left: -3.5rem;
+        width: 22rem;
+
+        &:focus {
+          outline: none;
+          background-color:  $color-dark--1;
+        }
+
+        &::-webkit-input-placeholder {
+          font-weight: 300;
+          color: $color-light--2;
+        }
+
+         
 
       }
 
@@ -197,6 +226,10 @@
 
   @include respond (tab-port-sm) {
     justify-content: space-around;
+  }
+
+  &__header {
+    margin-bottom: 3rem;
   }
 
 }

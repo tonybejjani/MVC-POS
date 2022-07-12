@@ -17,7 +17,8 @@ body {
   }
 }
 .heading--secondary {
-  font-size: 2.4rem;
+  font-size: 2rem;
+  font-weight: 600;
 
   @include respond (md-laptop) { 
       font-size: 1.7rem;

@@ -41,22 +41,28 @@ class controllerHome {
     orderSidebarView.addHandlertogglePanel();
   }
 
-  _controlMenuSearch(text) {
+  _controlMenuSearch(input) {
+    // input is empty
+    if (!input.length) return;
+
     //filter data with text search and pack results
     let searchResults = [];
 
     for (const [id, data] of Object.entries(model.state.menuItems)) {
-      if (
-        data.name
-          .split(' ')
-          .map((el) => el.toLowerCase())
-          .includes(text)
-      )
+      if (data.searchKeys.map((el) => el.toLowerCase().trim()).includes(input))
         searchResults.push({ id, data });
     }
 
-    if (text.length !== 0) {
-      menuSearchView.clear();
+    // no match
+    if (!searchResults.length) {
+      const noResult = searchResults.length;
+      menuSearchView.clearMenuItems();
+      menuSearchView.render(noResult);
+    }
+    // render result in case previous checks fail
+    else {
+      menuSearchView.clearMenuItems();
+      menuSearchView.setSearchHeader();
       menuSearchView.render(searchResults);
       menuSearchView.addHandlerRender(this._controlOrderItemForm.bind(this));
     }

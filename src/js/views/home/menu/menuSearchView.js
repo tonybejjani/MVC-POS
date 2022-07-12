@@ -23,24 +23,44 @@ class menuSearchView {
   #data;
 
   render(data) {
-    console.log(data);
-    this.#parentElement = document.querySelector('.menu-items');
+    this.#parentElement = document.querySelector('.menu');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
   addHandlerRender(handler) {
-    const menuItemBtns = document.querySelectorAll('.menu-item__button');
+    const menuItemBtns = document.querySelectorAll('.menu-item__search-button');
 
     menuItemBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn));
     });
   }
 
-  clear() {
-    const content = document.querySelector('.menu-items');
-    content.innerHTML = '';
+  clearMenuItems() {
+    const searchContainer = document.querySelector('.menu-items__search');
+    const menuItems = document.querySelectorAll('.menu-items__navbar');
+
+    // hide current menu items
+    menuItems.forEach((menuItem) => {
+      if (!menuItem.classList.contains('hidden'))
+        menuItem.classList.add('hidden');
+    });
+
+    //disable menu navbar active category
+    const menuTabsLinks = document.querySelectorAll('.menu-tabs__link');
+    menuTabsLinks.forEach((menuItem) => {
+      if (menuItem.classList.contains('menu-tabs__active'))
+        menuItem.classList.remove('menu-tabs__active');
+    });
+
+    // clear prev search content with container
+    if (searchContainer) searchContainer.remove();
+  }
+
+  setSearchHeader() {
+    const header = document.querySelector('.menu-items__header');
+    header.textContent = 'Search Results';
   }
 
   setBtnEffect(btn) {
@@ -100,51 +120,58 @@ class menuSearchView {
       }
   }
 
+  // displayMenuHeader(heading) {}
+
   _generateMarkup() {
-    // const { id, data } = Object.values(this.#data);
-
     let markup = [];
-    markup.push(`
-    <h1 class="heading--primary search-heading ">Search Results:</h1>`);
-    // markup.push(
-    //   `<h3 class="heading--tertiary menu-items__title">Choose Dishes</h3>`
-    // );
-    // for each category load corresponsding items markup
-    for (const { id, data } of Object.values(this.#data)) {
-      // this.#data.foreach((data) => {
 
-      markup.push(`<div class="menu-item" data-item-id="${id}">
-                          <div class="menu-item__image"><img src="${this._loadImg(
-                            data.img
-                          )}"></div>
-                          <div class="menu-item__details">
-                            <div class="menu-item__info">
-                            <svg class="menu-item__info-icon">
-                              <use xlink:href="${sprite + '#icon-Info'}"></use>
-                            </svg>
-                            </div>
-                            <h3 class="heading--tertiary menu-item__title">${
-                              data.name
-                            }</h3>
-                            <span class="menu-item__price">$ ${
-                              data.price
-                            }</span>
-                            <button class="${
-                              data.special_deal
-                                ? 'menu-item__button-special'
-                                : 'menu-item__button'
-                            }"  data-item-id="${id}">Add</button>
-                          </div>
-                      </div>`);
+    // no match
+    // if (!this.#data) {
+    //   markup.push(
+    //     '<h2 class="heading--secondary">No Results Found. Try again.</h2>'
+    //   );
+    // } else {
+
+    markup.push(`<div class="menu-items menu-items__search">`);
+
+    // if no results, inform user
+    if (!this.#data.length) {
+      markup.push(
+        `<h2 class="heading--secondary">No Results Found. Try again.</h2>`
+      );
+    } else {
+      for (const { id, data } of Object.values(this.#data)) {
+        // this.#data.foreach((data) => {
+
+        markup.push(`<div class="menu-item" data-item-id="${id}">
+                                <div class="menu-item__image"><img src="${this._loadImg(
+                                  data.img
+                                )}"></div>
+                                <div class="menu-item__details">
+                                  <div class="menu-item__info">
+                                  <svg class="menu-item__info-icon">
+                                    <use xlink:href="${
+                                      sprite + '#icon-Info'
+                                    }"></use>
+                                  </svg>
+                                  </div>
+                                  <h3 class="heading--tertiary menu-item__title">${
+                                    data.name
+                                  }</h3>
+                                  <span class="menu-item__price">$ ${
+                                    data.price
+                                  }</span>
+                                  <button class="${
+                                    data.special_deal
+                                      ? 'menu-item__button-special menu-item__search-button-special'
+                                      : 'menu-item__button menu-item__search-button'
+                                  }"  data-item-id="${id}">Add</button>
+                                </div>
+                            </div>`);
+      }
     }
 
     markup.push('</div>');
-    console.log(Object.values(this.#data));
-    if (markup.length === 0) {
-      markup.push(
-        '<h1 class="heading--primary">No Results Found. Try again.</h1>'
-      );
-    }
 
     return markup.join(' ');
   }

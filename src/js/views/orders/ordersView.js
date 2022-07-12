@@ -92,7 +92,7 @@ class navbarView {
 
     const drake = dragula(containers);
 
-    console.log(drake);
+    //console.log(drake);
   }
 
   _generateMarkup() {

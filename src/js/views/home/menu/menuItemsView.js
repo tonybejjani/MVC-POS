@@ -65,7 +65,7 @@ class menuCatView {
     }, 600);
   }
   _loadImg(img) {
-    // console.log(`${img.replace('.png', 'Img')}`);
+    // (`${img.replace('.png', 'Img')}`);
     // return `${img.replace('.png', '')}`;
 
     if (img)
@@ -108,9 +108,9 @@ class menuCatView {
   _generateMarkup() {
     let markup = [];
 
-    // markup.push(
-    //   `<h3 class="heading--tertiary menu-items__title">Choose Dishes</h3>`
-    // );
+    markup.push(
+      `<h2 class="heading--secondary menu-items__header">Choose Dishes</h2>`
+    );
     // for each category load corresponsding items markup
     for (const { id: categoryId, active } of Object.values(
       this.#data.menuCategories
@@ -119,7 +119,7 @@ class menuCatView {
         ` 
         <div class="menu-items ${
           active ? '' : 'hidden'
-        }" data-category-id="${categoryId}">
+        } menu-items__navbar" data-category-id="${categoryId}">
        `
       );
 
