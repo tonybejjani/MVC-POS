@@ -49,7 +49,11 @@ class controllerHome {
     let searchResults = [];
 
     for (const [id, data] of Object.entries(model.state.menuItems)) {
-      if (data.searchKeys.map((el) => el.toLowerCase().trim()).includes(input))
+      if (
+        data.searchKeys
+          .map((el) => el.toLowerCase().trim())
+          .includes(input.toLowerCase().trim())
+      )
         searchResults.push({ id, data });
     }
 
