@@ -16,6 +16,12 @@ class menuCatView {
 
     menuCatLinks.forEach((catLink) =>
       catLink.addEventListener('click', function () {
+        // if search results exist, remove them
+        const searchItems = document.querySelector('.menu-items__search');
+        if (searchItems) {
+          searchItems.remove();
+        }
+
         if (catLink.classList.contains('menu-navbar__active')) return;
 
         menuCatLinks.forEach((link) => {

@@ -119,7 +119,7 @@ class menuCatView {
         ` 
         <div class="menu-items ${
           active ? '' : 'hidden'
-        }" data-category-id="${categoryId}">
+        } menu-items__navbar" data-category-id="${categoryId}">
        `
       );
 
