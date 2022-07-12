@@ -10,6 +10,8 @@ import menuInfoView from '../views/home/menu/menuInfoView.js';
 import menuCatView from '../views/home/menu/menuCatView.js';
 import menuItemsView from '../views/home/menu/menuItemsView.js';
 import menuSpecialModalView from '../views/home/menu/menuSpecialModalView.js';
+
+import menuSearchView from '../views/home/menu/menuSearchView.js';
 import orderSidebarView from '../views/home/order/orderSidebarView.js';
 import orderItemView from '../views/home/order/orderItemView.js';
 import orderSpecialBoxView from '../views/home/order/orderSpecialBoxView.js';
@@ -41,21 +43,23 @@ class controllerHome {
 
   _controlMenuSearch(text) {
     //filter data with text search and pack results
-    let result = [];
+    let searchResults = [];
 
-    for (const [k, data] of Object.entries(model.state.menuItems)) {
+    for (const [id, data] of Object.entries(model.state.menuItems)) {
       if (
         data.name
           .split(' ')
           .map((el) => el.toLowerCase())
           .includes(text)
-      ) {
-        result.push({ id: k, data });
-        console.log(result);
-      }
+      )
+        searchResults.push({ id, data });
     }
 
-    //build the view
+    if (text.length !== 0) {
+      menuSearchView.clear();
+      menuSearchView.render(searchResults);
+      menuSearchView.addHandlerRender(this._controlOrderItemForm.bind(this));
+    }
   }
 
   _controlOrderItemForm(btn) {

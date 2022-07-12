@@ -18,6 +18,7 @@ class menuInfoView {
 
     searchTextEl.addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
+        e.preventDefault();
         handler(searchTextEl.value);
       }
     });
