@@ -1,5 +1,7 @@
 /** @format */
 'use strict';
+// module file system
+const fs = require('fs');
 
 // Views Menu
 import navbarView from '../views/navbar/navbarView.js';
@@ -37,20 +39,23 @@ class App {
         homeView.showPage();
         ordersView.hidePage();
         break;
+
       case 'orders':
         navbarView.activateNavIcon(hash);
         homeView.hidePage();
         ordersView.showPage();
-
         break;
+
       case 'dashboard':
         navbarView.activateNavIcon(hash);
         controllerOrders.renderOrders();
         break;
+
       case 'settings':
         navbarView.activateNavIcon(hash);
         controllerOrders.renderOrders();
         break;
+
       case 'logout':
         navbarView.activateNavIcon(hash);
         controllerOrders.renderOrders();

@@ -1,0 +1,382 @@
+{
+
+  "info": {
+    "logo": "src/img/general/LOGO-01.png",
+    "title": "Yumcha Eat St.",
+    "date": "Tuesday, 9 Nov 2022"
+  },
+
+  "menuCategories": {
+    "0": {
+      "id": 1,
+      "name": "Yumcha",
+      "active": true
+    },
+    "1": {
+      "id": 2,
+      "name": "Peking Duck",
+      "active": false
+    },
+    "2": {
+      "id": 3,
+      "name": "Drinks",
+      "active": "false"
+    },
+    "3": {
+      "id": 4,
+      "name": "Sides",
+      "active": false
+    }
+  },
+
+  "menuItems": {
+    "0": {
+      "catgId": 1,
+      "catgName": "Yumcha",
+      "name": "MIX 10 PCS",
+      "searchKeys": [
+        "yumcha",
+        "dumpling",
+        "dumplings",
+        "steamed",
+        "mix",
+        "special",
+        "specials"
+      ],
+      "price": 7.0,
+      "qty": 4,
+      "img": "mix.png",
+      "special_deal": true
+    },
+    "1": {
+      "catgId": 1,
+      "catgName": "Yumcha",
+      "name": "Pork Soup Dumpling",
+      "searchKeys": [
+        "yumcha",
+        "dumpling",
+        "dumplings",
+        "steamed",
+        "pork soup dumpling",
+        "pork",
+        "soup",
+        "pork soup",
+        "xiao",
+        "long",
+        "bao",
+        "xiao long",
+        "xiao long bao",
+        "shanghai",
+        "shanghai dumpling",
+        "steamed",
+        "steam",
+        "steamed dumpling",
+        "steamed dumplings"
+      ],
+      "price": 2.0,
+      "qty": 1,
+      "img": "xlb.png"
+    },
+    "2": {
+      "catgId": 1,
+      "catgName": "Yumcha",
+      "name": "Prawn Dumpling",
+      "searchKeys": [
+        "yumcha",
+        "dumpling",
+        "dumplings",
+        "steamed",
+        "prawn dumplings",
+        "prawn dumpling",
+        "prawn",
+        "prawns",
+        "steamed",
+        "steam",
+        "steamed dumpling",
+        "steamed dumplings"
+      ],
+      "price": 2.5,
+      "qty": 1,
+      "img": "hargow.png"
+    },
+    "3": {
+      "catgId": 1,
+      "catgName": "Yumcha",
+      "name": "BBQ Pork Buns",
+      "searchKeys": [
+        "yumcha",
+        "bun",
+        "buns",
+        "bbq bun",
+        "bbq buns",
+        "bbq",
+        "steamed",
+        "bbq pork buns",
+        "pork bun",
+        "bbq pork",
+        "pork buns",
+        "pork",
+        "char siu bao",
+        "char siu",
+        "bao",
+        "steamed",
+        "steam"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "buns.png",
+      "special_deal_limit": 2
+    },
+    "4": {
+      "catgId": 1,
+      "catgName": "Yumcha",
+      "name": "Chicken Dim Sims",
+      "searchKeys": [
+        "yumcha",
+        "dim",
+        "sim",
+        "sims",
+        "dim sim",
+        "dim sims",
+        "chicken",
+        "chicken dim sims",
+        "chicken siumai",
+        "shaomai",
+        "chicken shaomai",
+        "steamed",
+        "steam",
+        "steamed dumpling",
+        "steamed dumplings"
+      ],
+      "price": 2,
+      "qty": 1,
+      "img": "chicken.png"
+    },
+    "5": {
+      "catgId": 1,
+      "catgName": "Yumcha",
+      "name": "Pork & Prawn Siumai",
+      "searchKeys": [
+        "yumcha",
+        "dim",
+        "sim",
+        "sims",
+        "dim sim",
+        "dim sims",
+        "pork",
+        "prawn",
+        "prawns",
+        "pork & prawn",
+        "pork & prawns",
+        "pork & prawn dim sims",
+        "pork & prawn dim sim",
+        "pork and prawn",
+        "pork and prawns",
+        "pork and prawn dim sims",
+        "pork and prawn dim sims",
+        "pork dim sims",
+        "prawn dim sims",
+        "pork dim sim",
+        "prawn dim sim",
+        "pork siumai",
+        "prawn siumai",
+        "shaomai",
+        "pork shaomai",
+        "prawn shaomai",
+        "pork & prawn shaomai",
+        "pork and prawn shaomai",
+        "pork & prawns shaomai",
+        "pork and prawns shaomai",
+        "steamed",
+        "steam",
+        "steamed dumpling",
+        "steamed dumplings"
+      ],
+      "price": 2.5,
+      "qty": 1,
+      "img": "siumai.png"
+    },
+
+    "10": {
+      "catgId": 2,
+      "catgName": "Peking Duck",
+      "name": "Peking Duck x2",
+      "searchKeys": [
+        "Peking Duck x2",
+        "Peking Duck",
+        "Duck",
+        "Peking",
+        "x2",
+        "2"
+      ],
+      "price": 7,
+      "qty": 1,
+      "img": "duck_x2.png"
+    },
+    "11": {
+      "catgId": 2,
+      "catgName": "Peking Duck",
+      "name": "Peking Duck x4",
+      "searchKeys": [
+        "Peking Duck x4",
+        "Peking Duck",
+        "Duck",
+        "Peking",
+        "x4",
+        "4"
+      ],
+      "price": 12,
+      "qty": 1,
+      "img": "duck_x4.png"
+    },
+    "12": {
+      "catgId": 2,
+      "catgName": "Peking Duck",
+      "name": "Peking Duck x6",
+      "searchKeys": [
+        "Peking Duck x6",
+        "Peking Duck",
+        "Duck",
+        "Peking",
+        "x6",
+        "6"
+      ],
+      "price": 16,
+      "qty": 1,
+      "img": "duck_x6.png"
+    },
+    "20": {
+      "catgId": 3,
+      "catgName": "Drinks",
+      "name": "Water",
+      "searchKeys": [
+        "water",
+        "bottle",
+        "drink",
+        "drinks",
+        "refreshment",
+        "refreshments"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "water.png"
+    },
+    "21": {
+      "catgId": 3,
+      "catgName": "Drinks",
+      "name": "Coke",
+      "searchKeys": [
+        "coke",
+        "can",
+        "cans",
+        "drink",
+        "drinks",
+        "soft drink",
+        "soda",
+        "refreshment",
+        "refreshments"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "coke.png"
+    },
+    "22": {
+      "catgId": 3,
+      "catgName": "Drinks",
+      "name": "Coke Zero",
+      "searchKeys": [
+        "coke",
+        "zero",
+        "coke zero",
+        "can",
+        "cans",
+        "drink",
+        "drinks",
+        "soft drink",
+        "soda",
+        "refreshment",
+        "refreshments"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "coke-zero.png"
+    },
+    "23": {
+      "catgId": 3,
+      "catgName": "Drinks",
+      "name": "Fanta",
+      "searchKeys": [
+        "fanta",
+        "can",
+        "cans",
+        "drink",
+        "drinks",
+        "soft drink",
+        "soda",
+        "refreshment",
+        "refreshments"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "fanta.png"
+    },
+
+    "24": {
+      "catgId": 3,
+      "catgName": "Drinks",
+      "name": "Sprite",
+      "searchKeys": [
+        "sprite",
+        "can",
+        "cans",
+        "drink",
+        "drinks",
+        "soft drink",
+        "soda",
+        "refreshment",
+        "refreshments"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "sprite.png"
+    },
+    "25": {
+      "catgId": 3,
+      "catgName": "Drinks",
+      "name": "Solo",
+      "searchKeys": [
+        "solo",
+        "can",
+        "cans",
+        "drink",
+        "drinks",
+        "soft drinks",
+        "soft drink",
+        "soda",
+        "refreshment",
+        "refreshments"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "solo.png"
+    },
+    "26": {
+      "catgId": 4,
+      "catgName": "Entrees",
+      "name": "Prawn Crackers",
+      "searchKeys": [
+        "prawn crackers",
+        "prawn",
+        "prawns",
+        "crackers",
+        "chips",
+        "prawn chips",
+        "sides",
+        "side"
+      ],
+      "price": 3,
+      "qty": 1,
+      "img": "crackers.png"
+    }
+  }
+}
