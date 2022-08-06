@@ -2,7 +2,6 @@
   "name": "pos",
   "version": "1.0.0",
   "description": "Point of Sale system",
-
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist",
@@ -22,9 +21,16 @@
     "core-js": "^3.23.1",
     "dragula": "^3.7.3",
     "parcel": "^2.6.2",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.54.3"
   },
   "devDependencies": {
-    "node-sass": "^7.0.1"
+    "buffer": "^6.0.3",
+    "events": "^3.3.0",
+    "node-sass": "^7.0.1",
+    "process": "^0.11.10",
+    "querystring-es3": "^0.2.1",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0"
   }
 }

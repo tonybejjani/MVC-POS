@@ -2,7 +2,8 @@
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 62% 38%;
-  height: 83.4rem;
+  height: 83.4rem; 
+   
 
 
   @include respond(laptop) {

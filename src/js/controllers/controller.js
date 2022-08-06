@@ -1,8 +1,7 @@
 /** @format */
 'use strict';
-// module file system
-const fs = require('fs');
-
+// data
+import * as model from '../model.js';
 // Views Menu
 import navbarView from '../views/navbar/navbarView.js';
 import mainView from '../views/mainView.js';
@@ -20,12 +19,17 @@ import ordersView from '../views/orders/ordersView.js';
 class App {
   constructor() {
     // load the navbar, mainview and Home page on init
-    navbarView.render();
-    mainView.render();
-    controllerHome.renderHome();
-    controllerOrders.renderOrders();
-    homeView.showPage();
-    ordersView.hidePage();
+    model
+      .loadMenuData()
+      .then(() => {
+        navbarView.render();
+        mainView.render();
+        controllerHome.renderHome();
+        controllerOrders.renderOrders();
+        homeView.showPage();
+        ordersView.hidePage();
+      })
+      .catch((err) => console.log(err));
 
     // publish listener handler on navbar links
     navbarView.addHandlerRender(this._renderPage.bind(this));

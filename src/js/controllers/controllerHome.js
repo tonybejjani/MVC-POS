@@ -29,7 +29,7 @@ class controllerHome {
     menuInfoView.render(model.state.info);
     menuInfoView.addHandlerSearch(this._controlMenuSearch.bind(this));
     menuCatView.render(model.state.menuCategories);
-    menuItemsView.render(model.state);
+    setTimeout(this._renderMenuItems, 1000);
     menuCatView.activateMenuCat();
     menuItemsView.addHandlerRender(this._controlOrderItemForm.bind(this));
     menuSpecialModalView.render(model.state.menuItems);
@@ -39,6 +39,10 @@ class controllerHome {
     );
     orderSidebarView.addHandlerPayMethod(this._controlPayMethod.bind(this));
     orderSidebarView.addHandlertogglePanel();
+  }
+
+  _renderMenuItems() {
+    menuItemsView.render(model.state);
   }
 
   _controlMenuSearch(input) {
