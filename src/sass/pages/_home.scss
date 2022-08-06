@@ -31,13 +31,13 @@
 
 /////////////////////
 /// MENU 
-
 .menu {
   padding: 2.4rem 2.4rem 2.4rem 2.4rem;
   background-color: $color-dark--2;;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
 
   @include respond(tab-land) {
     padding: 0rem 2.4rem 0rem 0rem;
@@ -187,11 +187,6 @@
       }
 
     }
-    
-
-    
-
-    
   
     &__date {
       color: $color-light--4;
@@ -203,6 +198,11 @@
   }
 }
 
+.menu-items-container {
+  overflow: auto;
+  position: relative;
+}
+
 .menu-items {
   overflow: auto;
   padding-top: 5rem;
@@ -212,6 +212,9 @@
   column-gap: 2.8rem;
   row-gap: 7.4rem;
   justify-content: flex-start;
+  visibility: hidden;
+  z-index: 1;
+
 
   @include respond(laptop) {
     @include respond(tab-height-sh) {

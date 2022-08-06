@@ -15,6 +15,8 @@ class menuTempView {
       <div class="menu">
         <div class="info"></div>
         <ul class="menu-tabs"></ul>
+        <h2 class="heading--secondary menu-items__header">Choose Dishes</h2>
+        <div class="menu-items-container"></div>
       </div>`;
   }
 }

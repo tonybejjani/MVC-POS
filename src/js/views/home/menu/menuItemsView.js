@@ -23,10 +23,29 @@ class menuCatView {
   #data;
 
   render(data) {
-    this.#parentElement = document.querySelector('.menu');
+    this.#parentElement = document.querySelector('.menu-items-container');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
+    this._renderSpinner(this.#parentElement);
+    setTimeout(this._showMenuItems.bind(this), 500);
+  }
+
+  _renderSpinner(parentEl) {
+    const markup = `
+                  <div class="spinner">
+                    <svg>
+                      <use xlink:href="${sprite + '#icon-Loader'}"></use>
+                    </svg>
+                  </div>`;
+
+    parentEl.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  _hideSpinner() {
+    const spinnerEl = document.querySelector('.spinner');
+
+    spinnerEl.style.top = '-50%';
   }
 
   addHandlerRender(handler) {
@@ -34,6 +53,17 @@ class menuCatView {
 
     menuItemBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn));
+    });
+  }
+
+  // To show the spinner and make menu visible.
+  _showMenuItems() {
+    console.log('test');
+    this._hideSpinner();
+    const menuItemsEls = document.querySelectorAll('.menu-items');
+
+    menuItemsEls.forEach((el) => {
+      el.style.visibility = 'visible';
     });
   }
 
@@ -108,9 +138,6 @@ class menuCatView {
   _generateMarkup() {
     let markup = [];
 
-    markup.push(
-      `<h2 class="heading--secondary menu-items__header">Choose Dishes</h2>`
-    );
     // for each category load corresponsding items markup
     for (const { id: categoryId, active } of Object.values(
       this.#data.menuCategories

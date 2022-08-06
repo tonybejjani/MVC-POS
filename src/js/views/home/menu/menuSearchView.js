@@ -23,10 +23,12 @@ class menuSearchView {
   #data;
 
   render(data) {
-    this.#parentElement = document.querySelector('.menu');
+    this.#parentElement = document.querySelector('.menu-items-container');
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
+    this._renderSpinner(this.#parentElement);
+    setTimeout(this._showMenuSearchItems.bind(this), 500);
   }
 
   addHandlerRender(handler) {
@@ -35,6 +37,34 @@ class menuSearchView {
     menuItemBtns.forEach((btn) => {
       btn.addEventListener('click', handler.bind(this, btn));
     });
+  }
+
+  _renderSpinner(parentEl) {
+    const markup = `
+                  <div class="spinner">
+                    <svg>
+                      <use xlink:href="${sprite + '#icon-Loader'}"></use>
+                    </svg>
+                  </div>`;
+
+    parentEl.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  _hideSpinner() {
+    const spinnerEl = document.querySelector('.spinner');
+
+    spinnerEl.style.top = '-50%';
+  }
+
+  // To show the spinner and make menu visible.
+  _showMenuSearchItems() {
+    this._hideSpinner();
+    const menuItemsSearchEls = document.querySelector(
+      '.menu-items.menu-items__search'
+    );
+
+    console.log(menuItemsSearchEls);
+    menuItemsSearchEls.style.visibility = 'visible';
   }
 
   clearMenuItems() {
