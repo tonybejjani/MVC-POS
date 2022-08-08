@@ -30,6 +30,7 @@ class controllerHome {
     menuInfoView.addHandlerSearch(this._controlMenuSearch.bind(this));
     menuCatView.render(model.state.menuCategories);
     menuItemsView.render(model.state);
+    menuItemsView.renderSpinner();
     menuCatView.activateMenuCat();
     menuItemsView.addHandlerRender(this._controlOrderItemForm.bind(this));
     menuSpecialModalView.render(model.state.menuItems);
@@ -42,11 +43,19 @@ class controllerHome {
   }
 
   _controlMenuSearch(input) {
+    let searchResults = [];
     // input is empty
-    if (!input.length) return;
+    if (!input.length) {
+      const noResult = searchResults.length;
+      menuSearchView.clearMenuItems();
+      menuItemsView.showSpinner();
+      menuSearchView.setSearchHeader();
+      menuSearchView.render(noResult);
+      // menuItemsView._hideSpinner();
+      return;
+    }
 
     //filter data with text search and pack results
-    let searchResults = [];
 
     for (const [id, data] of Object.entries(model.state.menuItems)) {
       if (
@@ -61,11 +70,14 @@ class controllerHome {
     if (!searchResults.length) {
       const noResult = searchResults.length;
       menuSearchView.clearMenuItems();
+      menuItemsView.showSpinner();
+      menuSearchView.setSearchHeader();
       menuSearchView.render(noResult);
     }
-    // render result in case previous checks fail
+    // render result on match
     else {
       menuSearchView.clearMenuItems();
+      menuItemsView.showSpinner();
       menuSearchView.setSearchHeader();
       menuSearchView.render(searchResults);
       menuSearchView.addHandlerRender(this._controlOrderItemForm.bind(this));

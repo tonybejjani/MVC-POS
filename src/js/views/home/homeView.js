@@ -1,31 +1,30 @@
 /** @format */
 class homeView {
-  #parentElement;
-  #data;
+  _parentElement;
 
   render() {
-    this.#parentElement = document.querySelector('.main');
+    this._parentElement = document.querySelector('.main');
     this._clear();
     const markup = this._generateMarkup();
-    this.#parentElement.insertAdjacentHTML('beforeend', markup);
+    this._parentElement.insertAdjacentHTML('beforeend', markup);
   }
 
   _clear() {
-    this.#parentElement.innerHTML = '';
+    this._parentElement.innerHTML = '';
   }
 
-  _getPageParentEl() {
+  _getPageContainerEl() {
     return document.querySelector('.home');
   }
 
   hidePage() {
-    const pageParentEl = this._getPageParentEl();
-    pageParentEl.classList.add('hidden');
+    const pageContainerEl = this._getPageContainerEl();
+    pageContainerEl.classList.add('hidden');
   }
 
   showPage() {
-    const pageParentEl = this._getPageParentEl();
-    pageParentEl.classList.remove('hidden');
+    const pageContainerEl = this._getPageContainerEl();
+    pageContainerEl.classList.remove('hidden');
   }
 
   _generateMarkup() {

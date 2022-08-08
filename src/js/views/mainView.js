@@ -1,12 +1,8 @@
 /** @format */
-class navbarView {
-  #parentElement = document.body;
-  #data;
+import View from './View.js';
 
-  render() {
-    const markup = this._generateMarkup();
-    this.#parentElement.insertAdjacentHTML('beforeend', markup);
-  }
+class mainView extends View {
+  _parentElement = document.querySelector('.container');
 
   _generateMarkup() {
     return `
@@ -14,4 +10,4 @@ class navbarView {
   }
 }
 
-export default new navbarView();
+export default new mainView();

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tonybejjani/POS#readme",
   "dependencies": {
     "core-js": "^3.23.1",
+    "cors": "^2.8.5",
     "dragula": "^3.7.3",
     "parcel": "^2.6.2",
     "regenerator-runtime": "^0.13.9",

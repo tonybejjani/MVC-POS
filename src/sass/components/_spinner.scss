@@ -1,9 +1,7 @@
 .spinner {
-  margin: 5rem auto;
   text-align: center;
   position: absolute;
   // z-index: -1;
-  top: 10%;
   left: 45%;
 
   svg {
@@ -12,6 +10,11 @@
     fill: $color-brand--1;
     animation: rotate 2s infinite linear;
   }
+
+  &.hideSpinner  {
+    top: -200%;
+  }
+
 }
  
 @keyframes rotate {
@@ -23,3 +26,4 @@
     transform: rotate(360deg);
   }
 }
+

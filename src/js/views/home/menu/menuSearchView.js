@@ -27,7 +27,7 @@ class menuSearchView {
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
-    this._renderSpinner(this.#parentElement);
+    // this._renderSpinner(this.#parentElement);
     setTimeout(this._showMenuSearchItems.bind(this), 500);
   }
 
@@ -39,21 +39,20 @@ class menuSearchView {
     });
   }
 
-  _renderSpinner(parentEl) {
-    const markup = `
-                  <div class="spinner">
-                    <svg>
-                      <use xlink:href="${sprite + '#icon-Loader'}"></use>
-                    </svg>
-                  </div>`;
+  // _renderSpinner(parentEl) {
+  //   const markup = `
+  //                 <div class="spinner">
+  //                   <svg>
+  //                     <use xlink:href="${sprite + '#icon-Loader'}"></use>
+  //                   </svg>
+  //                 </div>`;
 
-    parentEl.insertAdjacentHTML('afterbegin', markup);
-  }
+  //   parentEl.insertAdjacentHTML('afterbegin', markup);
+  // }
 
   _hideSpinner() {
     const spinnerEl = document.querySelector('.spinner');
-
-    spinnerEl.style.top = '-50%';
+    spinnerEl.classList.add('hideSpinner');
   }
 
   // To show the spinner and make menu visible.

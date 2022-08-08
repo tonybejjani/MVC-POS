@@ -18,7 +18,7 @@ import waterImg from 'url:../../../../img/menu/water.png';
 import crackersImg from 'url:../../../../img/menu/crackers.png';
 
 // import
-class menuCatView {
+class menuItemsView {
   #parentElement;
   #data;
 
@@ -27,11 +27,10 @@ class menuCatView {
     this.#data = data;
     const markup = this._generateMarkup();
     this.#parentElement.insertAdjacentHTML('beforeend', markup);
-    this._renderSpinner(this.#parentElement);
     setTimeout(this._showMenuItems.bind(this), 500);
   }
 
-  _renderSpinner(parentEl) {
+  renderSpinner() {
     const markup = `
                   <div class="spinner">
                     <svg>
@@ -39,13 +38,17 @@ class menuCatView {
                     </svg>
                   </div>`;
 
-    parentEl.insertAdjacentHTML('afterbegin', markup);
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
   _hideSpinner() {
     const spinnerEl = document.querySelector('.spinner');
+    spinnerEl.classList.add('hideSpinner');
+  }
 
-    spinnerEl.style.top = '-50%';
+  showSpinner() {
+    const spinnerEl = document.querySelector('.spinner');
+    spinnerEl.classList.remove('hideSpinner');
   }
 
   addHandlerRender(handler) {
@@ -58,7 +61,6 @@ class menuCatView {
 
   // To show the spinner and make menu visible.
   _showMenuItems() {
-    console.log('test');
     this._hideSpinner();
     const menuItemsEls = document.querySelectorAll('.menu-items');
 
@@ -94,6 +96,7 @@ class menuCatView {
       btn.disabled = false;
     }, 600);
   }
+
   _loadImg(img) {
     // (`${img.replace('.png', 'Img')}`);
     // return `${img.replace('.png', '')}`;
@@ -184,4 +187,4 @@ class menuCatView {
   }
 }
 
-export default new menuCatView();
+export default new menuItemsView();

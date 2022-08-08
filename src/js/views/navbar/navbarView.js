@@ -1,14 +1,10 @@
 /** @format */
 import logoImg from 'url:../../../../src/img/general/logo.png';
 import sprite from '../../../img/icon/sprite.svg';
-class navbarView {
-  #parentElement = document.body;
-  #data;
+import View from '../View.js';
 
-  render() {
-    const markup = this._generateMarkup();
-    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  }
+class navbarView extends View {
+  _parentElement = document.querySelector('.container');
 
   addHandlerRender(handler) {
     window.addEventListener('hashchange', handler);

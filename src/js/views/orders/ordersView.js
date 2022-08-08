@@ -2,7 +2,7 @@
 
 import dragula from '../../../../node_modules/dragula/dragula.js';
 
-class navbarView {
+class ordersView {
   #parentElement;
   #data;
   #moving = null;
@@ -19,6 +19,7 @@ class navbarView {
   }
 
   hidePage() {
+    console.log('test');
     const pageParentEl = this._getPageParentEl();
     pageParentEl.classList.add('hidden');
   }
@@ -130,4 +131,4 @@ class navbarView {
   }
 }
 
-export default new navbarView();
+export default new ordersView();

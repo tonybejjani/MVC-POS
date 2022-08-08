@@ -22,8 +22,8 @@ class App {
     model
       .loadMenuData()
       .then(() => {
-        navbarView.render();
-        mainView.render();
+        navbarView.render('afterbegin');
+        mainView.render('beforeend');
         controllerHome.renderHome();
         controllerOrders.renderOrders();
         homeView.showPage();

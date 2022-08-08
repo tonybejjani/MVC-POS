@@ -1,5 +1,4 @@
 /** @format */
-import menuSearchView from './menuSearchView.js';
 class menuCatView {
   #parentElement;
   #data;
