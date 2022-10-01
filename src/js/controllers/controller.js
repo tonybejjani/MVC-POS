@@ -2,6 +2,7 @@
 'use strict';
 // data
 import * as model from '../model.js';
+
 // Views Menu
 import navbarView from '../views/navbar/navbarView.js';
 import mainView from '../views/mainView.js';

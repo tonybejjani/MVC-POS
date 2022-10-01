@@ -427,7 +427,6 @@ export const loadMenuData = async function () {
   try {
     const data = await getJSON(`${API_URL}`);
 
-    console.log(data);
     if (data) {
       const { info, menuCategories, menuItems } = data;
 
@@ -435,8 +434,6 @@ export const loadMenuData = async function () {
       state.menuCategories = menuCategories;
       state.menuItems = menuItems;
     }
-
-    console.log(state);
   } catch (err) {
     console.error(`${err} Data💥 💥 💥 💥`);
   }

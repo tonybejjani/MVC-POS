@@ -4,6 +4,7 @@ class homeView {
 
   render() {
     this._parentElement = document.querySelector('.main');
+
     this._clear();
     const markup = this._generateMarkup();
     this._parentElement.insertAdjacentHTML('beforeend', markup);
