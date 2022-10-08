@@ -2,6 +2,7 @@
   "name": "pos",
   "version": "1.0.0",
   "description": "Point of Sale system",
+  "main": "main.js",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist",
@@ -29,6 +30,7 @@
     "buffer": "^6.0.3",
     "events": "^3.3.0",
     "node-sass": "^7.0.1",
+    "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
     "stream-http": "^3.2.0",

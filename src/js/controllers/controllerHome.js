@@ -191,17 +191,17 @@ class controllerHome {
     // make a deep copy of currentOrder
     const newOrder = JSON.parse(JSON.stringify(model.state.currentOrderLog));
 
-    // push new order to state
+    // add new order submitted to "orders" in state
     model.state.orders.push(newOrder);
 
-    // clear currentLog state
+    // clear currentLog state after submiting new order
     model.state.currentOrderLog = {};
 
     // clear sideOrder UI
     orderSidebarView.clearOrders();
     console.log('orders:', model.state.orders);
 
-    // remove Pay method tick
+    // clear Pay method tick
     orderSidebarView.removePayMethod();
 
     // reset Total
@@ -213,7 +213,7 @@ class controllerHome {
     // increment order counter
     navbarView.setCounterVal(model.state.orders.length);
 
-    //if on mobile, close sidebar panel
+    //Mobile viewport only: close sidebar panel
     orderSidebarView.togglePanelEvent();
   }
 
